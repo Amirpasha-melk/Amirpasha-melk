@@ -1,960 +1,1143 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>املاک امیر پاشا | شهر جدید مهستان</title>
-
-  <meta name="description"
-        content="املاک امیر پاشا؛ متنوع‌ترین و بروزترین فایلینگ شهر جدید مهستان">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link href="https://fonts.googleapis.com/css2?family=Estedad:wght@400;500;600;700;800&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
-  <style>
-
-    :root {
-      --black: #0b0c0e;
-      --dark: #15171b;
-      --gray: #777b82;
-      --light-gray: #f2f2f1;
-      --border: #e5e5e5;
-      --white: #ffffff;
-      --navy: #19283d;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: "Vazirmatn", sans-serif;
-      background: var(--white);
-      color: var(--dark);
-    }
-
-    button,
-    input,
-    select {
-      font-family: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* =========================
-       LOADER
-    ========================= */
-
-    .loader {
-      position: fixed;
-      inset: 0;
-      background: #fff;
-      z-index: 9999;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: opacity .5s ease;
-    }
-
-    .loader.hide {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .loader-spinner {
-      width: 45px;
-      height: 45px;
-      border: 3px solid #ddd;
-      border-top-color: #111;
-      border-radius: 50%;
-      animation: spin .8s linear infinite;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    /* =========================
-       HEADER
-    ========================= */
-
-    header {
-      position: fixed;
-      top: 0;
-      right: 0;
-      left: 0;
-      height: 78px;
-      background: rgba(255,255,255,.94);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid #eee;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 5%;
-    }
-
-    .header-actions {
-      display: flex;
-      gap: 10px;
-      direction: ltr;
-    }
-
-    .icon-button {
-      width: 43px;
-      height: 43px;
-      border-radius: 50%;
-      border: 1px solid #ddd;
-      background: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .menu-lines {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .menu-lines span {
-      width: 18px;
-      height: 2px;
-      background: #111;
-      border-radius: 5px;
-    }
-
-    .brand {
-      text-align: center;
-    }
-
-    .brand h1 {
-      font-family: "Estedad";
-      font-size: 21px;
-      font-weight: 800;
-    }
-
-    .brand p {
-      font-size: 9px;
-      color: #777;
-      margin-top: 2px;
-    }
-
-    /* =========================
-       SEARCH PANEL
-    ========================= */
-
-    .search-panel {
-      position: fixed;
-      top: 78px;
-      right: 0;
-      left: 0;
-      background: #fff;
-      padding: 16px 6%;
-      z-index: 90;
-      box-shadow: 0 15px 35px rgba(0,0,0,.12);
-      transform: translateY(-150%);
-      transition: .3s;
-    }
-
-    .search-panel.active {
-      transform: translateY(0);
-    }
-
-    .search-panel input {
-      width: 100%;
-      padding: 14px 16px;
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      outline: none;
-    }
-
-    .search-panel input::placeholder {
-      color: #aaa;
-    }
-
-    /* =========================
-       DRAWER
-    ========================= */
-
-    .overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.65);
-      z-index: 150;
-      opacity: 0;
-      pointer-events: none;
-      transition: .3s;
-    }
-
-    .overlay.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .drawer {
-      position: fixed;
-      top: 0;
-      left: -330px;
-      width: 310px;
-      height: 100vh;
-      background: #111317;
-      color: white;
-      z-index: 200;
-      padding: 25px;
-      transition: .35s;
-    }
-
-    .drawer.active {
-      left: 0;
-    }
-
-    .drawer-close {
-      width: 40px;
-      height: 40px;
-      border: 1px solid #444;
-      border-radius: 50%;
-      background: transparent;
-      color: white;
-      font-size: 20px;
-      margin-bottom: 35px;
-    }
-
-    .drawer h2 {
-      font-family: Estedad;
-      font-size: 22px;
-    }
-
-    .drawer small {
-      color: #888;
-      font-size: 10px;
-    }
-
-    .drawer-menu {
-      margin-top: 30px;
-    }
-
-    .drawer-menu a {
-      display: block;
-      padding: 16px 3px;
-      border-bottom: 1px solid #292c31;
-      color: #ddd;
-      font-size: 13px;
-      transition: .2s;
-    }
-
-    .drawer-menu a:hover {
-      color: white;
-      padding-right: 10px;
-    }
-
-    /* =========================
-       HERO
-    ========================= */
-
-    .hero {
-      margin-top: 78px;
-      height: 590px;
-      position: relative;
-      overflow: hidden;
-      background: #111;
-    }
-
-    .slide {
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-      opacity: 0;
-      transition: opacity 1s ease;
-    }
-
-    .slide.active {
-      opacity: 1;
-    }
-
-    .slide::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(
-          90deg,
-          rgba(0,0,0,.8),
-          rgba(0,0,0,.3),
-          rgba(0,0,0,.5)
-        );
-    }
-
-    .hero-content {
-      position: absolute;
-      z-index: 5;
-      right: 8%;
-      top: 50%;
-      transform: translateY(-50%);
-      color: white;
-      max-width: 620px;
-    }
-
-    .hero-label {
-      display: inline-block;
-      padding: 7px 14px;
-      border-radius: 30px;
-      border: 1px solid rgba(255,255,255,.3);
-      background: rgba(255,255,255,.1);
-      font-size: 11px;
-      margin-bottom: 18px;
-    }
-
-    .hero-content h2 {
-      font-family: Estedad;
-      font-size: 47px;
-      line-height: 1.45;
-      font-weight: 800;
-    }
-
-    .hero-content p {
-      color: #ddd;
-      line-height: 2;
-      font-size: 13px;
-      margin-top: 10px;
-    }
-
-    .slider-dots {
-      position: absolute;
-      bottom: 25px;
-      right: 8%;
-      z-index: 10;
-      display: flex;
-      gap: 7px;
-    }
-
-    .slider-dots span {
-      display: block;
-      width: 25px;
-      height: 3px;
-      background: rgba(255,255,255,.4);
-    }
-
-    .slider-dots span.active {
-      width: 45px;
-      background: white;
-    }
-
-    /* =========================
-       SEARCH BOX
-    ========================= */
-
-    .search-container {
-      position: relative;
-      z-index: 20;
-      margin: -45px auto 0;
-      padding: 0 5%;
-      max-width: 1200px;
-    }
-
-    .search-box {
-      background: white;
-      border-radius: 18px;
-      padding: 14px;
-      box-shadow: 0 18px 55px rgba(0,0,0,.13);
-      display: flex;
-      gap: 8px;
-    }
-
-    .search-box input,
-    .search-box select {
-      border: 0;
-      outline: none;
-      background: #f4f4f4;
-      border-radius: 11px;
-      padding: 13px;
-      font-size: 11px;
-      color: #333;
-      width: 100%;
-    }
-
-    .search-box input {
-      flex: 1.7;
-    }
-
-    .search-box button {
-      width: 52px;
-      border: 0;
-      border-radius: 11px;
-      background: #111;
-      color: white;
-      font-size: 20px;
-    }
-
-    /* =========================
-       GENERAL SECTIONS
-    ========================= */
-
-    section {
-      padding: 80px 6%;
-    }
-
-    .section-heading {
-      margin-bottom: 30px;
-    }
-
-    .section-heading h2 {
-      font-family: Estedad;
-      font-size: 28px;
-    }
-
-    .section-heading p {
-      color: #777;
-      font-size: 11px;
-      margin-top: 6px;
-    }
-
-    /* =========================
-       PROPERTY CARDS
-    ========================= */
-
-    .property-grid {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 20px;
-    }
-
-    .property-card {
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      overflow: hidden;
-      background: white;
-      cursor: pointer;
-      transition: .3s;
-    }
-
-    .property-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 18px 45px rgba(0,0,0,.1);
-    }
-
-    .property-image {
-      height: 240px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .property-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: .5s;
-    }
-
-    .property-card:hover img {
-      transform: scale(1.05);
-    }
-
-    .property-badge {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      background: rgba(0,0,0,.75);
-      color: white;
-      padding: 6px 11px;
-      border-radius: 20px;
-      font-size: 10px;
-    }
-
-    .property-info {
-      padding: 18px;
-    }
-
-    .property-info h3 {
-      font-family: Estedad;
-      font-size: 16px;
-    }
-
-    .location {
-      color: #777;
-      font-size: 10px;
-      margin: 6px 0 15px;
-    }
-
-    .specifications {
-      border-top: 1px solid #eee;
-      padding-top: 14px;
-      display: grid;
-      grid-template-columns: repeat(2,1fr);
-      gap: 10px;
-    }
-
-    .spec {
-      color: #888;
-      font-size: 9px;
-    }
-
-    .spec strong {
-      display: block;
-      color: #222;
-      font-size: 11px;
-      margin-top: 3px;
-    }
-
-    .property-price {
-      border-top: 1px solid #eee;
-      margin-top: 15px;
-      padding-top: 13px;
-      display: flex;
-      justify-content: space-between;
-      font-size: 10px;
-      color: #888;
-    }
-
-    .property-price strong {
-      color: #111;
-    }
-
-    /* =========================
-       ABOUT
-    ========================= */
-
-    .about {
-      background: #f3f3f2;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .about-image {
-      height: 420px;
-      border-radius: 24px;
-      overflow: hidden;
-    }
-
-    .about-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .about h2 {
-      font-family: Estedad;
-      font-size: 34px;
-      margin-bottom: 15px;
-    }
-
-    .about p {
-      color: #666;
-      font-size: 13px;
-      line-height: 2.5;
-    }
-
-    .slogan {
-      font-family: Estedad;
-      color: var(--navy);
-      font-size: 21px;
-      margin-top: 25px;
-      font-weight: 600;
-    }
-
-    /* =========================
-       CONTACT
-    ========================= */
-
-    .contact {
-      margin: 70px 6%;
-      padding: 60px 25px;
-      background: #111216;
-      color: white;
-      text-align: center;
-      border-radius: 24px;
-    }
-
-    .contact h2 {
-      font-family: Estedad;
-      font-size: 29px;
-    }
-
-    .contact p {
-      color: #aaa;
-      font-size: 12px;
-      margin: 10px 0 25px;
-    }
-
-    .contact a {
-      display: inline-block;
-      padding: 12px 25px;
-      border-radius: 10px;
-      font-size: 12px;
-      margin: 4px;
-    }
-
-    .call-button {
-      background: white;
-      color: black;
-    }
-
-    .whatsapp-button {
-      background: var(--navy);
-      color: white;
-    }
-
-    /* =========================
-       FOOTER
-    ========================= */
-
-    footer {
-      background: #101114;
-      color: white;
-      padding: 55px 6% 25px;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 45px;
-      padding-bottom: 35px;
-      border-bottom: 1px solid #292b30;
-    }
-
-    footer h3 {
-      font-family: Estedad;
-      font-size: 17px;
-      margin-bottom: 12px;
-    }
-
-    footer p,
-    footer a {
-      display: block;
-      color: #999;
-      font-size: 11px;
-      line-height: 2;
-      margin-bottom: 5px;
-    }
-
-    .copyright {
-      display: flex;
-      justify-content: space-between;
-      padding-top: 22px;
-      color: #666;
-      font-size: 9px;
-    }
-
-    /* =========================
-       CATEGORY PAGES
-    ========================= */
-
-    .category-page {
-      display: none;
-      min-height: 100vh;
-      padding-top: 78px;
-    }
-
-    .category-page.active {
-      display: block;
-    }
-
-    .category-header {
-      padding: 70px 6% 40px;
-      background: #f3f3f2;
-      border-bottom: 1px solid #e4e4e4;
-    }
-
-    .category-header h1 {
-      font-family: Estedad;
-      font-size: 38px;
-    }
-
-    .category-header p {
-      color: #777;
-      font-size: 12px;
-      margin-top: 6px;
-    }
-
-    .category-content {
-      padding: 40px 6%;
-    }
-
-    .category-filters {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 25px;
-    }
-
-    .category-filters select {
-      border: 1px solid #ddd;
-      background: white;
-      border-radius: 10px;
-      padding: 10px 14px;
-      font-size: 10px;
-    }
-
-    /* UNIQUE CATEGORY DESIGNS */
-
-    #villas .category-header {
-      background: #e8ebec;
-    }
-
-    #villas .category-header h1 {
-      color: var(--navy);
-    }
-
-    #mehr .category-header {
-      background: #e9e9e7;
-    }
-
-    #mehr .category-header h1 {
-      font-size: 34px;
-    }
-
-    #land .category-header {
-      background: #e7e5df;
-    }
-
-    #land .category-header h1 {
-      color: #30382f;
-    }
-
-    /* =========================
-       MODAL
-    ========================= */
-
-    .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.75);
-      z-index: 500;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      padding: 18px;
-    }
-
-    .modal.active {
-      display: flex;
-    }
-
-    .modal-box {
-      width: min(820px,100%);
-      max-height: 92vh;
-      overflow-y: auto;
-      background: white;
-      border-radius: 20px;
-    }
-
-    .modal-image {
-      height: 320px;
-      position: relative;
-    }
-
-    .modal-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 14px;
-      left: 14px;
-      width: 40px;
-      height: 40px;
-      border: 0;
-      border-radius: 50%;
-      background: rgba(0,0,0,.7);
-      color: white;
-      font-size: 20px;
-    }
-
-    .modal-content {
-      padding: 25px;
-    }
-
-    .modal-content h2 {
-      font-family: Estedad;
-      font-size: 25px;
-    }
-
-    .modal-location {
-      color: #777;
-      font-size: 11px;
-      margin: 6px 0 20px;
-    }
-
-    .modal-specs {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 9px;
-    }
-
-    .modal-spec {
-      background: #f4f4f4;
-      border-radius: 10px;
-      padding: 13px;
-      font-size: 9px;
-      color: #777;
-    }
-
-    .modal-spec strong {
-      display: block;
-      color: #222;
-      font-size: 12px;
-      margin-top: 4px;
-    }
-
-    .description {
-      font-family: Estedad;
-      font-size: 12px;
-      line-height: 2.4;
-      color: #555;
-      margin-top: 20px;
-    }
-
-    .modal-buttons {
-      display: flex;
-      gap: 8px;
-      margin-top: 22px;
-    }
-
-    .modal-buttons a {
-      flex: 1;
-      text-align: center;
-      padding: 12px;
-      border-radius: 10px;
-      font-size: 12px;
-    }
-
-    .modal-call {
-      background: #111;
-      color: white;
-    }
-
-    .modal-whatsapp {
-      background: var(--navy);
-      color: white;
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================= */
-
-    @media(max-width:850px) {
-
-      .property-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .about {
-        grid-template-columns: 1fr;
-      }
-
-      .about-image {
-        height: 290px;
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .search-box {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .search-box input {
-        grid-column: 1/-1;
-      }
-
-      .search-box button {
-        width: 100%;
-        height: 45px;
-      }
-
-      .hero {
-        height: 530px;
-      }
-
-      .hero-content {
-        right: 7%;
-        left: 7%;
-      }
-
-      .hero-content h2 {
-        font-size: 35px;
-      }
-
-      .modal-specs {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media(max-width:480px) {
-
-      header {
-        height: 70px;
-      }
-
-      .brand h1 {
-        font-size: 17px;
-      }
-
-      .brand p {
-        font-size: 8px;
-      }
-
-      .hero {
-        margin-top: 70px;
-        height: 510px;
-      }
-
-      .search-panel {
-        top: 70px;
-      }
-
-      .category-page {
-        padding-top: 70px;
-      }
-
-      .category-header h1 {
-        font-size: 30px;
-      }
-
-      .search-box {
-        grid-template-columns: 1fr;
-      }
-
-      .search-box input {
-        grid-column: auto;
-      }
-    }
-
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>املاک امیر پاشا | شهر جدید مهستان</title>
+
+<meta name="description" content="املاک امیر پاشا با بیش از ۱۴ سال سابقه در زمینه املاک و مستغلات در شهر جدید مهستان">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Estedad:wght@400;500;600;700;800&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================
+   ROOT
+========================= */
+
+:root{
+  --black:#0b0d10;
+  --dark:#15171b;
+  --gray:#74777d;
+  --light:#f3f3f1;
+  --white:#fff;
+  --border:#e4e4e4;
+  --navy:#192b45;
+  --green:#25d366;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:"Vazirmatn",sans-serif;
+  background:#fff;
+  color:#17181b;
+}
+
+button,
+input,
+select{
+  font-family:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+/* =========================
+   LOADER
+========================= */
+
+.loader{
+  position:fixed;
+  inset:0;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  transition:.5s;
+}
+
+.loader.hide{
+  opacity:0;
+  visibility:hidden;
+}
+
+.spinner{
+  width:48px;
+  height:48px;
+  border:3px solid #ddd;
+  border-top-color:#111;
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg);}
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+  position:fixed;
+  top:0;
+  right:0;
+  left:0;
+  height:78px;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid #eee;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 5%;
+}
+
+.header-actions{
+  display:flex;
+  gap:10px;
+  direction:ltr;
+}
+
+.icon-button{
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  background:#fff;
+  border:1px solid #ddd;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:.25s;
+}
+
+.icon-button:hover{
+  background:#111;
+  color:#fff;
+}
+
+.search-icon{
+  font-size:28px;
+  line-height:1;
+  transform:rotate(-15deg);
+}
+
+.menu-lines{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+
+.menu-lines span{
+  width:20px;
+  height:2px;
+  background:currentColor;
+  border-radius:10px;
+}
+
+.brand{
+  text-align:center;
+}
+
+.brand h1{
+  font-family:Estedad;
+  font-size:22px;
+  font-weight:800;
+}
+
+.brand p{
+  font-size:9px;
+  color:#777;
+  margin-top:2px;
+}
+
+/* =========================
+   SEARCH PANEL
+========================= */
+
+.search-panel{
+  position:fixed;
+  top:78px;
+  right:0;
+  left:0;
+  background:#fff;
+  padding:18px 6%;
+  z-index:95;
+  box-shadow:0 15px 40px rgba(0,0,0,.12);
+  transform:translateY(-150%);
+  transition:.3s;
+}
+
+.search-panel.active{
+  transform:translateY(0);
+}
+
+.search-panel-inner{
+  max-width:1000px;
+  margin:auto;
+  display:flex;
+  gap:8px;
+}
+
+.search-panel input{
+  flex:1;
+  padding:15px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  outline:none;
+  font-size:12px;
+}
+
+.search-panel button{
+  width:52px;
+  border:0;
+  border-radius:12px;
+  background:#111;
+  color:#fff;
+}
+
+/* =========================
+   DRAWER
+========================= */
+
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.65);
+  z-index:150;
+  opacity:0;
+  pointer-events:none;
+  transition:.3s;
+}
+
+.overlay.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.drawer{
+  position:fixed;
+  top:0;
+  left:-350px;
+  width:320px;
+  height:100vh;
+  background:#101216;
+  color:#fff;
+  z-index:200;
+  padding:25px;
+  transition:.35s;
+}
+
+.drawer.active{
+  left:0;
+}
+
+.drawer-close{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  border:1px solid #444;
+  background:transparent;
+  color:#fff;
+  font-size:21px;
+}
+
+.drawer-brand{
+  margin-top:30px;
+}
+
+.drawer-brand h2{
+  font-family:Estedad;
+}
+
+.drawer-brand small{
+  color:#888;
+}
+
+.drawer-menu{
+  margin-top:30px;
+}
+
+.drawer-menu a{
+  display:block;
+  padding:17px 3px;
+  border-bottom:1px solid #292c31;
+  font-size:13px;
+  color:#ddd;
+  transition:.2s;
+}
+
+.drawer-menu a:hover{
+  color:#fff;
+  padding-right:12px;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  margin-top:78px;
+  height:580px;
+  position:relative;
+  overflow:hidden;
+  background:#111;
+}
+
+.slide{
+  position:absolute;
+  inset:0;
+  background-position:center;
+  background-size:cover;
+  opacity:0;
+  transition:opacity 1s;
+}
+
+.slide.active{
+  opacity:1;
+}
+
+.slide::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    90deg,
+    rgba(0,0,0,.82),
+    rgba(0,0,0,.35),
+    rgba(0,0,0,.55)
+  );
+}
+
+.hero-content{
+  position:absolute;
+  z-index:5;
+  right:8%;
+  top:50%;
+  transform:translateY(-50%);
+  color:#fff;
+  max-width:620px;
+}
+
+.hero-label{
+  display:inline-block;
+  padding:7px 14px;
+  border:1px solid rgba(255,255,255,.3);
+  border-radius:30px;
+  background:rgba(255,255,255,.1);
+  font-size:11px;
+  margin-bottom:18px;
+}
+
+.hero-content h2{
+  font-family:Estedad;
+  font-size:46px;
+  line-height:1.45;
+  font-weight:800;
+}
+
+.hero-content p{
+  color:#ddd;
+  font-size:13px;
+  line-height:2;
+  margin-top:10px;
+}
+
+.slider-dots{
+  position:absolute;
+  right:8%;
+  bottom:25px;
+  z-index:10;
+  display:flex;
+  gap:7px;
+}
+
+.slider-dots span{
+  width:25px;
+  height:3px;
+  background:rgba(255,255,255,.4);
+  transition:.3s;
+}
+
+.slider-dots span.active{
+  width:45px;
+  background:#fff;
+}
+
+/* =========================
+   SEARCH BOX
+========================= */
+
+.search-container{
+  position:relative;
+  z-index:20;
+  margin:-42px auto 0;
+  padding:0 5%;
+  max-width:1200px;
+}
+
+.search-box{
+  background:#fff;
+  border-radius:18px;
+  padding:14px;
+  box-shadow:0 18px 50px rgba(0,0,0,.14);
+  display:flex;
+  gap:8px;
+}
+
+.search-box input,
+.search-box select{
+  border:0;
+  outline:none;
+  background:#f4f4f4;
+  border-radius:11px;
+  padding:13px;
+  font-size:11px;
+  width:100%;
+}
+
+.search-box input{
+  flex:1.6;
+}
+
+.search-box button{
+  width:55px;
+  border:0;
+  background:#111;
+  color:#fff;
+  border-radius:11px;
+  font-size:22px;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+section{
+  padding:80px 6%;
+}
+
+.section-heading{
+  margin-bottom:30px;
+}
+
+.section-heading h2{
+  font-family:Estedad;
+  font-size:29px;
+  font-weight:800;
+}
+
+.section-heading p{
+  color:#777;
+  font-size:12px;
+  margin-top:6px;
+}
+
+/* =========================
+   PROPERTY GRID
+========================= */
+
+.property-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+/* =========================
+   PROPERTY CARD
+========================= */
+
+.property-card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:19px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.property-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 20px 50px rgba(0,0,0,.1);
+}
+
+.property-image{
+  height:245px;
+  position:relative;
+  overflow:hidden;
+}
+
+.property-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:.5s;
+}
+
+.property-card:hover .property-image img{
+  transform:scale(1.05);
+}
+
+.property-badge{
+  position:absolute;
+  right:14px;
+  top:14px;
+  background:rgba(0,0,0,.78);
+  color:#fff;
+  padding:7px 12px;
+  border-radius:25px;
+  font-size:10px;
+}
+
+.property-info{
+  padding:19px;
+}
+
+.property-info h3{
+  font-family:Estedad;
+  font-size:17px;
+  font-weight:700;
+}
+
+.location{
+  color:#777;
+  font-size:11px;
+  margin:7px 0 17px;
+}
+
+.specifications{
+  border-top:1px solid #eee;
+  padding-top:15px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.spec{
+  color:#777;
+  font-size:10px;
+}
+
+.spec strong{
+  display:block;
+  color:#222;
+  font-size:12px;
+  margin-top:4px;
+}
+
+.card-text{
+  border-top:1px solid #eee;
+  margin-top:16px;
+  padding-top:14px;
+  color:#666;
+  font-family:Estedad;
+  font-size:10px;
+  line-height:2;
+  min-height:58px;
+}
+
+.property-price{
+  border-top:1px solid #eee;
+  margin-top:14px;
+  padding-top:13px;
+  display:flex;
+  justify-content:space-between;
+  font-size:10px;
+  color:#777;
+}
+
+.property-price strong{
+  color:#111;
+}
+
+/* =========================
+   CATEGORY PAGE
+========================= */
+
+.category-page{
+  display:none;
+  min-height:100vh;
+  padding-top:78px;
+}
+
+.category-page.active{
+  display:block;
+}
+
+.category-title-box{
+  margin:60px auto 35px;
+  max-width:1100px;
+  padding:35px;
+  border-radius:25px;
+  background:#f3f3f1;
+  border:1px solid #e3e3e1;
+}
+
+.category-title-box h1{
+  font-family:Estedad;
+  font-size:35px;
+  font-weight:800;
+}
+
+.category-title-box p{
+  color:#777;
+  font-size:12px;
+  margin-top:8px;
+}
+
+/* unique sections */
+
+#villas .category-title-box{
+  background:#e9edef;
+}
+
+#villas .category-title-box h1{
+  color:var(--navy);
+}
+
+#mehr .category-title-box{
+  background:#eeeeec;
+}
+
+#land .category-title-box{
+  background:#e9e7e0;
+}
+
+#land .category-title-box h1{
+  color:#374235;
+}
+
+/* =========================
+   FILTERS
+========================= */
+
+.filter-bar{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:28px;
+  flex-wrap:wrap;
+}
+
+.filter-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.custom-select{
+  position:relative;
+}
+
+.filter-button{
+  min-width:130px;
+  padding:11px 15px;
+  border:1px solid #ddd;
+  background:#fff;
+  border-radius:11px;
+  font-size:10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.dropdown{
+  position:absolute;
+  top:calc(100% + 7px);
+  right:0;
+  min-width:160px;
+  background:#fff;
+  border:1px solid #ddd;
+  border-radius:13px;
+  box-shadow:0 15px 35px rgba(0,0,0,.13);
+  padding:6px;
+  z-index:30;
+  display:none;
+}
+
+.dropdown.active{
+  display:block;
+}
+
+.dropdown button{
+  width:100%;
+  border:0;
+  background:#fff;
+  text-align:right;
+  padding:11px;
+  border-radius:8px;
+  font-size:10px;
+}
+
+.dropdown button:hover{
+  background:#f1f1f1;
+}
+
+.sort-button{
+  padding:11px 15px;
+  border:1px solid #ddd;
+  background:#111;
+  color:#fff;
+  border-radius:11px;
+  font-size:10px;
+}
+
+/* =========================
+   ABOUT
+========================= */
+
+.about{
+  background:#f3f3f2;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  align-items:center;
+}
+
+.about-image{
+  height:420px;
+  border-radius:25px;
+  overflow:hidden;
+}
+
+.about-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.about-content h2{
+  font-family:Estedad;
+  font-size:34px;
+  font-weight:800;
+  margin-bottom:17px;
+}
+
+.about-content p{
+  font-family:Estedad;
+  color:#555;
+  font-size:13px;
+  line-height:2.6;
+}
+
+.slogan{
+  margin-top:24px;
+  font-family:Estedad;
+  font-weight:800;
+  font-size:22px;
+  color:var(--navy);
+}
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact{
+  margin:70px 6%;
+  padding:55px 25px;
+  background:#111317;
+  color:#fff;
+  border-radius:25px;
+  text-align:center;
+}
+
+.contact h2{
+  font-family:Estedad;
+  font-size:29px;
+  font-weight:800;
+}
+
+.contact p{
+  color:#aaa;
+  font-size:12px;
+  line-height:2;
+  margin:10px auto 20px;
+}
+
+.contact-address{
+  max-width:650px;
+  margin:0 auto 25px;
+  padding:14px;
+  border:1px solid #333;
+  border-radius:12px;
+  color:#ccc;
+  font-size:11px;
+}
+
+.contact-buttons{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.contact-button{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:12px 22px;
+  border-radius:11px;
+  font-size:11px;
+}
+
+.call-button{
+  background:#fff;
+  color:#111;
+}
+
+.whatsapp-button{
+  background:var(--navy);
+  color:#fff;
+}
+
+.whatsapp-icon{
+  width:19px;
+  height:19px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+  background:#101216;
+  color:#fff;
+  padding:55px 6% 25px;
+}
+
+.footer-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:45px;
+  padding-bottom:35px;
+  border-bottom:1px solid #292c31;
+}
+
+footer h3{
+  font-family:Estedad;
+  margin-bottom:12px;
+}
+
+footer p,
+footer a{
+  display:block;
+  color:#999;
+  font-size:11px;
+  line-height:2;
+  margin-bottom:5px;
+}
+
+.copyright{
+  padding-top:22px;
+  display:flex;
+  justify-content:space-between;
+  color:#666;
+  font-size:9px;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.82);
+  z-index:500;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
+}
+
+.modal.active{
+  display:flex;
+}
+
+.modal-box{
+  width:min(900px,100%);
+  max-height:94vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:22px;
+}
+
+.modal-gallery{
+  height:390px;
+  position:relative;
+  background:#111;
+}
+
+.modal-gallery img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.modal-close{
+  position:absolute;
+  left:15px;
+  top:15px;
+  width:43px;
+  height:43px;
+  border:1px solid rgba(255,255,255,.4);
+  border-radius:50%;
+  background:rgba(0,0,0,.6);
+  color:#fff;
+  font-size:25px;
+  z-index:10;
+}
+
+.gallery-arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:42px;
+  height:42px;
+  border:0;
+  border-radius:50%;
+  background:rgba(0,0,0,.55);
+  color:#fff;
+  font-size:22px;
+}
+
+.gallery-prev{
+  right:15px;
+}
+
+.gallery-next{
+  left:15px;
+}
+
+.gallery-counter{
+  position:absolute;
+  bottom:15px;
+  right:50%;
+  transform:translateX(50%);
+  background:rgba(0,0,0,.6);
+  color:#fff;
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:10px;
+}
+
+.modal-content{
+  padding:27px;
+}
+
+.modal-content h2{
+  font-family:Estedad;
+  font-size:26px;
+  font-weight:800;
+}
+
+.modal-location{
+  color:#777;
+  font-size:11px;
+  margin:6px 0 22px;
+}
+
+.modal-specs{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.modal-spec{
+  background:#f3f3f2;
+  border-radius:11px;
+  padding:13px;
+  font-size:10px;
+  color:#777;
+}
+
+.modal-spec strong{
+  display:block;
+  color:#222;
+  font-size:12px;
+  margin-top:5px;
+}
+
+.modal-description{
+  margin-top:22px;
+  padding-top:18px;
+  border-top:1px solid #eee;
+  font-family:Estedad;
+  color:#555;
+  font-size:12px;
+  line-height:2.5;
+}
+
+.modal-buttons{
+  display:flex;
+  gap:8px;
+  margin-top:22px;
+}
+
+.modal-buttons a{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:13px;
+  border-radius:11px;
+  font-size:12px;
+}
+
+.modal-call{
+  background:#111;
+  color:#fff;
+}
+
+.modal-whatsapp{
+  background:var(--navy);
+  color:#fff;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:850px){
+
+  .property-grid{
+    grid-template-columns:1fr;
+  }
+
+  .about{
+    grid-template-columns:1fr;
+  }
+
+  .about-image{
+    height:290px;
+  }
+
+  .footer-grid{
+    grid-template-columns:1fr;
+  }
+
+  .search-box{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+
+  .search-box input{
+    grid-column:1/-1;
+  }
+
+  .search-box button{
+    width:100%;
+  }
+
+  .hero{
+    height:520px;
+  }
+
+  .hero-content{
+    right:7%;
+    left:7%;
+  }
+
+  .hero-content h2{
+    font-size:35px;
+  }
+
+  .modal-specs{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:480px){
+
+  header{
+    height:70px;
+  }
+
+  .brand h1{
+    font-size:17px;
+  }
+
+  .brand p{
+    font-size:8px;
+  }
+
+  .hero{
+    margin-top:70px;
+  }
+
+  .category-page{
+    padding-top:70px;
+  }
+
+  .search-panel{
+    top:70px;
+  }
+
+  .search-box{
+    grid-template-columns:1fr;
+  }
+
+  .search-box input{
+    grid-column:auto;
+  }
+
+  .category-title-box{
+    margin-top:35px;
+    padding:25px;
+  }
+
+  .category-title-box h1{
+    font-size:28px;
+  }
+
+  .modal-gallery{
+    height:280px;
+  }
+
+  .modal-content{
+    padding:20px;
+  }
+
+  .modal-specs{
+    grid-template-columns:1fr 1fr;
+  }
+
+}
+
+</style>
 </head>
 
+
 <body>
+
 
 <!-- LOADER -->
 
 <div class="loader" id="loader">
-  <div class="loader-spinner"></div>
+  <div class="spinner"></div>
 </div>
 
 
@@ -963,23 +1146,34 @@
 <header>
 
   <div class="brand">
-    <h1>املاک امیر پاشا</h1>
-    <p>متنوع‌ترین و بروزترین فایلینگ شهر جدید مهستان</p>
+
+    <h1>
+      املاک امیر پاشا
+    </h1>
+
+    <p>
+      متنوع‌ترین و بروزترین فایلینگ شهر جدید مهستان
+    </p>
+
   </div>
+
 
   <div class="header-actions">
 
     <button
       class="icon-button"
-      onclick="toggleSearch()"
-      aria-label="جستجو">
-      ⌕
+      onclick="toggleSearch()">
+
+      <span class="search-icon">
+        ⌕
+      </span>
+
     </button>
+
 
     <button
       class="icon-button"
-      onclick="openMenu()"
-      aria-label="منو">
+      onclick="openMenu()">
 
       <span class="menu-lines">
         <span></span>
@@ -994,20 +1188,30 @@
 </header>
 
 
-<!-- SEARCH -->
+<!-- SEARCH PANEL -->
 
-<div class="search-panel" id="searchPanel">
+<div
+  class="search-panel"
+  id="searchPanel">
 
-  <input
-    id="quickSearch"
-    type="text"
-    placeholder="جستجو کنید"
-    oninput="quickSearch()">
+  <div class="search-panel-inner">
+
+    <input
+      id="quickSearch"
+      type="text"
+      placeholder="جستجو کنید"
+      oninput="quickSearch()">
+
+    <button>
+      ⌕
+    </button>
+
+  </div>
 
 </div>
 
 
-<!-- MENU OVERLAY -->
+<!-- OVERLAY -->
 
 <div
   class="overlay"
@@ -1016,9 +1220,11 @@
 </div>
 
 
-<!-- SIDE MENU -->
+<!-- DRAWER -->
 
-<aside class="drawer" id="drawer">
+<aside
+  class="drawer"
+  id="drawer">
 
   <button
     class="drawer-close"
@@ -1026,8 +1232,19 @@
     ×
   </button>
 
-  <h2>املاک امیر پاشا</h2>
-  <small>شهر جدید مهستان</small>
+
+  <div class="drawer-brand">
+
+    <h2>
+      املاک امیر پاشا
+    </h2>
+
+    <small>
+      شهر جدید مهستان
+    </small>
+
+  </div>
+
 
   <nav class="drawer-menu">
 
@@ -1035,20 +1252,20 @@
       خانه
     </a>
 
-    <a href="#" onclick="showCategory('apartments')">
-      آپارتمان‌های موجود
+    <a href="#" onclick="showCategory('villas')">
+      ویلا
     </a>
 
-    <a href="#" onclick="showCategory('villas')">
-      ویلاهای موجود
+    <a href="#" onclick="showCategory('apartments')">
+      آپارتمان
     </a>
 
     <a href="#" onclick="showCategory('mehr')">
-      فایل‌های مسکن مهر موجود
+      مسکن مهر
     </a>
 
     <a href="#" onclick="showCategory('land')">
-      زمین‌های موجود
+      زمین
     </a>
 
     <a href="#contact" onclick="showHome()">
@@ -1071,273 +1288,306 @@
 <main id="home">
 
 
-  <!-- HERO -->
+<!-- HERO -->
 
-  <section class="hero">
-
-    <div
-      class="slide active"
-      style="background-image:url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=85')">
-
-      <div class="hero-content">
-
-        <span class="hero-label">
-          املاک امیر پاشا
-        </span>
-
-        <h2>
-          انتخاب درست،
-          <br>
-          شروع یک آینده بهتر.
-        </h2>
-
-        <p>
-          متنوع‌ترین و بروزترین فایلینگ شهر جدید مهستان؛
-          آپارتمان، ویلا، مسکن مهر و زمین.
-        </p>
-
-      </div>
-
-    </div>
+<section class="hero">
 
 
-    <div
-      class="slide"
-      style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=85')">
+  <div
+    class="slide active"
+    style="background-image:url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=85')">
 
-      <div class="hero-content">
+    <div class="hero-content">
 
-        <span class="hero-label">
-          ویلاهای موجود
-        </span>
+      <span class="hero-label">
+        املاک امیر پاشا
+      </span>
 
-        <h2>
-          فضایی برای
-          <br>
-          زندگی بهتر.
-        </h2>
+      <h2>
+        انتخاب درست،
+        <br>
+        شروع یک آینده بهتر.
+      </h2>
 
-        <p>
-          فایل‌های منتخب ویلا در شهر جدید مهستان.
-        </p>
-
-      </div>
-
-    </div>
-
-
-    <div
-      class="slide"
-      style="background-image:url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1800&q=85')">
-
-      <div class="hero-content">
-
-        <span class="hero-label">
-          زمین‌های موجود
-        </span>
-
-        <h2>
-          سرمایه‌گذاری
-          <br>
-          برای آینده.
-        </h2>
-
-        <p>
-          زمین‌های منتخب با اطلاعات مورد نیاز برای یک تصمیم درست.
-        </p>
-
-      </div>
-
-    </div>
-
-
-    <div class="slider-dots">
-
-      <span class="active" onclick="goSlide(0)"></span>
-      <span onclick="goSlide(1)"></span>
-      <span onclick="goSlide(2)"></span>
-
-    </div>
-
-  </section>
-
-
-  <!-- MAIN SEARCH -->
-
-  <div class="search-container">
-
-    <div class="search-box">
-
-      <input
-        id="mainSearch"
-        placeholder="جستجو کنید">
-
-      <select id="propertyType">
-
-        <option value="">
-          نوع ملک
-        </option>
-
-        <option value="آپارتمان">
-          آپارتمان
-        </option>
-
-        <option value="ویلا">
-          ویلا
-        </option>
-
-        <option value="مسکن مهر">
-          مسکن مهر
-        </option>
-
-        <option value="زمین">
-          زمین
-        </option>
-
-      </select>
-
-
-      <select id="propertyPhase">
-
-        <option value="">
-          فاز
-        </option>
-
-        <option value="۱">فاز ۱</option>
-        <option value="۲">فاز ۲</option>
-        <option value="۳">فاز ۳</option>
-        <option value="۴">فاز ۴</option>
-        <option value="۷">فاز ۷</option>
-
-      </select>
-
-
-      <select id="propertyArea">
-
-        <option value="">
-          متراژ
-        </option>
-
-        <option value="small">
-          زیر ۷۰ متر
-        </option>
-
-        <option value="medium">
-          ۷۰ تا ۱۰۰ متر
-        </option>
-
-        <option value="large">
-          ۱۰۰ تا ۱۵۰ متر
-        </option>
-
-        <option value="xl">
-          بالای ۱۵۰ متر
-        </option>
-
-      </select>
-
-
-      <button onclick="searchProperties()">
-        ⌕
-      </button>
+      <p>
+        متنوع‌ترین و بروزترین فایلینگ شهر جدید مهستان؛
+        آپارتمان، ویلا، مسکن مهر و زمین.
+      </p>
 
     </div>
 
   </div>
 
 
-  <!-- LATEST -->
+  <div
+    class="slide"
+    style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=85')">
 
-  <section>
+    <div class="hero-content">
 
-    <div class="section-heading">
+      <span class="hero-label">
+        ویلا
+      </span>
 
       <h2>
-        جدیدترین فایل‌ها
+        فضایی برای
+        <br>
+        زندگی بهتر.
       </h2>
 
       <p>
-        آخرین فایل‌های املاک امیر پاشا
+        فایل‌های منتخب ویلا در شهر جدید مهستان.
       </p>
 
     </div>
 
-    <div
-      class="property-grid"
-      id="latestProperties">
-    </div>
+  </div>
 
-  </section>
-
-
-  <!-- ABOUT -->
-
-  <section
-    class="about"
-    id="about">
-
-    <div class="about-image">
-
-      <img
-        src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=85"
-        alt="املاک امیر پاشا">
-
-    </div>
-
-
-    <div>
-
-      <h2>
-        املاک امیر پاشا
-      </h2>
-
-      <p>
-        مرجع فایل‌های متنوع و بروز شهر جدید مهستان.
-        تمرکز ما بر ارائه اطلاعات شفاف و ایجاد انتخاب‌های
-        متنوع برای خرید، فروش، رهن و اجاره است.
-      </p>
-
-      <div class="slogan">
-        آینده را با هم می‌سازیم.
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- CONTACT -->
 
   <div
-    class="contact"
-    id="contact">
+    class="slide"
+    style="background-image:url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1800&q=85')">
+
+    <div class="hero-content">
+
+      <span class="hero-label">
+        زمین
+      </span>
+
+      <h2>
+        سرمایه‌گذاری
+        <br>
+        برای آینده.
+      </h2>
+
+      <p>
+        زمین‌های منتخب برای ساخت و سرمایه‌گذاری.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="slider-dots">
+
+    <span
+      class="active"
+      onclick="goSlide(0)">
+    </span>
+
+    <span
+      onclick="goSlide(1)">
+    </span>
+
+    <span
+      onclick="goSlide(2)">
+    </span>
+
+  </div>
+
+</section>
+
+
+<!-- SEARCH -->
+
+<div class="search-container">
+
+  <div class="search-box">
+
+    <input
+      id="mainSearch"
+      placeholder="جستجو کنید">
+
+
+    <select id="propertyType">
+
+      <option value="">
+        نوع ملک
+      </option>
+
+      <option>
+        آپارتمان
+      </option>
+
+      <option>
+        ویلا
+      </option>
+
+      <option>
+        مسکن مهر
+      </option>
+
+      <option>
+        زمین
+      </option>
+
+    </select>
+
+
+    <select id="propertyPhase">
+
+      <option value="">
+        فاز
+      </option>
+
+      <option value="۱">
+        فاز ۱
+      </option>
+
+      <option value="۲">
+        فاز ۲
+      </option>
+
+      <option value="۳">
+        فاز ۳
+      </option>
+
+      <option value="۴">
+        فاز ۴
+      </option>
+
+      <option value="۷">
+        فاز ۷
+      </option>
+
+    </select>
+
+
+    <button onclick="searchProperties()">
+      ⌕
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- LATEST -->
+
+<section>
+
+  <div class="section-heading">
 
     <h2>
-      دنبال ملک خاصی هستید؟
+      جدیدترین فایل‌ها
     </h2>
 
     <p>
-      برای دریافت فایل‌های جدید با املاک امیر پاشا در ارتباط باشید.
+      آخرین فایل‌های ثبت‌شده در املاک امیر پاشا
     </p>
 
-    <a
-      class="call-button"
-      href="tel:09019472293">
+  </div>
 
-      ۰۹۰۱۹۴۷۲۲۹۳
+
+  <div
+    class="property-grid"
+    id="latestProperties">
+  </div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section
+  class="about"
+  id="about">
+
+
+  <div class="about-image">
+
+    <img
+      src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=85"
+      alt="املاک امیر پاشا">
+
+  </div>
+
+
+  <div class="about-content">
+
+    <h2>
+      درباره ما
+    </h2>
+
+    <p>
+
+      املاک امیر پاشا با بیش از ۱۴ سال سابقه و تجربه خدمت در زمینه‌های املاک و مستغلات و دارا بودن جواز و مجوزهای لازم از اتحادیه و نهادهای مربوط، مفتخر است با تمرکز بر ارائه اطلاعات شفاف و ایجاد انتخاب‌های متنوع در تمام زمینه‌های ملکی یک گزینه امن و مطلوب برای خرید، فروش، مشاوره و سرمایه‌گذاری‌های شما باشد.
+
+    </p>
+
+    <div class="slogan">
+      آینده را با هم می‌سازیم
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<div
+  class="contact"
+  id="contact">
+
+  <h2>
+    ارتباط با ما
+  </h2>
+
+  <p>
+    برای خرید، فروش، مشاوره و سرمایه‌گذاری با ما در ارتباط باشید.
+  </p>
+
+
+  <div class="contact-address">
+
+    📍 استان البرز، شهر جدید مهستان،
+    فاز ۱، میدان شهرداری،
+    بلوار ارکیده، پلاک ۱۹۸
+
+  </div>
+
+
+  <div class="contact-buttons">
+
+    <a
+      href="tel:09019472293"
+      class="contact-button call-button">
+
+      ☎ تماس
 
     </a>
 
+
     <a
-      class="whatsapp-button"
       href="https://wa.me/989019472293"
-      target="_blank">
+      target="_blank"
+      class="contact-button whatsapp-button">
+
+      <svg
+        class="whatsapp-icon"
+        viewBox="0 0 32 32"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+
+        <path
+          d="M16 3C8.82 3 3 8.82 3 16c0 2.3.6 4.55 1.75 6.53L3 29l6.65-1.7A12.94 12.94 0 0 0 16 29c7.18 0 13-5.82 13-13S23.18 3 16 3Z"
+          fill="white"/>
+
+        <path
+          d="M12.2 9.3c-.3-.7-.6-.72-.9-.74h-.77c-.27 0-.7.1-1.07.5-.37.4-1.4 1.37-1.4 3.34s1.44 3.87 1.64 4.14c.2.27 2.78 4.46 6.8 6.07 3.36 1.35 4.05 1.08 4.78 1.01.73-.06 2.35-.96 2.68-1.89.33-.93.33-1.72.23-1.89-.1-.17-.37-.27-.77-.47-.4-.2-2.35-1.16-2.71-1.3-.37-.13-.64-.2-.9.2-.27.4-1.04 1.3-1.27 1.56-.23.27-.47.3-.87.1-.4-.2-1.67-.62-3.18-1.97-1.18-1.05-1.98-2.35-2.21-2.75-.23-.4-.02-.62.18-.82.18-.18.4-.47.6-.7.2-.23.27-.4.4-.67.13-.27.07-.5-.03-.7-.1-.2-.88-2.14-1.21-2.93Z"
+          fill="#25D366"/>
+
+      </svg>
 
       WhatsApp
 
     </a>
 
   </div>
+
+</div>
 
 </main>
 
@@ -1350,14 +1600,14 @@
   class="category-page"
   id="apartments">
 
-  <div class="category-header">
+  <div class="category-title-box">
 
     <h1>
-      آپارتمان‌های موجود
+      آپارتمان
     </h1>
 
     <p>
-      فایل‌های آپارتمان در شهر جدید مهستان
+      فایل‌های آپارتمانی شهر جدید مهستان
     </p>
 
   </div>
@@ -1365,25 +1615,100 @@
 
   <div class="category-content">
 
-    <div class="category-filters">
+    <div class="filter-bar">
 
-      <select>
-        <option>همه فازها</option>
-        <option>فاز ۱</option>
-        <option>فاز ۲</option>
-        <option>فاز ۳</option>
-        <option>فاز ۴</option>
-        <option>فاز ۷</option>
-      </select>
+      <div class="filter-actions">
 
-      <select>
-        <option>همه متراژها</option>
-        <option>زیر ۷۰</option>
-        <option>۷۰ تا ۱۰۰</option>
-        <option>۱۰۰ تا ۱۵۰</option>
-      </select>
+        <div class="custom-select">
+
+          <button
+            class="filter-button"
+            onclick="toggleDropdown('apartmentPhaseDropdown')">
+
+            فاز
+
+            <span>⌄</span>
+
+          </button>
+
+          <div
+            class="dropdown"
+            id="apartmentPhaseDropdown">
+
+            <button onclick="filterCategory('apartments','all')">
+              همه
+            </button>
+
+            <button onclick="filterPhase('apartments','۱')">
+              فاز ۱
+            </button>
+
+            <button onclick="filterPhase('apartments','۲')">
+              فاز ۲
+            </button>
+
+            <button onclick="filterPhase('apartments','۳')">
+              فاز ۳
+            </button>
+
+            <button onclick="filterPhase('apartments','۴')">
+              فاز ۴
+            </button>
+
+            <button onclick="filterPhase('apartments','۷')">
+              فاز ۷
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="custom-select">
+
+          <button
+            class="filter-button"
+            onclick="toggleDropdown('apartmentAreaDropdown')">
+
+            متراژ
+
+            <span>⌄</span>
+
+          </button>
+
+          <div
+            class="dropdown"
+            id="apartmentAreaDropdown">
+
+            <button onclick="filterArea('apartments','small')">
+              زیر ۷۰ متر
+            </button>
+
+            <button onclick="filterArea('apartments','medium')">
+              ۷۰ تا ۱۰۰ متر
+            </button>
+
+            <button onclick="filterArea('apartments','large')">
+              بالای ۱۰۰ متر
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <button
+        class="sort-button"
+        onclick="sortCategory('apartments')">
+
+        مرتب‌سازی
+
+      </button>
 
     </div>
+
 
     <div
       class="property-grid"
@@ -1403,14 +1728,14 @@
   class="category-page"
   id="villas">
 
-  <div class="category-header">
+  <div class="category-title-box">
 
     <h1>
-      ویلاهای موجود
+      ویلا
     </h1>
 
     <p>
-      فایل‌های منتخب ویلا در شهر جدید مهستان
+      فایل‌های ویلایی شهر جدید مهستان
     </p>
 
   </div>
@@ -1418,18 +1743,67 @@
 
   <div class="category-content">
 
-    <div class="category-filters">
+    <div class="filter-bar">
 
-      <select>
-        <option>همه فازها</option>
-        <option>فاز ۱</option>
-        <option>فاز ۲</option>
-        <option>فاز ۳</option>
-        <option>فاز ۴</option>
-        <option>فاز ۷</option>
-      </select>
+      <div class="filter-actions">
+
+        <div class="custom-select">
+
+          <button
+            class="filter-button"
+            onclick="toggleDropdown('villaPhaseDropdown')">
+
+            فاز
+
+            <span>⌄</span>
+
+          </button>
+
+          <div
+            class="dropdown"
+            id="villaPhaseDropdown">
+
+            <button onclick="filterCategory('villas','all')">
+              همه
+            </button>
+
+            <button onclick="filterPhase('villas','۱')">
+              فاز ۱
+            </button>
+
+            <button onclick="filterPhase('villas','۲')">
+              فاز ۲
+            </button>
+
+            <button onclick="filterPhase('villas','۳')">
+              فاز ۳
+            </button>
+
+            <button onclick="filterPhase('villas','۴')">
+              فاز ۴
+            </button>
+
+            <button onclick="filterPhase('villas','۷')">
+              فاز ۷
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <button
+        class="sort-button"
+        onclick="sortCategory('villas')">
+
+        مرتب‌سازی
+
+      </button>
 
     </div>
+
 
     <div
       class="property-grid"
@@ -1449,14 +1823,14 @@
   class="category-page"
   id="mehr">
 
-  <div class="category-header">
+  <div class="category-title-box">
 
     <h1>
-      فایل‌های مسکن مهر موجود
+      مسکن مهر
     </h1>
 
     <p>
-      فایل‌های اختصاصی مسکن مهر شهر جدید مهستان
+      فایل‌های مسکن مهر شهر جدید مهستان
     </p>
 
   </div>
@@ -1464,23 +1838,67 @@
 
   <div class="category-content">
 
-    <div class="category-filters">
+    <div class="filter-bar">
 
-      <select>
+      <div class="filter-actions">
 
-        <option>
-          همه فازها
-        </option>
+        <div class="custom-select">
 
-        <option>فاز ۱</option>
-        <option>فاز ۲</option>
-        <option>فاز ۳</option>
-        <option>فاز ۴</option>
-        <option>فاز ۷</option>
+          <button
+            class="filter-button"
+            onclick="toggleDropdown('mehrPhaseDropdown')">
 
-      </select>
+            فاز
+
+            <span>⌄</span>
+
+          </button>
+
+          <div
+            class="dropdown"
+            id="mehrPhaseDropdown">
+
+            <button onclick="filterCategory('mehr','all')">
+              همه
+            </button>
+
+            <button onclick="filterPhase('mehr','۱')">
+              فاز ۱
+            </button>
+
+            <button onclick="filterPhase('mehr','۲')">
+              فاز ۲
+            </button>
+
+            <button onclick="filterPhase('mehr','۳')">
+              فاز ۳
+            </button>
+
+            <button onclick="filterPhase('mehr','۴')">
+              فاز ۴
+            </button>
+
+            <button onclick="filterPhase('mehr','۷')">
+              فاز ۷
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <button
+        class="sort-button"
+        onclick="sortCategory('mehr')">
+
+        مرتب‌سازی
+
+      </button>
 
     </div>
+
 
     <div
       class="property-grid"
@@ -1500,14 +1918,14 @@
   class="category-page"
   id="land">
 
-  <div class="category-header">
+  <div class="category-title-box">
 
     <h1>
-      زمین‌های موجود
+      زمین
     </h1>
 
     <p>
-      فایل‌های زمین برای خرید و سرمایه‌گذاری
+      فایل‌های زمین شهر جدید مهستان
     </p>
 
   </div>
@@ -1515,23 +1933,67 @@
 
   <div class="category-content">
 
-    <div class="category-filters">
+    <div class="filter-bar">
 
-      <select>
+      <div class="filter-actions">
 
-        <option>
-          همه فازها
-        </option>
+        <div class="custom-select">
 
-        <option>فاز ۱</option>
-        <option>فاز ۲</option>
-        <option>فاز ۳</option>
-        <option>فاز ۴</option>
-        <option>فاز ۷</option>
+          <button
+            class="filter-button"
+            onclick="toggleDropdown('landPhaseDropdown')">
 
-      </select>
+            فاز
+
+            <span>⌄</span>
+
+          </button>
+
+          <div
+            class="dropdown"
+            id="landPhaseDropdown">
+
+            <button onclick="filterCategory('land','all')">
+              همه
+            </button>
+
+            <button onclick="filterPhase('land','۱')">
+              فاز ۱
+            </button>
+
+            <button onclick="filterPhase('land','۲')">
+              فاز ۲
+            </button>
+
+            <button onclick="filterPhase('land','۳')">
+              فاز ۳
+            </button>
+
+            <button onclick="filterPhase('land','۴')">
+              فاز ۴
+            </button>
+
+            <button onclick="filterPhase('land','۷')">
+              فاز ۷
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <button
+        class="sort-button"
+        onclick="sortCategory('land')">
+
+        مرتب‌سازی
+
+      </button>
 
     </div>
+
 
     <div
       class="property-grid"
@@ -1562,7 +2024,7 @@
       </p>
 
       <p>
-        آینده را با هم می‌سازیم.
+        بیش از ۱۴ سال تجربه در حوزه املاک و مستغلات.
       </p>
 
     </div>
@@ -1578,12 +2040,12 @@
         خانه
       </a>
 
-      <a href="#" onclick="showCategory('apartments')">
-        آپارتمان
-      </a>
-
       <a href="#" onclick="showCategory('villas')">
         ویلا
+      </a>
+
+      <a href="#" onclick="showCategory('apartments')">
+        آپارتمان
       </a>
 
       <a href="#" onclick="showCategory('mehr')">
@@ -1604,17 +2066,19 @@
       </h3>
 
       <a href="tel:09019472293">
-        ۰۹۰۱۹۴۷۲۲۹۳
+        ☎ ۰۹۰۱۹۴۷۲۲۹۳
       </a>
 
       <a
         href="https://wa.me/989019472293"
         target="_blank">
+
         WhatsApp
+
       </a>
 
-      <a href="#">
-        لوکیشن
+      <a href="#contact">
+        📍 لوکیشن دفتر
       </a>
 
     </div>
@@ -1638,7 +2102,7 @@
 
 
 <!-- =========================
-     PROPERTY MODAL
+     MODAL
 ========================= -->
 
 <div
@@ -1647,12 +2111,14 @@
 
   <div class="modal-box">
 
-    <div class="modal-image">
+
+    <div class="modal-gallery">
 
       <img
         id="modalImage"
         src=""
-        alt="ملک">
+        alt="تصویر ملک">
+
 
       <button
         class="modal-close"
@@ -1661,6 +2127,31 @@
         ×
 
       </button>
+
+
+      <button
+        class="gallery-arrow gallery-prev"
+        onclick="previousImage()">
+
+        ›
+      </button>
+
+
+      <button
+        class="gallery-arrow gallery-next"
+        onclick="nextImage()">
+
+        ‹
+      </button>
+
+
+      <div
+        class="gallery-counter"
+        id="galleryCounter">
+
+        1 / 1
+
+      </div>
 
     </div>
 
@@ -1676,43 +2167,14 @@
       </div>
 
 
-      <div class="modal-specs">
-
-        <div class="modal-spec">
-          متراژ
-          <strong id="modalArea"></strong>
-        </div>
-
-        <div class="modal-spec">
-          خواب
-          <strong id="modalRooms"></strong>
-        </div>
-
-        <div class="modal-spec">
-          پارکینگ
-          <strong id="modalParking"></strong>
-        </div>
-
-        <div class="modal-spec">
-          انباری
-          <strong id="modalStorage"></strong>
-        </div>
-
-        <div class="modal-spec">
-          آسانسور
-          <strong id="modalElevator"></strong>
-        </div>
-
-        <div class="modal-spec">
-          فاز
-          <strong id="modalPhase"></strong>
-        </div>
-
+      <div
+        class="modal-specs"
+        id="modalSpecs">
       </div>
 
 
       <div
-        class="description"
+        class="modal-description"
         id="modalDescription">
       </div>
 
@@ -1720,17 +2182,33 @@
       <div class="modal-buttons">
 
         <a
-          class="modal-call"
-          href="tel:09019472293">
+          href="tel:09019472293"
+          class="modal-call">
 
-          تماس
+          ☎ تماس
 
         </a>
 
+
         <a
-          class="modal-whatsapp"
           href="https://wa.me/989019472293"
-          target="_blank">
+          target="_blank"
+          class="modal-whatsapp">
+
+          <svg
+            class="whatsapp-icon"
+            viewBox="0 0 32 32"
+            fill="none">
+
+            <path
+              d="M16 3C8.82 3 3 8.82 3 16c0 2.3.6 4.55 1.75 6.53L3 29l6.65-1.7A12.94 12.94 0 0 0 16 29c7.18 0 13-5.82 13-13S23.18 3 16 3Z"
+              fill="white"/>
+
+            <path
+              d="M12.2 9.3c-.3-.7-.6-.72-.9-.74h-.77c-.27 0-.7.1-1.07.5-.37.4-1.4 1.37-1.4 3.34s1.44 3.87 1.64 4.14c.2.27 2.78 4.46 6.8 6.07 3.36 1.35 4.05 1.08 4.78 1.01.73-.06 2.35-.96 2.68-1.89.33-.93.33-1.72.23-1.89-.1-.17-.37-.27-.77-.47-.4-.2-2.35-1.16-2.71-1.3-.37-.13-.64-.2-.9.2-.27.4-1.04 1.3-1.27 1.56-.23.27-.47.3-.87.1-.4-.2-1.67-.62-3.18-1.97-1.18-1.05-1.98-2.35-2.21-2.75-.23-.4-.02-.62.18-.82.18-.18.4-.47.6-.7.2-.23.27-.4.4-.67.13-.27.07-.5-.03-.7-.1-.2-.88-2.14-1.21-2.93Z"
+              fill="#25D366"/>
+
+          </svg>
 
           WhatsApp
 
@@ -1748,83 +2226,255 @@
 <script>
 
 /* =========================
-   PROPERTY DATABASE
+   DATA
 ========================= */
 
 const properties = [
 
   {
-    id: 1,
-    type: "آپارتمان",
-    title: "آپارتمان ۸۵ متری",
-    phase: "۲",
-    area: 85,
-    rooms: "۲ خواب",
-    parking: "دارد",
-    storage: "دارد",
-    elevator: "دارد",
-    image:
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=85",
+    id:1,
+    type:"آپارتمان",
+    title:"آپارتمان ۸۵ متری",
+    phase:"۲",
+    area:85,
+    rooms:"۲ خواب",
+    parking:"دارد",
+    storage:"دارد",
+    elevator:"دارد",
+    heating:"پکیج",
+    cooling:"کولر",
+    floor:"طبقه ۳",
+    documents:"سند",
+    year:"۱۴۰۲",
+
+    images:[
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=85"
+    ],
+
     description:
-      "آپارتمان خوش‌نقشه و نورگیر. اطلاعات کامل این فایل توسط مدیر سایت قابل ویرایش خواهد بود."
+      "آپارتمان خوش‌نقشه، نورگیر و مناسب سکونت. اطلاعات کامل این فایل در این قسمت قرار می‌گیرد."
   },
 
-  {
-    id: 2,
-    type: "ویلا",
-    title: "ویلای ۱۸۰ متری",
-    phase: "۷",
-    area: 180,
-    rooms: "۳ خواب",
-    parking: "دارد",
-    storage: "دارد",
-    elevator: "ندارد",
-    image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=85",
-    description:
-      "ویلای منتخب با فضای مناسب سکونت و سرمایه‌گذاری."
-  },
 
   {
-    id: 3,
-    type: "مسکن مهر",
-    title: "آپارتمان مسکن مهر",
-    phase: "۱",
-    area: 75,
-    rooms: "۲ خواب",
-    parking: "دارد",
-    storage: "ندارد",
-    elevator: "دارد",
-    image:
-      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1000&q=85",
+    id:2,
+    type:"ویلا",
+    title:"ویلای ۱۸۰ متری",
+    phase:"۷",
+    area:180,
+    buildingArea:"۱۸۰ متر",
+    landArea:"۳۰۰ متر",
+    rooms:"۳ خواب",
+    villaType:"مستقل",
+    documents:"سند",
+    year:"۱۴۰۱",
+
+    images:[
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=85"
+    ],
+
+    description:
+      "ویلای منتخب در شهر جدید مهستان با فضای مناسب سکونت و سرمایه‌گذاری."
+  },
+
+
+  {
+    id:3,
+    type:"مسکن مهر",
+    title:"مسکن مهر ۷۵ متری",
+    phase:"۱",
+    area:75,
+    rooms:"۲ خواب",
+    parking:"دارد",
+    storage:"دارد",
+    elevator:"دارد",
+    heating:"پکیج",
+    cooling:"کولر",
+
+    images:[
+      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=85"
+    ],
+
     description:
       "فایل مسکن مهر با موقعیت مناسب و دسترسی مطلوب."
   },
 
+
   {
-    id: 4,
-    type: "زمین",
-    title: "زمین ۲۰۰ متری",
-    phase: "۴",
-    area: 200,
-    rooms: "—",
-    parking: "—",
-    storage: "—",
-    elevator: "—",
-    image:
-      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=85",
+    id:4,
+    type:"زمین",
+    title:"زمین ۲۰۰ متری",
+    phase:"۴",
+    area:200,
+    documents:"سند",
+    landUse:"مسکونی",
+
+    images:[
+      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85"
+    ],
+
     description:
-      "زمین مناسب ساخت و سرمایه‌گذاری. اطلاعات سند و کاربری در نسخه مدیریت قابل اضافه شدن است."
+      "زمین مناسب ساخت و سرمایه‌گذاری در شهر جدید مهستان."
   }
 
 ];
 
 
 /* =========================
-   PROPERTY CARD
+   CARD
 ========================= */
 
-function propertyCard(property) {
+function propertyCard(property){
+
+  let specs="";
+
+  if(property.type==="آپارتمان"){
+
+    specs=`
+
+      <div class="spec">
+        متراژ
+        <strong>${property.area} متر</strong>
+      </div>
+
+      <div class="spec">
+        خواب
+        <strong>${property.rooms}</strong>
+      </div>
+
+      <div class="spec">
+        پارکینگ
+        <strong>${property.parking}</strong>
+      </div>
+
+      <div class="spec">
+        انباری
+        <strong>${property.storage}</strong>
+      </div>
+
+      <div class="spec">
+        آسانسور
+        <strong>${property.elevator}</strong>
+      </div>
+
+      <div class="spec">
+        فاز
+        <strong>${property.phase}</strong>
+      </div>
+
+    `;
+  }
+
+
+  if(property.type==="ویلا"){
+
+    specs=`
+
+      <div class="spec">
+        متراژ بنا
+        <strong>${property.buildingArea}</strong>
+      </div>
+
+      <div class="spec">
+        زمین
+        <strong>${property.landArea}</strong>
+      </div>
+
+      <div class="spec">
+        خواب
+        <strong>${property.rooms}</strong>
+      </div>
+
+      <div class="spec">
+        نوع ویلا
+        <strong>${property.villaType}</strong>
+      </div>
+
+      <div class="spec">
+        سال ساخت
+        <strong>${property.year}</strong>
+      </div>
+
+      <div class="spec">
+        فاز
+        <strong>${property.phase}</strong>
+      </div>
+
+    `;
+  }
+
+
+  if(property.type==="مسکن مهر"){
+
+    specs=`
+
+      <div class="spec">
+        متراژ
+        <strong>${property.area} متر</strong>
+      </div>
+
+      <div class="spec">
+        خواب
+        <strong>${property.rooms}</strong>
+      </div>
+
+      <div class="spec">
+        پارکینگ
+        <strong>${property.parking}</strong>
+      </div>
+
+      <div class="spec">
+        انباری
+        <strong>${property.storage}</strong>
+      </div>
+
+      <div class="spec">
+        آسانسور
+        <strong>${property.elevator}</strong>
+      </div>
+
+      <div class="spec">
+        فاز
+        <strong>${property.phase}</strong>
+      </div>
+
+    `;
+  }
+
+
+  if(property.type==="زمین"){
+
+    specs=`
+
+      <div class="spec">
+        متراژ زمین
+        <strong>${property.area} متر</strong>
+      </div>
+
+      <div class="spec">
+        مدارک
+        <strong>${property.documents}</strong>
+      </div>
+
+      <div class="spec">
+        فاز
+        <strong>${property.phase}</strong>
+      </div>
+
+      <div class="spec">
+        کاربری
+        <strong>${property.landUse}</strong>
+      </div>
+
+    `;
+  }
+
 
   return `
 
@@ -1835,7 +2485,7 @@ function propertyCard(property) {
       <div class="property-image">
 
         <img
-          src="${property.image}"
+          src="${property.images[0]}"
           alt="${property.title}">
 
         <span class="property-badge">
@@ -1858,47 +2508,14 @@ function propertyCard(property) {
 
         <div class="specifications">
 
-          <div class="spec">
-            متراژ
-            <strong>
-              ${property.area} متر
-            </strong>
-          </div>
+          ${specs}
 
-          <div class="spec">
-            خواب
-            <strong>
-              ${property.rooms}
-            </strong>
-          </div>
+        </div>
 
-          <div class="spec">
-            پارکینگ
-            <strong>
-              ${property.parking}
-            </strong>
-          </div>
 
-          <div class="spec">
-            انباری
-            <strong>
-              ${property.storage}
-            </strong>
-          </div>
+        <div class="card-text">
 
-          <div class="spec">
-            آسانسور
-            <strong>
-              ${property.elevator}
-            </strong>
-          </div>
-
-          <div class="spec">
-            فاز
-            <strong>
-              ${property.phase}
-            </strong>
-          </div>
+          ${property.description}
 
         </div>
 
@@ -1920,6 +2537,7 @@ function propertyCard(property) {
     </article>
 
   `;
+
 }
 
 
@@ -1927,39 +2545,42 @@ function propertyCard(property) {
    RENDER
 ========================= */
 
-function renderProperties(elementId, list) {
+function renderProperties(id,list){
 
-  const element =
-    document.getElementById(elementId);
+  const element=document.getElementById(id);
 
-  if (!element) return;
+  if(!element)return;
 
-  if (!list.length) {
+  if(!list.length){
 
-    element.innerHTML = `
+    element.innerHTML=`
+
       <div style="
         grid-column:1/-1;
-        background:#f5f5f4;
-        padding:60px 20px;
         text-align:center;
+        padding:60px;
+        background:#f4f4f2;
         border-radius:18px;
         color:#777;
         font-size:12px;">
-        فعلاً فایلی در این بخش ثبت نشده است.
+
+        فایلی با این مشخصات پیدا نشد.
+
       </div>
+
     `;
 
     return;
   }
 
-  element.innerHTML =
+  element.innerHTML=
     list.map(propertyCard).join("");
 
 }
 
 
 /* =========================
-   INITIAL RENDER
+   INITIAL
 ========================= */
 
 renderProperties(
@@ -1969,91 +2590,198 @@ renderProperties(
 
 renderProperties(
   "apartmentList",
-  properties.filter(
-    p => p.type === "آپارتمان"
-  )
+  properties.filter(p=>p.type==="آپارتمان")
 );
 
 renderProperties(
   "villaList",
-  properties.filter(
-    p => p.type === "ویلا"
-  )
+  properties.filter(p=>p.type==="ویلا")
 );
 
 renderProperties(
   "mehrList",
-  properties.filter(
-    p => p.type === "مسکن مهر"
-  )
+  properties.filter(p=>p.type==="مسکن مهر")
 );
 
 renderProperties(
   "landList",
-  properties.filter(
-    p => p.type === "زمین"
-  )
+  properties.filter(p=>p.type==="زمین")
 );
 
 
 /* =========================
-   PROPERTY MODAL
+   MODAL
 ========================= */
 
-function openProperty(id) {
+let currentProperty=null;
+let currentImage=0;
 
-  const property =
-    properties.find(
-      p => p.id === id
-    );
 
-  if (!property) return;
+function openProperty(id){
 
-  document.getElementById("modalImage").src =
-    property.image;
+  currentProperty=
+    properties.find(p=>p.id===id);
 
-  document.getElementById("modalTitle").textContent =
-    property.title;
+  if(!currentProperty)return;
 
-  document.getElementById("modalLocation").textContent =
-    `شهر جدید مهستان • فاز ${property.phase}`;
+  currentImage=0;
 
-  document.getElementById("modalArea").textContent =
-    `${property.area} متر`;
+  updateModalImage();
 
-  document.getElementById("modalRooms").textContent =
-    property.rooms;
+  document.getElementById("modalTitle")
+    .textContent=currentProperty.title;
 
-  document.getElementById("modalParking").textContent =
-    property.parking;
+  document.getElementById("modalLocation")
+    .textContent=
+      `شهر جدید مهستان • فاز ${currentProperty.phase}`;
 
-  document.getElementById("modalStorage").textContent =
-    property.storage;
+  document.getElementById("modalDescription")
+    .textContent=currentProperty.description;
 
-  document.getElementById("modalElevator").textContent =
-    property.elevator;
-
-  document.getElementById("modalPhase").textContent =
-    property.phase;
-
-  document.getElementById("modalDescription").textContent =
-    property.description;
+  renderModalSpecs();
 
   document
     .getElementById("propertyModal")
     .classList.add("active");
 
-  document.body.style.overflow = "hidden";
+  document.body.style.overflow="hidden";
 }
 
 
-function closeModal() {
+function updateModalImage(){
+
+  document.getElementById("modalImage")
+    .src=currentProperty.images[currentImage];
+
+  document.getElementById("galleryCounter")
+    .textContent=
+      `${currentImage+1} / ${currentProperty.images.length}`;
+
+}
+
+
+function nextImage(){
+
+  if(!currentProperty)return;
+
+  currentImage++;
+
+  if(currentImage>=currentProperty.images.length){
+    currentImage=0;
+  }
+
+  updateModalImage();
+
+}
+
+
+function previousImage(){
+
+  if(!currentProperty)return;
+
+  currentImage--;
+
+  if(currentImage<0){
+    currentImage=currentProperty.images.length-1;
+  }
+
+  updateModalImage();
+
+}
+
+
+function renderModalSpecs(){
+
+  let specs=[];
+
+
+  if(currentProperty.type==="آپارتمان"){
+
+    specs=[
+      ["متراژ",currentProperty.area+" متر"],
+      ["خواب",currentProperty.rooms],
+      ["پارکینگ",currentProperty.parking],
+      ["انباری",currentProperty.storage],
+      ["آسانسور",currentProperty.elevator],
+      ["گرمایش",currentProperty.heating],
+      ["سرمایش",currentProperty.cooling],
+      ["طبقه",currentProperty.floor],
+      ["فاز",currentProperty.phase],
+      ["مدارک",currentProperty.documents],
+      ["سال ساخت",currentProperty.year]
+    ];
+
+  }
+
+
+  if(currentProperty.type==="ویلا"){
+
+    specs=[
+      ["متراژ بنا",currentProperty.buildingArea],
+      ["سال ساخت",currentProperty.year],
+      ["نوع ویلا",currentProperty.villaType],
+      ["متراژ زمین",currentProperty.landArea],
+      ["مدارک",currentProperty.documents],
+      ["خواب",currentProperty.rooms]
+    ];
+
+  }
+
+
+  if(currentProperty.type==="زمین"){
+
+    specs=[
+      ["متراژ زمین",currentProperty.area+" متر"],
+      ["مدارک",currentProperty.documents],
+      ["فاز",currentProperty.phase],
+      ["کاربری",currentProperty.landUse]
+    ];
+
+  }
+
+
+  if(currentProperty.type==="مسکن مهر"){
+
+    specs=[
+      ["متراژ",currentProperty.area+" متر"],
+      ["طبقه","اطلاعات وارد نشده"],
+      ["پارکینگ",currentProperty.parking],
+      ["انباری",currentProperty.storage],
+      ["آسانسور",currentProperty.elevator],
+      ["فاز",currentProperty.phase],
+      ["خواب",currentProperty.rooms],
+      ["گرمایش",currentProperty.heating],
+      ["سرمایش",currentProperty.cooling]
+    ];
+
+  }
+
+
+  document.getElementById("modalSpecs").innerHTML=
+    specs.map(item=>`
+
+      <div class="modal-spec">
+
+        ${item[0]}
+
+        <strong>
+          ${item[1] || "—"}
+        </strong>
+
+      </div>
+
+    `).join("");
+
+}
+
+
+function closeModal(){
 
   document
     .getElementById("propertyModal")
     .classList.remove("active");
 
-  document.body.style.overflow = "";
+  document.body.style.overflow="";
 
 }
 
@@ -2062,7 +2790,7 @@ function closeModal() {
    MENU
 ========================= */
 
-function openMenu() {
+function openMenu(){
 
   document
     .getElementById("drawer")
@@ -2075,7 +2803,7 @@ function openMenu() {
 }
 
 
-function closeMenu() {
+function closeMenu(){
 
   document
     .getElementById("drawer")
@@ -2089,19 +2817,17 @@ function closeMenu() {
 
 
 /* =========================
-   SEARCH PANEL
+   SEARCH
 ========================= */
 
-function toggleSearch() {
+function toggleSearch(){
 
-  const panel =
+  const panel=
     document.getElementById("searchPanel");
 
   panel.classList.toggle("active");
 
-  if (
-    panel.classList.contains("active")
-  ) {
+  if(panel.classList.contains("active")){
 
     document
       .getElementById("quickSearch")
@@ -2112,19 +2838,15 @@ function toggleSearch() {
 }
 
 
-/* =========================
-   QUICK SEARCH
-========================= */
+function quickSearch(){
 
-function quickSearch() {
-
-  const query =
+  const query=
     document
       .getElementById("quickSearch")
       .value
       .trim();
 
-  if (!query) {
+  if(!query){
 
     renderProperties(
       "latestProperties",
@@ -2132,129 +2854,92 @@ function quickSearch() {
     );
 
     return;
+
   }
 
-  const result =
-    properties.filter(property => {
 
-      const text =
-        `${property.title}
-         ${property.type}
-         ${property.phase}
-         ${property.area}`;
+  const result=
+    properties.filter(p=>{
+
+      const text=
+        `${p.title}
+         ${p.type}
+         ${p.phase}
+         ${p.area}
+         ${p.description}`;
 
       return text.includes(query);
 
     });
 
+
   renderProperties(
     "latestProperties",
     result
   );
 
-  showHome();
-
 }
 
 
-/* =========================
-   MAIN SEARCH
-========================= */
+function searchProperties(){
 
-function searchProperties() {
-
-  const query =
+  const query=
     document
       .getElementById("mainSearch")
       .value
       .trim();
 
-  const type =
+  const type=
     document
       .getElementById("propertyType")
       .value;
 
-  const phase =
+  const phase=
     document
       .getElementById("propertyPhase")
       .value;
 
-  const area =
-    document
-      .getElementById("propertyArea")
-      .value;
+
+  const result=
+    properties.filter(p=>{
+
+      let ok=true;
 
 
-  const result =
-    properties.filter(property => {
+      if(query){
 
-      let matches = true;
+        const text=
+          `${p.title}
+           ${p.type}
+           ${p.phase}
+           ${p.area}`;
 
-
-      if (query) {
-
-        const text =
-          `${property.title}
-           ${property.type}
-           ${property.phase}
-           ${property.area}`;
-
-        matches =
-          matches &&
+        ok=
+          ok &&
           text.includes(query);
 
       }
 
 
-      if (type) {
+      if(type){
 
-        matches =
-          matches &&
-          property.type === type;
-
-      }
-
-
-      if (phase) {
-
-        matches =
-          matches &&
-          property.phase === phase;
+        ok=
+          ok &&
+          p.type===type;
 
       }
 
 
-      if (area) {
+      if(phase){
 
-        if (area === "small") {
-          matches =
-            matches &&
-            property.area < 70;
-        }
-
-        if (area === "medium") {
-          matches =
-            matches &&
-            property.area >= 70 &&
-            property.area <= 100;
-        }
-
-        if (area === "large") {
-          matches =
-            matches &&
-            property.area > 100 &&
-            property.area <= 150;
-        }
-
-        if (area === "xl") {
-          matches =
-            matches &&
-            property.area > 150;
-        }
+        ok=
+          ok &&
+          p.phase===phase;
 
       }
 
-      return matches;
+
+      return ok;
 
     });
 
@@ -2264,31 +2949,33 @@ function searchProperties() {
     result
   );
 
+
   document
     .getElementById("latestProperties")
     .scrollIntoView({
-      behavior:"smooth",
-      block:"start"
+      behavior:"smooth"
     });
 
 }
 
 
 /* =========================
-   PAGE NAVIGATION
+   NAVIGATION
 ========================= */
 
-function showHome() {
+function showHome(){
 
   document
     .querySelectorAll(".category-page")
-    .forEach(page =>
-      page.classList.remove("active")
-    );
+    .forEach(page=>{
+      page.classList.remove("active");
+    });
+
 
   document
     .getElementById("home")
-    .style.display = "block";
+    .style.display="block";
+
 
   closeMenu();
 
@@ -2300,21 +2987,24 @@ function showHome() {
 }
 
 
-function showCategory(category) {
+function showCategory(category){
 
   document
     .getElementById("home")
-    .style.display = "none";
+    .style.display="none";
+
 
   document
     .querySelectorAll(".category-page")
-    .forEach(page =>
-      page.classList.remove("active")
-    );
+    .forEach(page=>{
+      page.classList.remove("active");
+    });
+
 
   document
     .getElementById(category)
     .classList.add("active");
+
 
   closeMenu();
 
@@ -2322,6 +3012,196 @@ function showCategory(category) {
     top:0,
     behavior:"smooth"
   });
+
+}
+
+
+/* =========================
+   DROPDOWN
+========================= */
+
+function toggleDropdown(id){
+
+  document
+    .querySelectorAll(".dropdown")
+    .forEach(drop=>{
+      if(drop.id!==id){
+        drop.classList.remove("active");
+      }
+    });
+
+
+  document
+    .getElementById(id)
+    .classList.toggle("active");
+
+}
+
+
+document.addEventListener(
+  "click",
+  function(event){
+
+    if(
+      !event.target.closest(".custom-select")
+    ){
+
+      document
+        .querySelectorAll(".dropdown")
+        .forEach(drop=>{
+          drop.classList.remove("active");
+        });
+
+    }
+
+  }
+);
+
+
+/* =========================
+   FILTER
+========================= */
+
+function filterCategory(category,value){
+
+  const typeMap={
+    apartments:"آپارتمان",
+    villas:"ویلا",
+    mehr:"مسکن مهر",
+    land:"زمین"
+  };
+
+  const result=
+    properties.filter(p=>
+      p.type===typeMap[category]
+    );
+
+  const idMap={
+    apartments:"apartmentList",
+    villas:"villaList",
+    mehr:"mehrList",
+    land:"landList"
+  };
+
+  renderProperties(
+    idMap[category],
+    result
+  );
+
+}
+
+
+function filterPhase(category,phase){
+
+  const typeMap={
+    apartments:"آپارتمان",
+    villas:"ویلا",
+    mehr:"مسکن مهر",
+    land:"زمین"
+  };
+
+  const idMap={
+    apartments:"apartmentList",
+    villas:"villaList",
+    mehr:"mehrList",
+    land:"landList"
+  };
+
+
+  const result=
+    properties.filter(p=>
+      p.type===typeMap[category] &&
+      p.phase===phase
+    );
+
+
+  renderProperties(
+    idMap[category],
+    result
+  );
+
+}
+
+
+function filterArea(category,size){
+
+  const typeMap={
+    apartments:"آپارتمان",
+    villas:"ویلا",
+    mehr:"مسکن مهر",
+    land:"زمین"
+  };
+
+  const idMap={
+    apartments:"apartmentList",
+    villas:"villaList",
+    mehr:"mehrList",
+    land:"landList"
+  };
+
+
+  let result=
+    properties.filter(p=>
+      p.type===typeMap[category]
+    );
+
+
+  if(size==="small"){
+    result=result.filter(p=>p.area<70);
+  }
+
+  if(size==="medium"){
+    result=result.filter(
+      p=>p.area>=70 && p.area<=100
+    );
+  }
+
+  if(size==="large"){
+    result=result.filter(p=>p.area>100);
+  }
+
+
+  renderProperties(
+    idMap[category],
+    result
+  );
+
+}
+
+
+/* =========================
+   SORT
+========================= */
+
+function sortCategory(category){
+
+  const typeMap={
+    apartments:"آپارتمان",
+    villas:"ویلا",
+    mehr:"مسکن مهر",
+    land:"زمین"
+  };
+
+  const idMap={
+    apartments:"apartmentList",
+    villas:"villaList",
+    mehr:"mehrList",
+    land:"landList"
+  };
+
+
+  const result=
+    properties
+      .filter(p=>p.type===typeMap[category])
+      .sort(
+        (a,b)=>b.area-a.area
+      );
+
+
+  renderProperties(
+    idMap[category],
+    result
+  );
 
 }
 
@@ -2330,16 +3210,16 @@ function showCategory(category) {
    SLIDER
 ========================= */
 
-const slides =
+const slides=
   document.querySelectorAll(".slide");
 
-const dots =
+const dots=
   document.querySelectorAll(".slider-dots span");
 
-let currentSlide = 0;
+let currentSlide=0;
 
 
-function goSlide(index) {
+function goSlide(index){
 
   slides[currentSlide]
     .classList.remove("active");
@@ -2347,7 +3227,7 @@ function goSlide(index) {
   dots[currentSlide]
     .classList.remove("active");
 
-  currentSlide = index;
+  currentSlide=index;
 
   slides[currentSlide]
     .classList.add("active");
@@ -2358,28 +3238,50 @@ function goSlide(index) {
 }
 
 
-setInterval(() => {
-
-  goSlide(
-    (currentSlide + 1)
-    % slides.length
-  );
-
-}, 5000);
+setInterval(
+  ()=>{
+    goSlide(
+      (currentSlide+1)%slides.length
+    );
+  },
+  5000
+);
 
 
 /* =========================
-   ESC KEY
+   KEYBOARD
 ========================= */
 
 document.addEventListener(
   "keydown",
-  function(event) {
+  function(event){
 
-    if (event.key === "Escape") {
+    if(event.key==="Escape"){
 
       closeModal();
       closeMenu();
+
+    }
+
+    if(
+      event.key==="ArrowRight" &&
+      document
+        .getElementById("propertyModal")
+        .classList.contains("active")
+    ){
+
+      previousImage();
+
+    }
+
+    if(
+      event.key==="ArrowLeft" &&
+      document
+        .getElementById("propertyModal")
+        .classList.contains("active")
+    ){
+
+      nextImage();
 
     }
 
@@ -2393,20 +3295,19 @@ document.addEventListener(
 
 window.addEventListener(
   "load",
-  function() {
-
-    setTimeout(() => {
-
-      document
-        .getElementById("loader")
-        .classList.add("hide");
-
-    }, 600);
-
+  ()=>{
+    setTimeout(
+      ()=>{
+        document
+          .getElementById("loader")
+          .classList.add("hide");
+      },
+      600
+    );
   }
 );
 
 </script>
 
 </body>
-    </html>
+  </html>
