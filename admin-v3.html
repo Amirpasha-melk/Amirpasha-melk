@@ -1,0 +1,3918 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1220">
+<meta name="description" content="پنل مدیریت املاک امیر پاشا">
+<title>پنل مدیریت | املاک امیر پاشا</title>
+
+<style>
+:root{
+  --ink:#0b1220;
+  --navy:#10233f;
+  --navy2:#162f52;
+  --white:#fff;
+  --bg:#f4f6f9;
+  --line:#e4e8ef;
+  --muted:#707989;
+  --green:#16a34a;
+  --red:#dc2626;
+  --gold:#b7791f;
+  --blue:#2563eb;
+  --shadow:0 16px 45px rgba(11,18,32,.09);
+  --radius:20px;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0
+}
+
+html{
+  scroll-behavior:smooth
+}
+
+body{
+  font-family:Tahoma,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.8
+}
+
+button,input,textarea,select{
+  font:inherit
+}
+
+button{
+  cursor:pointer
+}
+
+a{
+  text-decoration:none;
+  color:inherit
+}
+
+.hidden{
+  display:none!important
+}
+
+.app{
+  min-height:100vh
+}
+
+/* TOPBAR */
+
+.topbar{
+  height:72px;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:50
+}
+
+.topbar-in{
+  max-width:1380px;
+  height:100%;
+  margin:auto;
+  padding:0 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px
+}
+
+.brand-icon{
+  width:44px;
+  height:44px;
+  border-radius:14px;
+  background:var(--navy);
+  color:white;
+  display:grid;
+  place-items:center;
+  font-size:20px;
+  font-weight:900
+}
+
+.brand-text strong{
+  display:block;
+  font-size:16px
+}
+
+.brand-text span{
+  display:block;
+  color:var(--muted);
+  font-size:11px
+}
+
+.connection{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:12px;
+  color:var(--muted)
+}
+
+.status-dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#aaa
+}
+
+.status-dot.ok{
+  background:var(--green)
+}
+
+.status-dot.bad{
+  background:var(--red)
+}
+
+/* LAYOUT */
+
+.layout{
+  max-width:1380px;
+  margin:auto;
+  padding:22px 20px 50px;
+  display:grid;
+  grid-template-columns:220px minmax(0,1fr);
+  gap:22px
+}
+
+.sidebar{
+  position:sticky;
+  top:94px;
+  align-self:start;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:12px;
+  box-shadow:var(--shadow)
+}
+
+.nav-btn{
+  width:100%;
+  border:0;
+  background:transparent;
+  color:var(--ink);
+  text-align:right;
+  padding:13px 14px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:5px;
+  transition:.2s
+}
+
+.nav-btn:hover{
+  background:#f1f4f8
+}
+
+.nav-btn.active{
+  background:var(--navy);
+  color:white
+}
+
+.nav-icon{
+  width:28px;
+  text-align:center
+}
+
+.main{
+  min-width:0
+}
+
+.page{
+  display:none
+}
+
+.page.active{
+  display:block
+}
+
+/* HEAD */
+
+.page-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:20px
+}
+
+.page-head h1{
+  font-size:25px;
+  margin-bottom:4px
+}
+
+.page-head p{
+  color:var(--muted);
+  font-size:13px
+}
+
+/* BUTTONS */
+
+.btn{
+  border:0;
+  border-radius:13px;
+  padding:11px 16px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  transition:.2s;
+  font-weight:700
+}
+
+.btn:hover{
+  transform:translateY(-1px)
+}
+
+.btn-primary{
+  background:var(--navy);
+  color:white
+}
+
+.btn-secondary{
+  background:white;
+  border:1px solid var(--line);
+  color:var(--ink)
+}
+
+.btn-danger{
+  background:#fff0f0;
+  color:var(--red)
+}
+
+.btn-success{
+  background:#ecfdf3;
+  color:var(--green)
+}
+
+.btn-blue{
+  background:#eff6ff;
+  color:var(--blue)
+}
+
+.btn:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+  transform:none
+}
+
+/* STATS */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin-bottom:20px
+}
+
+.stat{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:18px;
+  box-shadow:var(--shadow)
+}
+
+.stat-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:10px
+}
+
+.stat-icon{
+  width:40px;
+  height:40px;
+  border-radius:13px;
+  background:#eef2f7;
+  display:grid;
+  place-items:center;
+  font-size:18px
+}
+
+.stat-label{
+  color:var(--muted);
+  font-size:12px
+}
+
+.stat-number{
+  font-size:28px;
+  font-weight:900
+}
+
+/* CARD */
+
+.card{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:22px;
+  box-shadow:var(--shadow);
+  padding:20px
+}
+
+.card-title{
+  font-size:17px;
+  font-weight:900;
+  margin-bottom:15px
+}
+
+/* TOOLBAR */
+
+.toolbar{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:16px
+}
+
+.search{
+  flex:1;
+  min-width:220px
+}
+
+.input,
+.select,
+.textarea{
+  width:100%;
+  border:1px solid var(--line);
+  background:white;
+  color:var(--ink);
+  border-radius:13px;
+  padding:11px 13px;
+  outline:none;
+  transition:.2s
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus{
+  border-color:var(--navy);
+  box-shadow:0 0 0 3px rgba(16,35,63,.08)
+}
+
+.textarea{
+  min-height:120px;
+  resize:vertical
+}
+
+/* LIST */
+
+.list{
+  display:grid;
+  gap:12px
+}
+
+.property{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:14px;
+  display:grid;
+  grid-template-columns:105px minmax(0,1fr) auto;
+  gap:15px;
+  align-items:center;
+  background:#fff
+}
+
+.property-image{
+  width:105px;
+  height:90px;
+  border-radius:14px;
+  overflow:hidden;
+  background:#eef1f5
+}
+
+.property-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover
+}
+
+.property-info{
+  min-width:0
+}
+
+.property-title{
+  font-size:16px;
+  font-weight:900;
+  margin-bottom:5px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis
+}
+
+.property-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-bottom:5px
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  padding:3px 8px;
+  border-radius:20px;
+  background:#f1f4f8;
+  color:#45505f;
+  font-size:10px
+}
+
+.badge.navy{
+  background:#e9eef5;
+  color:var(--navy)
+}
+
+.property-location{
+  color:var(--muted);
+  font-size:11px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis
+}
+
+.property-price{
+  font-size:13px;
+  font-weight:900;
+  margin-top:4px
+}
+
+.property-actions{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  gap:7px
+}
+
+.icon-btn{
+  width:38px;
+  height:38px;
+  border:0;
+  border-radius:11px;
+  display:grid;
+  place-items:center;
+  background:#f2f4f7
+}
+
+.icon-btn.edit{
+  color:var(--blue)
+}
+
+.icon-btn.delete{
+  color:var(--red)
+}
+
+.icon-btn.view{
+  color:var(--navy)
+}
+
+/* EMPTY */
+
+.empty{
+  text-align:center;
+  padding:50px 20px;
+  color:var(--muted)
+}
+
+.empty-icon{
+  font-size:42px;
+  margin-bottom:8px
+}
+
+.empty strong{
+  display:block;
+  color:var(--ink);
+  margin-bottom:4px
+}
+
+/* SETTINGS */
+
+.settings-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px
+}
+
+.field{
+  margin-bottom:15px
+}
+
+.field.full{
+  grid-column:1/-1
+}
+
+.field label{
+  display:block;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:7px
+}
+
+.help{
+  color:var(--muted);
+  font-size:10px;
+  margin-top:5px
+}
+
+.warning{
+  background:#fff8e8;
+  border:1px solid #f3dfaa;
+  color:#765b16;
+  border-radius:15px;
+  padding:13px;
+  font-size:11px;
+  margin-bottom:18px
+}
+
+/* MODAL */
+
+.modal-wrap{
+  position:fixed;
+  inset:0;
+  background:rgba(5,10,20,.68);
+  z-index:100;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:15px
+}
+
+.modal-wrap.open{
+  display:flex
+}
+
+.modal{
+  width:min(900px,100%);
+  max-height:94vh;
+  overflow:auto;
+  background:white;
+  border-radius:24px;
+  box-shadow:0 30px 100px rgba(0,0,0,.25)
+}
+
+.modal-head{
+  position:sticky;
+  top:0;
+  z-index:2;
+  background:white;
+  border-bottom:1px solid var(--line);
+  padding:17px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between
+}
+
+.modal-head h2{
+  font-size:18px
+}
+
+.close{
+  width:38px;
+  height:38px;
+  border:0;
+  border-radius:11px;
+  background:#f1f3f6;
+  font-size:20px
+}
+
+.modal-body{
+  padding:20px
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px
+}
+
+.dynamic{
+  grid-column:1/-1;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px
+}
+
+.dynamic .field{
+  margin:0
+}
+
+.amenities{
+  grid-column:1/-1
+}
+
+.amenity-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px
+}
+
+.amenity{
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:10px;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-size:12px
+}
+
+.amenity input{
+  accent-color:var(--navy)
+}
+
+/* PHOTOS */
+
+.photo-box{
+  grid-column:1/-1;
+  border:1px dashed #cdd4df;
+  border-radius:17px;
+  padding:15px
+}
+
+.photo-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:10px
+}
+
+.photo-label{
+  display:inline-flex;
+  background:var(--navy);
+  color:white;
+  padding:9px 13px;
+  border-radius:11px;
+  cursor:pointer;
+  font-size:12px
+}
+
+#photoInput{
+  display:none
+}
+
+.previews{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:9px
+}
+
+.preview{
+  aspect-ratio:1;
+  position:relative;
+  border-radius:13px;
+  overflow:hidden;
+  background:#eef1f5
+}
+
+.preview img{
+  width:100%;
+  height:100%;
+  object-fit:cover
+}
+
+.remove-photo{
+  position:absolute;
+  top:5px;
+  left:5px;
+  width:28px;
+  height:28px;
+  border:0;
+  border-radius:50%;
+  background:rgba(0,0,0,.7);
+  color:white;
+  font-size:18px;
+  line-height:1
+}
+
+.form-actions{
+  grid-column:1/-1;
+  display:flex;
+  justify-content:flex-end;
+  gap:9px;
+  padding-top:5px
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  z-index:300;
+  background:var(--ink);
+  color:white;
+  border-radius:14px;
+  padding:12px 16px;
+  font-size:12px;
+  box-shadow:0 15px 40px rgba(0,0,0,.2);
+  transform:translateY(100px);
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+  max-width:calc(100vw - 40px)
+}
+
+.toast.show{
+  transform:translateY(0);
+  opacity:1
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+  .layout{
+    grid-template-columns:1fr
+  }
+
+  .sidebar{
+    position:static;
+    display:flex;
+    overflow:auto;
+    padding:7px
+  }
+
+  .nav-btn{
+    width:auto;
+    white-space:nowrap;
+    margin:0
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,1fr)
+  }
+}
+
+@media(max-width:650px){
+  .topbar{
+    height:65px
+  }
+
+  .topbar-in{
+    padding:0 12px
+  }
+
+  .brand-icon{
+    width:38px;
+    height:38px
+  }
+
+  .brand-text strong{
+    font-size:13px
+  }
+
+  .layout{
+    padding:12px 10px 35px;
+    gap:12px
+  }
+
+  .page-head{
+    flex-direction:column
+  }
+
+  .page-head h1{
+    font-size:21px
+  }
+
+  .page-head .btn{
+    width:100%
+  }
+
+  .stats{
+    gap:9px
+  }
+
+  .stat{
+    padding:13px
+  }
+
+  .stat-number{
+    font-size:23px
+  }
+
+  .card{
+    padding:13px;
+    border-radius:17px
+  }
+
+  .property{
+    grid-template-columns:80px minmax(0,1fr);
+    gap:10px
+  }
+
+  .property-image{
+    width:80px;
+    height:75px
+  }
+
+  .property-actions{
+    grid-column:1/-1;
+    justify-content:flex-start
+  }
+
+  .property-actions .btn{
+    flex:1
+  }
+
+  .form-grid,
+  .dynamic,
+  .settings-grid{
+    grid-template-columns:1fr
+  }
+
+  .field.full,
+  .dynamic,
+  .amenities,
+  .photo-box,
+  .form-actions{
+    grid-column:auto
+  }
+
+  .amenity-grid{
+    grid-template-columns:1fr 1fr
+  }
+
+  .previews{
+    grid-template-columns:repeat(3,1fr)
+  }
+
+  .modal-wrap{
+    padding:0
+  }
+
+  .modal{
+    max-height:100vh;
+    height:100%;
+    border-radius:0
+  }
+
+  .modal-head{
+    padding:13px
+  }
+
+  .modal-body{
+    padding:13px
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="topbar">
+  <div class="topbar-in">
+
+    <div class="brand">
+      <div class="brand-icon">🏠</div>
+      <div class="brand-text">
+        <strong>املاک امیر پاشا</strong>
+        <span>پنل مدیریت فایل‌ها</span>
+      </div>
+    </div>
+
+    <div class="connection">
+      <span class="status-dot" id="statusDot"></span>
+      <span id="statusText">اتصال بررسی نشده</span>
+    </div>
+
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+
+    <button class="nav-btn active" data-page="dashboard">
+      <span class="nav-icon">📊</span>
+      داشبورد
+    </button>
+
+    <button class="nav-btn" data-page="listings">
+      <span class="nav-icon">🏘️</span>
+      آگهی‌ها
+    </button>
+
+    <button class="nav-btn" data-page="settings">
+      <span class="nav-icon">⚙️</span>
+      تنظیمات اتصال
+    </button>
+
+  </aside>
+
+  <main class="main">
+
+    <!-- DASHBOARD -->
+
+    <section class="page active" id="page-dashboard">
+
+      <div class="page-head">
+        <div>
+          <h1>داشبورد</h1>
+          <p>مدیریت فایل‌های ملکی سایت املاک امیر پاشا</p>
+        </div>
+
+        <button class="btn btn-primary" id="addFromDashboard">
+          ＋ افزودن آگهی
+        </button>
+      </div>
+
+      <div class="stats">
+
+        <div class="stat">
+          <div class="stat-top">
+            <span class="stat-label">کل آگهی‌ها</span>
+            <span class="stat-icon">🏠</span>
+          </div>
+          <div class="stat-number" id="countAll">۰</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-top">
+            <span class="stat-label">آپارتمان</span>
+            <span class="stat-icon">🏢</span>
+          </div>
+          <div class="stat-number" id="countApartment">۰</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-top">
+            <span class="stat-label">ویلا</span>
+            <span class="stat-icon">🏡</span>
+          </div>
+          <div class="stat-number" id="countVilla">۰</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-top">
+            <span class="stat-label">مهر / زمین</span>
+            <span class="stat-icon">📍</span>
+          </div>
+          <div class="stat-number" id="countOther">۰</div>
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-title">
+          آخرین فایل‌ها
+        </div>
+
+        <div class="list" id="dashboardList"></div>
+
+      </div>
+
+    </section>
+
+
+    <!-- LISTINGS -->
+
+    <section class="page" id="page-listings">
+
+      <div class="page-head">
+
+        <div>
+          <h1>مدیریت آگهی‌ها</h1>
+          <p>افزودن، ویرایش و حذف فایل‌های ملکی</p>
+        </div>
+
+        <button class="btn btn-primary" id="addListingBtn">
+          ＋ افزودن آگهی جدید
+        </button>
+
+      </div>
+
+      <div class="card">
+
+        <div class="toolbar">
+
+          <div class="search">
+            <input
+              id="searchInput"
+              class="input"
+              placeholder="جستجو بر اساس عنوان، لوکیشن یا توضیحات..."
+            >
+          </div>
+
+          <select id="typeFilter" class="select" style="max-width:170px">
+            <option value="">همه نوع‌ها</option>
+            <option value="apartment">آپارتمان</option>
+            <option value="villa">ویلا</option>
+            <option value="mehr">مسکن مهر</option>
+            <option value="land">زمین</option>
+          </select>
+
+          <select id="phaseFilter" class="select" style="max-width:150px">
+            <option value="">همه فازها</option>
+          </select>
+
+          <select id="sortFilter" class="select" style="max-width:170px">
+            <option value="new">جدیدترین</option>
+            <option value="old">قدیمی‌ترین</option>
+            <option value="cheap">ارزان‌ترین</option>
+            <option value="expensive">گران‌ترین</option>
+          </select>
+
+        </div>
+
+        <div class="list" id="listingList"></div>
+
+      </div>
+
+    </section>
+
+
+    <!-- SETTINGS -->
+
+    <section class="page" id="page-settings">
+
+      <div class="page-head">
+        <div>
+          <h1>تنظیمات اتصال</h1>
+          <p>اتصال پنل به GitHub برای ذخیره آگهی‌ها و تصاویر</p>
+        </div>
+      </div>
+
+      <div class="card">
+
+        <div class="warning">
+          ⚠️ توکن GitHub فقط در همین مرورگر و در
+          <b>sessionStorage</b>
+          ذخیره می‌شود و داخل فایل HTML قرار نمی‌گیرد.
+          توکن را برای هیچ شخص دیگری ارسال نکن.
+        </div>
+
+        <div class="settings-grid">
+
+          <div class="field">
+            <label>نام کاربری GitHub</label>
+            <input
+              id="ghOwner"
+              class="input"
+              value="Amirpasha-melk"
+              placeholder="مثلاً Amirpasha-melk"
+            >
+          </div>
+
+          <div class="field">
+            <label>نام Repository</label>
+            <input
+              id="ghRepo"
+              class="input"
+              value="Amirpasha-melk"
+              placeholder="مثلاً Amirpasha-melk"
+            >
+          </div>
+
+          <div class="field">
+            <label>Branch</label>
+            <input
+              id="ghBranch"
+              class="input"
+              value="main"
+            >
+          </div>
+
+          <div class="field">
+            <label>GitHub Token</label>
+            <input
+              id="ghToken"
+              class="input"
+              type="password"
+              placeholder="توکن Fine-grained خودت را وارد کن"
+              autocomplete="off"
+            >
+          </div>
+
+          <div class="field full">
+            <label>آدرس سایت</label>
+            <input
+              id="siteBase"
+              class="input"
+              value="https://amlakmani.ir"
+              placeholder="https://amlakmani.ir"
+            >
+            <div class="help">
+              برای دکمه «مشاهده سایت» استفاده می‌شود.
+            </div>
+          </div>
+
+        </div>
+
+        <div style="display:flex;gap:9px;flex-wrap:wrap">
+
+          <button class="btn btn-primary" id="saveSettings">
+            💾 ذخیره تنظیمات
+          </button>
+
+          <button class="btn btn-secondary" id="testConnection">
+            🔌 تست اتصال GitHub
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+</div>
+
+
+<!-- EDITOR -->
+
+<div class="modal-wrap" id="editorWrap">
+
+  <div class="modal">
+
+    <div class="modal-head">
+
+      <h2 id="editorTitle">افزودن آگهی</h2>
+
+      <button
+        type="button"
+        class="close"
+        id="closeEditor"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div class="modal-body">
+
+      <form id="listingForm">
+
+        <input type="hidden" id="editId">
+
+        <div class="form-grid">
+
+          <div class="field">
+            <label>عنوان آگهی *</label>
+            <input
+              id="fTitle"
+              class="input"
+              placeholder="مثلاً آپارتمان ۹۰ متری فاز ۴"
+              required
+            >
+          </div>
+
+          <div class="field">
+            <label>نوع ملک *</label>
+
+            <select id="fType" class="select" required>
+
+              <option value="">
+                انتخاب کنید
+              </option>
+
+              <option value="apartment">
+                آپارتمان
+              </option>
+
+              <option value="villa">
+                ویلا
+              </option>
+
+              <option value="mehr">
+                مسکن مهر
+              </option>
+
+              <option value="land">
+                زمین
+              </option>
+
+            </select>
+
+          </div>
+
+          <div class="field">
+            <label>فاز</label>
+
+            <select id="fPhase" class="select">
+
+              <option value="">
+                انتخاب فاز
+              </option>
+
+            </select>
+
+          </div>
+
+          <div class="field">
+            <label>متراژ *</label>
+
+            <input
+              id="fArea"
+              class="input"
+              type="number"
+              min="1"
+              placeholder="مثلاً ۹۰"
+              required
+            >
+
+          </div>
+
+          <div class="field">
+            <label>قیمت</label>
+
+            <input
+              id="fPrice"
+              class="input"
+              placeholder="مثلاً ۲ میلیارد و ۳۰۰ میلیون"
+            >
+
+          </div>
+
+          <div class="field">
+            <label>لوکیشن *</label>
+
+            <input
+              id="fLocation"
+              class="input"
+              placeholder="مثلاً مهستان، فاز ۴"
+              required
+            >
+
+          </div>
+
+          <div class="field full">
+
+            <label>توضیحات</label>
+
+            <textarea
+              id="fDescription"
+              class="textarea"
+              placeholder="توضیحات کامل ملک..."
+            ></textarea>
+
+          </div>
+
+
+          <!-- DYNAMIC -->
+
+          <div
+            id="dynamicFormFields"
+            class="dynamic"
+          ></div>
+
+
+          <!-- AMENITIES -->
+
+          <div class="amenities">
+
+            <div class="field">
+
+              <label>امکانات</label>
+
+              <div
+                id="amenities"
+                class="amenity-grid"
+              ></div>
+
+            </div>
+
+          </div>
+
+
+          <!-- PHOTOS -->
+
+          <div class="photo-box">
+
+            <div class="photo-head">
+
+              <div>
+                <b style="font-size:13px">
+                  تصاویر ملک
+                </b>
+
+                <div class="help">
+                  حداکثر ۸ عکس، هر عکس حداکثر ۸ مگابایت
+                </div>
+              </div>
+
+              <label
+                class="photo-label"
+                for="photoInput"
+              >
+                📷 انتخاب عکس‌ها
+              </label>
+
+              <input
+                id="photoInput"
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                multiple
+              >
+
+            </div>
+
+            <div
+              class="previews"
+              id="previews"
+            ></div>
+
+          </div>
+
+
+          <div class="form-actions">
+
+            <button
+              type="button"
+              class="btn btn-secondary"
+              id="cancelEditor"
+            >
+              انصراف
+            </button>
+
+            <button
+              type="submit"
+              class="btn btn-primary"
+              id="saveListing"
+            >
+              ذخیره آگهی
+            </button>
+
+          </div>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+'use strict';
+
+
+/* =========================
+   CONFIG
+========================= */
+
+const API='https://api.github.com';
+
+const PATH='data/listings.json';
+
+const IMAGE_DIR='images/listings';
+
+const MAX_PHOTOS=8;
+
+const MAX_SIZE=8*1024*1024;
+
+
+const phases=[
+  'فاز ۱',
+  'فاز ۲',
+  'فاز ۳',
+  'فاز ۴',
+  'فاز ۵',
+  'فاز ۶',
+  'فاز ۷',
+  'فاز ۸'
+];
+
+
+const typeFa={
+  apartment:'آپارتمان',
+  villa:'ویلا',
+  mehr:'مسکن مهر',
+  land:'زمین'
+};
+
+
+const amenityList=[
+  ['parking','پارکینگ'],
+  ['storage','انباری'],
+  ['elevator','آسانسور'],
+  ['balcony','بالکن'],
+  ['yard','حیاط'],
+  ['document','مدارک کامل']
+];
+
+
+const $=id=>document.getElementById(id);
+
+
+/*
+  نکته مهم:
+  existingPhotos = عکس‌هایی که قبلاً روی GitHub هستند
+  pendingFiles = عکس‌های جدیدی که هنوز آپلود نشده‌اند
+
+  این دو جدا نگه داشته شده‌اند تا هنگام ویرایش،
+  عکس‌های جدید دوبار ذخیره نشوند.
+*/
+
+const state={
+  listings:[],
+  editing:null,
+  existingPhotos:[],
+  pendingFiles:[],
+  pendingPreviews:[],
+  saving:false
+};
+
+
+/* =========================
+   TOAST
+========================= */
+
+function toast(msg,ok=true){
+
+  const el=$('toast');
+
+  el.textContent=msg;
+
+  el.style.background=
+    ok ? 'var(--ink)' : '#991b1b';
+
+  el.classList.add('show');
+
+  clearTimeout(window.__toast);
+
+  window.__toast=setTimeout(
+    ()=>el.classList.remove('show'),
+    3500
+  );
+}
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function esc(value){
+
+  return String(value ?? '')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#039;');
+
+}
+
+
+/* =========================
+   CONFIG
+========================= */
+
+function cfg(){
+
+  return {
+
+    owner:$('ghOwner').value.trim(),
+
+    repo:$('ghRepo').value.trim(),
+
+    branch:
+      $('ghBranch').value.trim() || 'main',
+
+    token:$('ghToken').value.trim(),
+
+    siteBase:
+      $('siteBase')
+        .value
+        .trim()
+        .replace(/\/+$/,'')
+
+  };
+
+}
+
+
+function saveCfg(){
+
+  const c=cfg();
+
+  sessionStorage.setItem(
+    'amlak_admin_cfg',
+    JSON.stringify(c)
+  );
+
+  updateStatus(false);
+
+}
+
+
+function loadCfg(){
+
+  try{
+
+    const c=
+      JSON.parse(
+        sessionStorage.getItem(
+          'amlak_admin_cfg'
+        ) || '{}'
+      );
+
+    $('ghOwner').value=
+      c.owner || 'Amirpasha-melk';
+
+    $('ghRepo').value=
+      c.repo || 'Amirpasha-melk';
+
+    $('ghBranch').value=
+      c.branch || 'main';
+
+    $('ghToken').value=
+      c.token || '';
+
+    $('siteBase').value=
+      c.siteBase || 'https://amlakmani.ir';
+
+  }catch(e){
+
+    $('ghOwner').value='Amirpasha-melk';
+
+    $('ghRepo').value='Amirpasha-melk';
+
+    $('ghBranch').value='main';
+
+    $('siteBase').value='https://amlakmani.ir';
+
+  }
+
+}
+
+
+function updateStatus(ok){
+
+  const dot=$('statusDot');
+
+  const text=$('statusText');
+
+  dot.classList.remove('ok','bad');
+
+  if(ok===true){
+
+    dot.classList.add('ok');
+
+    text.textContent='اتصال برقرار است';
+
+  }else if(ok===false){
+
+    text.textContent='اتصال بررسی نشده';
+
+  }else{
+
+    dot.classList.add('bad');
+
+    text.textContent='خطا در اتصال';
+
+  }
+
+}
+
+
+/* =========================
+   GITHUB REQUEST
+========================= */
+
+async function github(path,options={}){
+
+  const c=cfg();
+
+  if(!c.owner || !c.repo || !c.token){
+
+    throw new Error(
+      'اطلاعات GitHub کامل نیست.'
+    );
+
+  }
+
+  const url=
+    API+
+    '/repos/'+
+    encodeURIComponent(c.owner)+
+    '/'+
+    encodeURIComponent(c.repo)+
+    '/contents/'+
+    path;
+
+
+  const headers={
+    'Accept':
+      'application/vnd.github+json',
+
+    'Authorization':
+      'Bearer '+c.token,
+
+    'X-GitHub-Api-Version':
+      '2022-11-28'
+  };
+
+
+  const response=
+    await fetch(
+      url,
+      {
+        ...options,
+        headers:{
+          ...headers,
+          ...(options.headers||{})
+        }
+      }
+    );
+
+
+  if(!response.ok){
+
+    let message='خطای GitHub';
+
+    try{
+
+      const data=await response.json();
+
+      message=
+        data.message ||
+        message;
+
+    }catch(e){}
+
+    throw new Error(
+      message+
+      ' ('+
+      response.status+
+      ')'
+    );
+
+  }
+
+
+  return response;
+
+}
+
+
+/* =========================
+   NORMALIZE
+========================= */
+
+function normalize(x){
+
+  x=x || {};
+
+  const type=
+    x.type ||
+    x.property_type ||
+    '';
+
+  return {
+
+    id:String(
+      x.id ||
+      crypto.randomUUID()
+    ),
+
+    title:String(
+      x.title || ''
+    ),
+
+    type,
+
+    property_type:type,
+
+    phase:String(
+      x.phase || ''
+    ),
+
+    location:String(
+      x.location || ''
+    ),
+
+    area:Number(
+      x.area || 0
+    ),
+
+    price:String(
+      x.price || 'تماس بگیرید'
+    ),
+
+    description:String(
+      x.description || ''
+    ),
+
+    photos:
+      Array.isArray(x.photos)
+        ? x.photos.filter(Boolean)
+        : [],
+
+    specs:
+      Array.isArray(x.specs)
+        ? x.specs
+        : [],
+
+    amenities:
+      Array.isArray(x.amenities)
+        ? x.amenities
+        : [],
+
+    created_at:
+      x.created_at ||
+      new Date().toISOString(),
+
+    bedrooms:String(
+      x.bedrooms || ''
+    ),
+
+    floor:String(
+      x.floor || ''
+    ),
+
+    parking:String(
+      x.parking || ''
+    ),
+
+    storage:String(
+      x.storage || ''
+    ),
+
+    elevator:String(
+      x.elevator || ''
+    ),
+
+    heating:String(
+      x.heating || ''
+    ),
+
+    cooling:String(
+      x.cooling || ''
+    ),
+
+    year:String(
+      x.year || ''
+    ),
+
+    documents:String(
+      x.documents || ''
+    ),
+
+    buildingArea:String(
+      x.buildingArea || ''
+    ),
+
+    villaType:String(
+      x.villaType || ''
+    ),
+
+    usage:String(
+      x.usage || ''
+    )
+
+  };
+
+}
+
+
+/* =========================
+   READ LISTINGS
+========================= */
+
+async function readListings(){
+
+  const response=
+    await github(
+      PATH+
+      '?ref='+
+      encodeURIComponent(
+        cfg().branch || 'main'
+      )
+    );
+
+
+  const data=
+    await response.json();
+
+
+  let decoded='';
+
+  try{
+
+    decoded=
+      decodeURIComponent(
+        escape(
+          atob(
+            data.content.replace(/\n/g,'')
+          )
+        )
+      );
+
+  }catch(e){
+
+    decoded=
+      atob(
+        data.content.replace(/\n/g,'')
+      );
+
+  }
+
+
+  let json;
+
+  try{
+
+    json=JSON.parse(decoded);
+
+  }catch(e){
+
+    throw new Error(
+      'فایل data/listings.json معتبر نیست.'
+    );
+
+  }
+
+
+  return {
+
+    listings:
+      Array.isArray(json)
+        ? json.map(normalize)
+        : (
+            Array.isArray(json.listings)
+              ? json.listings.map(normalize)
+              : []
+          ),
+
+    sha:data.sha
+
+  };
+
+}
+
+
+/* =========================
+   WRITE LISTINGS
+========================= */
+
+async function writeListings(
+  listings,
+  sha,
+  message
+){
+
+  const json=
+    JSON.stringify(
+      {
+        listings
+      },
+      null,
+      2
+    );
+
+
+  let encoded;
+
+  try{
+
+    encoded=
+      btoa(
+        unescape(
+          encodeURIComponent(json)
+        )
+      );
+
+  }catch(e){
+
+    encoded=btoa(json);
+
+  }
+
+
+  const body={
+    message,
+    content:encoded,
+    branch:cfg().branch || 'main'
+  };
+
+
+  if(sha){
+    body.sha=sha;
+  }
+
+
+  await github(
+    PATH,
+    {
+      method:'PUT',
+
+      headers:{
+        'Content-Type':
+          'application/json'
+      },
+
+      body:JSON.stringify(body)
+    }
+  );
+
+}
+
+
+/* =========================
+   UPLOAD IMAGE
+========================= */
+
+async function uploadImage(file){
+
+  if(!file){
+
+    throw new Error(
+      'فایل تصویر انتخاب نشده است.'
+    );
+
+  }
+
+
+  if(
+    !/^image\/(jpeg|png|webp)$/i
+      .test(file.type)
+  ){
+
+    throw new Error(
+      'فرمت عکس باید JPG، PNG یا WEBP باشد.'
+    );
+
+  }
+
+
+  if(file.size>MAX_SIZE){
+
+    throw new Error(
+      'حجم هر عکس باید حداکثر ۸ مگابایت باشد.'
+    );
+
+  }
+
+
+  const ext=
+    file.type==='image/png'
+      ? 'png'
+      : file.type==='image/webp'
+        ? 'webp'
+        : 'jpg';
+
+
+  const safeName=
+    Date.now()+
+    '-'+
+    Math.random()
+      .toString(36)
+      .slice(2,9)+
+    '.'+
+    ext;
+
+
+  const path=
+    IMAGE_DIR+
+    '/'+
+    safeName;
+
+
+  const buffer=
+    await file.arrayBuffer();
+
+
+  let binary='';
+
+  const bytes=
+    new Uint8Array(buffer);
+
+
+  const chunk=0x8000;
+
+
+  for(
+    let i=0;
+    i<bytes.length;
+    i+=chunk
+  ){
+
+    binary+=String.fromCharCode(
+      ...bytes.subarray(
+        i,
+        Math.min(
+          i+chunk,
+          bytes.length
+        )
+      )
+    );
+
+  }
+
+
+  const content=
+    btoa(binary);
+
+
+  const body={
+    message:'Upload property image '+safeName,
+    content,
+    branch:cfg().branch || 'main'
+  };
+
+
+  await github(
+    path,
+    {
+      method:'PUT',
+
+      headers:{
+        'Content-Type':
+          'application/json'
+      },
+
+      body:JSON.stringify(body)
+    }
+  );
+
+
+  const c=cfg();
+
+
+  /*
+    GitHub Pages URL:
+    اگر دامنه سفارشی تنظیم شده باشد:
+    https://amlakmani.ir/images/listings/file.jpg
+
+    در غیر این صورت:
+    https://OWNER.github.io/REPO/images/listings/file.jpg
+  */
+
+  const base=
+    c.siteBase ||
+    (
+      'https://'+
+      c.owner+
+      '.github.io/'+
+      c.repo
+    );
+
+
+  return (
+    base.replace(/\/+$/,'')+
+    '/images/listings/'+
+    safeName
+  );
+
+}
+
+
+/* =========================
+   DELETE IMAGE
+========================= */
+
+async function deleteImageByUrl(url){
+
+  if(!url)return;
+
+
+  const c=cfg();
+
+
+  const customBase=
+    (
+      c.siteBase ||
+      ''
+    ).replace(/\/+$/,'');
+
+
+  const pagesBase=
+    (
+      'https://'+
+      c.owner+
+      '.github.io/'+
+      c.repo
+    ).replace(/\/+$/,'');
+
+
+  let path='';
+
+
+  if(
+    customBase &&
+    url.startsWith(customBase)
+  ){
+
+    path=
+      url.slice(customBase.length)
+        .replace(/^\/+/,'');
+
+  }else if(
+    url.startsWith(pagesBase)
+  ){
+
+    path=
+      url.slice(pagesBase.length)
+        .replace(/^\/+/,'');
+
+  }else{
+
+    return;
+
+  }
+
+
+  if(
+    !path.startsWith(
+      IMAGE_DIR+'/'
+    )
+  ){
+
+    return;
+
+  }
+
+
+  try{
+
+    const response=
+      await github(
+        path+
+        '?ref='+
+        encodeURIComponent(
+          c.branch || 'main'
+        )
+      );
+
+
+    const data=
+      await response.json();
+
+
+    await github(
+      path,
+      {
+        method:'DELETE',
+
+        headers:{
+          'Content-Type':
+            'application/json'
+        },
+
+        body:JSON.stringify({
+          message:
+            'Delete property image',
+
+          sha:data.sha,
+
+          branch:
+            c.branch || 'main'
+        })
+      }
+    );
+
+  }catch(e){
+
+    console.warn(
+      'Image deletion failed:',
+      e
+    );
+
+  }
+
+}
+
+
+/* =========================
+   TYPE FIELDS
+========================= */
+
+function renderDynamic(
+  type,
+  values={}
+){
+
+  const wrap=
+    $('dynamicFormFields');
+
+
+  let fields=[];
+
+
+  if(type==='apartment'){
+
+    fields=[
+      ['bedrooms','تعداد خواب','number'],
+      ['floor','طبقه','text'],
+      ['heating','گرمایش','text'],
+      ['cooling','سرمایش','text'],
+      ['year','سال ساخت','text'],
+      ['documents','مدارک','text']
+    ];
+
+  }
+
+
+  if(type==='villa'){
+
+    fields=[
+      ['buildingArea','متراژ بنا','number'],
+      ['bedrooms','تعداد خواب','number'],
+      ['year','سال ساخت','text'],
+      ['villaType','نوع ویلا','text'],
+      ['documents','مدارک','text']
+    ];
+
+  }
+
+
+  if(type==='mehr'){
+
+    fields=[
+      ['bedrooms','تعداد خواب','number'],
+      ['floor','طبقه','text'],
+      ['heating','گرمایش','text'],
+      ['cooling','سرمایش','text']
+    ];
+
+  }
+
+
+  if(type==='land'){
+
+    fields=[
+      ['usage','کاربری','text'],
+      ['documents','مدارک','text']
+    ];
+
+  }
+
+
+  wrap.innerHTML=
+    fields.map(
+      ([key,label,inputType])=>`
+
+        <div class="field">
+
+          <label>${esc(label)}</label>
+
+          <input
+            class="input"
+            data-field="${esc(key)}"
+            type="${esc(inputType)}"
+            value="${esc(values[key]||'')}"
+            placeholder="${esc(label)}"
+          >
+
+        </div>
+
+      `
+    ).join('');
+
+}
+
+
+/* =========================
+   AMENITIES
+========================= */
+
+function renderAmenities(
+  selected=[]
+){
+
+  $('amenities').innerHTML=
+    amenityList.map(
+      ([key,label])=>`
+
+        <label class="amenity">
+
+          <input
+            type="checkbox"
+            value="${esc(key)}"
+            ${
+              selected.includes(key)
+                ? 'checked'
+                : ''
+            }
+          >
+
+          <span>${esc(label)}</span>
+
+        </label>
+
+      `
+    ).join('');
+
+}
+
+
+/* =========================
+   PHASES
+========================= */
+
+function fillPhases(){
+
+  const select=
+    $('fPhase');
+
+  const filter=
+    $('phaseFilter');
+
+
+  select.innerHTML=
+    '<option value="">انتخاب فاز</option>'+
+    phases.map(
+      p=>`<option value="${esc(p)}">${esc(p)}</option>`
+    ).join('');
+
+
+  filter.innerHTML=
+    '<option value="">همه فازها</option>'+
+    phases.map(
+      p=>`<option value="${esc(p)}">${esc(p)}</option>`
+    ).join('');
+
+}
+
+
+/* =========================
+   COLLECT DYNAMIC
+========================= */
+
+function collectDynamic(){
+
+  const o={};
+
+  document
+    .querySelectorAll(
+      '#dynamicFormFields [data-field]'
+    )
+    .forEach(
+      x=>{
+        o[x.dataset.field]=
+          x.value.trim();
+      }
+    );
+
+
+  return o;
+
+}
+
+
+/* =========================
+   AMENITIES
+========================= */
+
+function collectAmenities(){
+
+  return [
+    ...document.querySelectorAll(
+      '#amenities input:checked'
+    )
+  ].map(
+    x=>x.value
+  );
+
+}
+
+
+/* =========================
+   SPECS
+========================= */
+
+function buildSpecs(d){
+
+  const map=[
+    ['bedrooms','خواب'],
+    ['floor','طبقه'],
+    ['buildingArea','متراژ بنا'],
+    ['villaType','نوع ویلا'],
+    ['usage','کاربری'],
+    ['heating','گرمایش'],
+    ['cooling','سرمایش'],
+    ['year','سال ساخت'],
+    ['documents','مدارک']
+  ];
+
+
+  return map
+    .filter(
+      ([k])=>d[k]
+    )
+    .map(
+      ([k,l])=>
+        l+': '+d[k]
+    );
+
+}
+
+
+/* =========================
+   OPEN EDITOR
+========================= */
+
+function openEditor(p=null){
+
+  state.editing=
+    p ? p.id : null;
+
+
+  state.existingPhotos=
+    p
+      ? [...(p.photos||[])]
+      : [];
+
+
+  state.pendingFiles=[];
+
+  state.pendingPreviews=[];
+
+
+  $('photoInput').value='';
+
+
+  $('editorTitle').textContent=
+    p
+      ? 'ویرایش آگهی'
+      : 'افزودن آگهی';
+
+
+  $('editId').value=
+    p?.id || '';
+
+
+  $('fTitle').value=
+    p?.title || '';
+
+
+  $('fType').value=
+    p?.type || '';
+
+
+  $('fPhase').value=
+    p?.phase || '';
+
+
+  $('fArea').value=
+    p?.area || '';
+
+
+  $('fPrice').value=
+    p?.price || '';
+
+
+  $('fLocation').value=
+    p?.location || '';
+
+
+  $('fDescription').value=
+    p?.description || '';
+
+
+  renderDynamic(
+    p?.type || '',
+    p || {}
+  );
+
+
+  renderAmenities(
+    p?.amenities || []
+  );
+
+
+  renderPreviews();
+
+
+  $('editorWrap')
+    .classList
+    .add('open');
+
+
+  document.body.style.overflow=
+    'hidden';
+
+}
+
+
+/* =========================
+   CLOSE EDITOR
+========================= */
+
+function closeEditor(){
+
+  state.pendingPreviews
+    .forEach(
+      u=>URL.revokeObjectURL(u)
+    );
+
+
+  $('editorWrap')
+    .classList
+    .remove('open');
+
+
+  document.body.style.overflow='';
+
+
+  state.editing=null;
+
+  state.existingPhotos=[];
+
+  state.pendingFiles=[];
+
+  state.pendingPreviews=[];
+
+  $('photoInput').value='';
+
+  renderPreviews();
+
+}
+
+
+/* =========================
+   PREVIEWS
+========================= */
+
+function renderPreviews(){
+
+  const items=[
+
+    ...state.existingPhotos.map(
+      (src,i)=>({
+        src,
+        index:i,
+        pending:false
+      })
+    ),
+
+    ...state.pendingPreviews.map(
+      (src,i)=>({
+        src,
+        index:i,
+        pending:true
+      })
+    )
+
+  ];
+
+
+  $('previews').innerHTML=
+    items.map(
+      x=>`
+
+        <div class="preview">
+
+          <img
+            src="${esc(x.src)}"
+            alt=""
+          >
+
+          <button
+            type="button"
+            class="remove-photo"
+            onclick="${
+              x.pending
+                ? 'removePendingPhoto'
+                : 'removePhoto'
+            }(${x.index})"
+          >
+            ×
+          </button>
+
+        </div>
+
+      `
+    ).join('');
+
+}
+
+
+/* =========================
+   REMOVE EXISTING PHOTO
+========================= */
+
+function removePhoto(i){
+
+  state.existingPhotos
+    .splice(i,1);
+
+  renderPreviews();
+
+}
+
+
+/* =========================
+   REMOVE NEW PHOTO
+========================= */
+
+function removePendingPhoto(i){
+
+  if(
+    state.pendingPreviews[i]
+  ){
+
+    URL.revokeObjectURL(
+      state.pendingPreviews[i]
+    );
+
+  }
+
+
+  state.pendingPreviews
+    .splice(i,1);
+
+
+  state.pendingFiles
+    .splice(i,1);
+
+
+  renderPreviews();
+
+}
+
+
+/* =========================
+   PHOTO SELECT
+========================= */
+
+$('photoInput')
+  .addEventListener(
+    'change',
+    ()=>{
+
+      const files=
+        [
+          ...$('photoInput').files
+        ];
+
+
+      if(!files.length)return;
+
+
+      const current=
+        state.existingPhotos.length+
+        state.pendingFiles.length;
+
+
+      if(
+        current+
+        files.length>
+        MAX_PHOTOS
+      ){
+
+        toast(
+          'حداکثر ۸ عکس مجاز است.',
+          false
+        );
+
+        $('photoInput').value='';
+
+        return;
+
+      }
+
+
+      for(
+        const f of files
+      ){
+
+        if(
+          !/^image\/(jpeg|png|webp)$/i
+            .test(f.type)
+        ){
+
+          toast(
+            'فقط JPG، PNG یا WEBP مجاز است.',
+            false
+          );
+
+          continue;
+
+        }
+
+
+        if(
+          f.size>MAX_SIZE
+        ){
+
+          toast(
+            'حجم هر عکس باید حداکثر ۸ مگابایت باشد.',
+            false
+          );
+
+          continue;
+
+        }
+
+
+        state.pendingFiles.push(f);
+
+
+        state.pendingPreviews.push(
+          URL.createObjectURL(f)
+        );
+
+      }
+
+
+      $('photoInput').value='';
+
+
+      renderPreviews();
+
+    }
+  );
+
+
+/* =========================
+   SAVE LISTING
+========================= */
+
+async function saveListing(e){
+
+  e.preventDefault();
+
+
+  if(state.saving)return;
+
+
+  const c=cfg();
+
+
+  if(
+    !c.owner ||
+    !c.repo ||
+    !c.token
+  ){
+
+    showPage('settings');
+
+    toast(
+      'اول اتصال GitHub را کامل کن.',
+      false
+    );
+
+    return;
+
+  }
+
+
+  const title=
+    $('fTitle')
+      .value
+      .trim();
+
+
+  const type=
+    $('fType')
+      .value;
+
+
+  const phase=
+    $('fPhase')
+      .value;
+
+
+  const area=
+    Number(
+      $('fArea').value
+    );
+
+
+  const location=
+    $('fLocation')
+      .value
+      .trim();
+
+
+  if(
+    !title ||
+    !type ||
+    !area ||
+    !location
+  ){
+
+    toast(
+      'عنوان، نوع ملک، متراژ و لوکیشن الزامی هستند.',
+      false
+    );
+
+    return;
+
+  }
+
+
+  state.saving=true;
+
+
+  $('saveListing').disabled=true;
+
+
+  $('saveListing').textContent=
+    'در حال ذخیره...';
+
+
+  try{
+
+    saveCfg();
+
+
+    const old=
+      state.editing
+        ? state.listings.find(
+            x=>x.id===state.editing
+          )
+        : null;
+
+
+    /*
+      فقط عکس‌های موجود + فایل‌های جدید.
+      دیگر Data URL وارد JSON نمی‌شود.
+    */
+
+    let photos=
+      [
+        ...state.existingPhotos
+      ];
+
+
+    if(
+      state.pendingFiles.length+
+      photos.length>
+      MAX_PHOTOS
+    ){
+
+      throw new Error(
+        'حداکثر ۸ عکس مجاز است.'
+      );
+
+    }
+
+
+    for(
+      const f of state.pendingFiles
+    ){
+
+      toast(
+        'در حال آپلود عکس‌ها...'
+      );
+
+
+      const uploaded=
+        await uploadImage(f);
+
+
+      photos.push(uploaded);
+
+    }
+
+
+    const dyn=
+      collectDynamic();
+
+
+    const now=
+      new Date()
+        .toISOString();
+
+
+    const item=
+      normalize({
+
+        id:
+          old?.id ||
+          crypto.randomUUID(),
+
+        title,
+
+        type,
+
+        property_type:type,
+
+        phase,
+
+        area,
+
+        price:
+          $('fPrice')
+            .value
+            .trim() ||
+          'تماس بگیرید',
+
+        location,
+
+        description:
+          $('fDescription')
+            .value
+            .trim(),
+
+        photos,
+
+        created_at:
+          old?.created_at ||
+          now,
+
+        specs:
+          buildSpecs(dyn),
+
+        amenities:
+          collectAmenities(),
+
+        ...dyn
+
+      });
+
+
+    /*
+      دوباره آخرین نسخه JSON را می‌خوانیم
+      تا SHA جدید داشته باشیم.
+    */
+
+    const r=
+      await readListings();
+
+
+    let arr=
+      r.listings
+        .map(normalize);
+
+
+    const idx=
+      arr.findIndex(
+        x=>x.id===item.id
+      );
+
+
+    if(idx>=0){
+
+      arr[idx]=item;
+
+    }else{
+
+      arr.unshift(item);
+
+    }
+
+
+    await writeListings(
+
+      arr,
+
+      r.sha,
+
+      idx>=0
+        ? 'Update property '+item.title
+        : 'Add property '+item.title
+
+    );
+
+
+    /*
+      عکس‌هایی که کاربر در ویرایش حذف کرده
+      از GitHub نیز حذف می‌شوند.
+    */
+
+    if(old){
+
+      const removed=
+        (old.photos||[])
+          .filter(
+            url=>
+              !photos.includes(url)
+          );
+
+
+      for(
+        const url of removed
+      ){
+
+        await deleteImageByUrl(
+          url
+        );
+
+      }
+
+    }
+
+
+    state.listings=arr;
+
+
+    render();
+
+
+    closeEditor();
+
+
+    toast(
+      idx>=0
+        ? 'آگهی با موفقیت ویرایش شد.'
+        : 'آگهی با موفقیت ثبت شد.'
+    );
+
+
+  }catch(err){
+
+    console.error(err);
+
+
+    toast(
+      'ذخیره انجام نشد: '+
+      err.message,
+      false
+    );
+
+
+  }finally{
+
+    state.saving=false;
+
+
+    $('saveListing')
+      .disabled=false;
+
+
+    $('saveListing')
+      .textContent=
+      'ذخیره آگهی';
+
+  }
+
+}
+
+
+/* =========================
+   DELETE LISTING
+========================= */
+
+async function deleteListing(id){
+
+  const item=
+    state.listings.find(
+      x=>x.id===id
+    );
+
+
+  if(!item)return;
+
+
+  const confirmed=
+    confirm(
+      'آیا از حذف این آگهی مطمئن هستید؟\n\n'+
+      item.title+
+      '\n\nاین عملیات قابل بازگشت نیست.'
+    );
+
+
+  if(!confirmed)return;
+
+
+  try{
+
+    toast(
+      'در حال حذف آگهی...'
+    );
+
+
+    const r=
+      await readListings();
+
+
+    const arr=
+      r.listings
+        .filter(
+          x=>x.id!==id
+        );
+
+
+    await writeListings(
+
+      arr,
+
+      r.sha,
+
+      'Delete property '+item.title
+
+    );
+
+
+    for(
+      const url of (
+        item.photos || []
+      )
+    ){
+
+      await deleteImageByUrl(
+        url
+      );
+
+    }
+
+
+    state.listings=arr;
+
+
+    render();
+
+
+    toast(
+      'آگهی با موفقیت حذف شد.'
+    );
+
+
+  }catch(err){
+
+    console.error(err);
+
+
+    toast(
+      'حذف انجام نشد: '+
+      err.message,
+      false
+    );
+
+  }
+
+}
+
+
+/* =========================
+   SHOW PAGE
+========================= */
+
+function showPage(page){
+
+  document
+    .querySelectorAll('.page')
+    .forEach(
+      x=>
+        x.classList.remove(
+          'active'
+        )
+    );
+
+
+  const target=
+    $('page-'+page);
+
+
+  if(target){
+
+    target.classList.add(
+      'active'
+    );
+
+  }
+
+
+  document
+    .querySelectorAll('.nav-btn')
+    .forEach(
+      x=>{
+        x.classList.toggle(
+          'active',
+          x.dataset.page===page
+        );
+      }
+    );
+
+}
+
+
+/* =========================
+   FORMAT DATE
+========================= */
+
+function formatDate(value){
+
+  if(!value)return '';
+
+  try{
+
+    return new Intl.DateTimeFormat(
+      'fa-IR',
+      {
+        year:'numeric',
+        month:'numeric',
+        day:'numeric'
+      }
+    ).format(
+      new Date(value)
+    );
+
+  }catch(e){
+
+    return '';
+
+  }
+
+}
+
+
+/* =========================
+   PROPERTY CARD
+========================= */
+
+function propertyHTML(item){
+
+  const image=
+    item.photos &&
+    item.photos.length
+      ? item.photos[0]
+      : 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=600&q=80';
+
+
+  return `
+
+    <div class="property">
+
+      <div class="property-image">
+
+        <img
+          src="${esc(image)}"
+          alt="${esc(item.title)}"
+          loading="lazy"
+          onerror="this.src='https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=600&q=80'"
+        >
+
+      </div>
+
+
+      <div class="property-info">
+
+        <div class="property-title">
+          ${esc(item.title)}
+        </div>
+
+
+        <div class="property-meta">
+
+          <span class="badge navy">
+            ${esc(typeFa[item.type] || item.type || 'ملک')}
+          </span>
+
+          ${
+            item.phase
+              ? `<span class="badge">${esc(item.phase)}</span>`
+              : ''
+          }
+
+          ${
+            item.area
+              ? `<span class="badge">${esc(item.area)} متر</span>`
+              : ''
+          }
+
+        </div>
+
+
+        <div class="property-location">
+          📍 ${esc(item.location || 'بدون لوکیشن')}
+        </div>
+
+
+        <div class="property-price">
+          ${esc(item.price || 'تماس بگیرید')}
+        </div>
+
+
+        ${
+          item.created_at
+            ? `<div class="help">ثبت شده در ${esc(formatDate(item.created_at))}</div>`
+            : ''
+        }
+
+      </div>
+
+
+      <div class="property-actions">
+
+        <button
+          class="icon-btn view"
+          title="مشاهده سایت"
+          onclick="viewListing('${esc(item.id)}')"
+        >
+          👁️
+        </button>
+
+        <button
+          class="icon-btn edit"
+          title="ویرایش"
+          onclick="editListing('${esc(item.id)}')"
+        >
+          ✏️
+        </button>
+
+        <button
+          class="icon-btn delete"
+          title="حذف"
+          onclick="deleteListing('${esc(item.id)}')"
+        >
+          🗑️
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================
+   RENDER DASHBOARD
+========================= */
+
+function renderDashboard(){
+
+  const arr=
+    state.listings;
+
+
+  $('countAll')
+    .textContent=
+      arr.length;
+
+
+  $('countApartment')
+    .textContent=
+      arr.filter(
+        x=>x.type==='apartment'
+      ).length;
+
+
+  $('countVilla')
+    .textContent=
+      arr.filter(
+        x=>x.type==='villa'
+      ).length;
+
+
+  $('countOther')
+    .textContent=
+      arr.filter(
+        x=>
+          x.type==='mehr' ||
+          x.type==='land'
+      ).length;
+
+
+  const latest=
+    [...arr]
+      .sort(
+        (a,b)=>
+          new Date(b.created_at)-
+          new Date(a.created_at)
+      )
+      .slice(0,5);
+
+
+  $('dashboardList').innerHTML=
+    latest.length
+      ? latest
+          .map(propertyHTML)
+          .join('')
+      : `
+
+        <div class="empty">
+
+          <div class="empty-icon">
+            🏠
+          </div>
+
+          <strong>
+            هنوز آگهی‌ای ثبت نشده
+          </strong>
+
+          <span>
+            اولین فایل ملکی را اضافه کن.
+          </span>
+
+        </div>
+
+      `;
+
+}
+
+
+/* =========================
+   RENDER LISTINGS
+========================= */
+
+function renderListings(){
+
+  const search=
+    $('searchInput')
+      .value
+      .trim()
+      .toLowerCase();
+
+
+  const type=
+    $('typeFilter')
+      .value;
+
+
+  const phase=
+    $('phaseFilter')
+      .value;
+
+
+  const sort=
+    $('sortFilter')
+      .value;
+
+
+  let arr=
+    [...state.listings];
+
+
+  if(search){
+
+    arr=
+      arr.filter(
+        x=>
+          (
+            x.title+
+            ' '+
+            x.location+
+            ' '+
+            x.description+
+            ' '+
+            x.price
+          )
+          .toLowerCase()
+          .includes(search)
+      );
+
+  }
+
+
+  if(type){
+
+    arr=
+      arr.filter(
+        x=>x.type===type
+      );
+
+  }
+
+
+  if(phase){
+
+    arr=
+      arr.filter(
+        x=>x.phase===phase
+      );
+
+  }
+
+
+  if(sort==='new'){
+
+    arr.sort(
+      (a,b)=>
+        new Date(b.created_at)-
+        new Date(a.created_at)
+    );
+
+  }
+
+
+  if(sort==='old'){
+
+    arr.sort(
+      (a,b)=>
+        new Date(a.created_at)-
+        new Date(b.created_at)
+    );
+
+  }
+
+
+  if(sort==='cheap'){
+
+    arr.sort(
+      (a,b)=>
+        numericPrice(a.price)-
+        numericPrice(b.price)
+    );
+
+  }
+
+
+  if(sort==='expensive'){
+
+    arr.sort(
+      (a,b)=>
+        numericPrice(b.price)-
+        numericPrice(a.price)
+    );
+
+  }
+
+
+  $('listingList').innerHTML=
+    arr.length
+      ? arr
+          .map(propertyHTML)
+          .join('')
+      : `
+
+        <div class="empty">
+
+          <div class="empty-icon">
+            🔎
+          </div>
+
+          <strong>
+            موردی پیدا نشد
+          </strong>
+
+          <span>
+            فیلترها یا عبارت جستجو را تغییر بده.
+          </span>
+
+        </div>
+
+      `;
+
+}
+
+
+/* =========================
+   NUMERIC PRICE
+========================= */
+
+function numericPrice(value){
+
+  if(!value)return 0;
+
+
+  const digits=
+    String(value)
+      .replace(
+        /[^\d]/g,
+        ''
+      );
+
+
+  return Number(digits)||0;
+
+}
+
+
+/* =========================
+   RENDER ALL
+========================= */
+
+function render(){
+
+  renderDashboard();
+
+  renderListings();
+
+}
+
+
+/* =========================
+   EDIT
+========================= */
+
+function editListing(id){
+
+  const item=
+    state.listings.find(
+      x=>x.id===id
+    );
+
+
+  if(!item)return;
+
+
+  openEditor(item);
+
+}
+
+
+/* =========================
+   VIEW
+========================= */
+
+function viewListing(id){
+
+  const c=cfg();
+
+
+  const base=
+    c.siteBase ||
+    (
+      'https://'+
+      c.owner+
+      '.github.io/'+
+      c.repo
+    );
+
+
+  /*
+    فعلاً صفحه اصلی سایت باز می‌شود.
+    بعداً می‌توانیم Deep Link برای هر ملک
+    را در index.html اضافه کنیم.
+  */
+
+  window.open(
+    base,
+    '_blank'
+  );
+
+}
+
+
+/* =========================
+   TEST CONNECTION
+========================= */
+
+async function testConnection(){
+
+  try{
+
+    saveCfg();
+
+
+    toast(
+      'در حال بررسی اتصال...'
+    );
+
+
+    const r=
+      await readListings();
+
+
+    state.listings=
+      r.listings;
+
+
+    render();
+
+
+    updateStatus(true);
+
+
+    toast(
+      'اتصال GitHub با موفقیت برقرار شد.'
+    );
+
+
+  }catch(err){
+
+    updateStatus(null);
+
+
+    toast(
+      'اتصال برقرار نشد: '+
+      err.message,
+      false
+    );
+
+  }
+
+}
+
+
+/* =========================
+   LOAD DATA
+========================= */
+
+async function loadData(){
+
+  try{
+
+    if(!cfg().token){
+
+      updateStatus(false);
+
+      render();
+
+      return;
+
+    }
+
+
+    toast(
+      'در حال دریافت فایل‌ها...'
+    );
+
+
+    const r=
+      await readListings();
+
+
+    state.listings=
+      r.listings;
+
+
+    render();
+
+
+    updateStatus(true);
+
+
+  }catch(err){
+
+    console.error(err);
+
+
+    updateStatus(null);
+
+
+    toast(
+      'دریافت آگهی‌ها انجام نشد: '+
+      err.message,
+      false
+    );
+
+
+    render();
+
+  }
+
+}
+
+
+/* =========================
+   EVENT LISTENERS
+========================= */
+
+document
+  .querySelectorAll('.nav-btn')
+  .forEach(
+    btn=>{
+
+      btn.addEventListener(
+        'click',
+        ()=>{
+
+          showPage(
+            btn.dataset.page
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+$('addListingBtn')
+  .addEventListener(
+    'click',
+    ()=>openEditor()
+  );
+
+
+$('addFromDashboard')
+  .addEventListener(
+    'click',
+    ()=>openEditor()
+  );
+
+
+$('closeEditor')
+  .addEventListener(
+    'click',
+    closeEditor
+  );
+
+
+$('cancelEditor')
+  .addEventListener(
+    'click',
+    closeEditor
+  );
+
+
+$('listingForm')
+  .addEventListener(
+    'submit',
+    saveListing
+  );
+
+
+$('fType')
+  .addEventListener(
+    'change',
+    ()=>{
+
+      const current=
+        collectDynamic();
+
+
+      renderDynamic(
+        $('fType').value,
+        current
+      );
+
+    }
+  );
+
+
+$('searchInput')
+  .addEventListener(
+    'input',
+    renderListings
+  );
+
+
+$('typeFilter')
+  .addEventListener(
+    'change',
+    renderListings
+  );
+
+
+$('phaseFilter')
+  .addEventListener(
+    'change',
+    renderListings
+  );
+
+
+$('sortFilter')
+  .addEventListener(
+    'change',
+    renderListings
+  );
+
+
+$('saveSettings')
+  .addEventListener(
+    'click',
+    ()=>{
+
+      saveCfg();
+
+      toast(
+        'تنظیمات ذخیره شد.'
+      );
+
+    }
+  );
+
+
+$('testConnection')
+  .addEventListener(
+    'click',
+    testConnection
+  );
+
+
+$('editorWrap')
+  .addEventListener(
+    'click',
+    e=>{
+
+      if(
+        e.target ===
+        $('editorWrap')
+      ){
+
+        closeEditor();
+
+      }
+
+    }
+  );
+
+
+/* =========================
+   INIT
+========================= */
+
+fillPhases();
+
+loadCfg();
+
+render();
+
+loadData();
+
+</script>
+
+</body>
+ </html>
