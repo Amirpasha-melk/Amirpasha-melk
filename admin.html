@@ -2,7 +2,7 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b1220">
 <title>پنل مدیریت | املاک امیر پاشا</title>
 
@@ -10,13 +10,16 @@
 :root{
   --ink:#0b1220;
   --navy:#10233f;
-  --bg:#f4f6f9;
+  --navy2:#162f52;
   --white:#fff;
+  --bg:#f4f6f9;
   --line:#e4e8ef;
   --muted:#707989;
-  --red:#dc2626;
   --green:#16a34a;
+  --red:#dc2626;
+  --gold:#b7791f;
   --shadow:0 16px 45px rgba(11,18,32,.09);
+  --radius:20px;
 }
 
 *{
@@ -44,6 +47,11 @@ button{
   cursor:pointer;
 }
 
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
 .hidden{
   display:none!important;
 }
@@ -52,11 +60,9 @@ button{
   min-height:100vh;
 }
 
-/* TOPBAR */
-
 .topbar{
   height:72px;
-  background:rgba(255,255,255,.95);
+  background:rgba(255,255,255,.94);
   backdrop-filter:blur(16px);
   border-bottom:1px solid var(--line);
   position:sticky;
@@ -105,6 +111,7 @@ button{
 .top-actions{
   display:flex;
   gap:8px;
+  align-items:center;
 }
 
 .icon-btn,
@@ -123,8 +130,6 @@ button{
 .ghost-btn:hover{
   background:#f7f8fa;
 }
-
-/* LAYOUT */
 
 .layout{
   max-width:1380px;
@@ -217,8 +222,6 @@ button{
   min-width:0;
 }
 
-/* PAGE */
-
 .page-head{
   display:flex;
   align-items:center;
@@ -249,8 +252,6 @@ button{
   background:#17233a;
 }
 
-/* STATS */
-
 .stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -278,8 +279,6 @@ button{
   margin-top:2px;
 }
 
-/* PANEL */
-
 .panel{
   background:#fff;
   border:1px solid var(--line);
@@ -305,8 +304,6 @@ button{
   font-size:10px;
   color:var(--muted);
 }
-
-/* TOOLBAR */
 
 .toolbar{
   padding:12px;
@@ -334,8 +331,6 @@ button{
   border-color:#aeb8c8;
   box-shadow:0 0 0 3px #0b12200b;
 }
-
-/* CARDS */
 
 .cards{
   padding:14px;
@@ -440,8 +435,6 @@ button{
   font-size:12px;
 }
 
-/* MODAL */
-
 .modal-wrap{
   position:fixed;
   inset:0;
@@ -488,10 +481,7 @@ button{
   border:1px solid var(--line);
   background:#fff;
   border-radius:12px;
-  font-size:22px;
 }
-
-/* FORM */
 
 .form{
   padding:18px;
@@ -532,7 +522,6 @@ button{
   display:flex;
   flex-wrap:wrap;
   gap:7px;
-  margin-bottom:18px;
 }
 
 .check{
@@ -549,8 +538,6 @@ button{
 .check input{
   accent-color:var(--ink);
 }
-
-/* PHOTOS */
 
 .dropzone{
   border:1px dashed #cbd2dc;
@@ -611,7 +598,7 @@ button{
 .form-actions{
   display:flex;
   gap:8px;
-  margin-top:18px;
+  margin-top:8px;
 }
 
 .form-actions button{
@@ -626,8 +613,6 @@ button{
   padding:12px;
   font-weight:800;
 }
-
-/* SETTINGS */
 
 .settings{
   padding:17px;
@@ -652,8 +637,6 @@ button{
   color:var(--muted);
 }
 
-/* TOAST */
-
 .toast{
   position:fixed;
   bottom:18px;
@@ -676,14 +659,16 @@ button{
   opacity:1;
 }
 
+.loading{
+  opacity:.6;
+  pointer-events:none;
+}
+
 .mobile-only{
   display:none;
 }
 
-/* RESPONSIVE */
-
 @media(max-width:1050px){
-
   .cards{
     grid-template-columns:repeat(2,1fr);
   }
@@ -856,8 +841,6 @@ button{
 
 <div class="layout">
 
-<!-- SIDEBAR -->
-
 <aside class="sidebar" id="sidebar">
 
   <div class="side-title">
@@ -897,6 +880,7 @@ button{
   <div class="connection">
 
     <div class="connection-status">
+
       <span
         class="status-dot"
         id="statusDot">
@@ -905,6 +889,7 @@ button{
       <span id="statusText">
         اتصال بررسی نشده
       </span>
+
     </div>
 
     <button
@@ -919,11 +904,8 @@ button{
 </aside>
 
 
-<!-- MAIN -->
-
 <main class="main">
 
-<!-- DASHBOARD -->
 
 <section id="page-dashboard">
 
@@ -996,8 +978,6 @@ button{
 
 </section>
 
-
-<!-- LISTINGS -->
 
 <section
   id="page-listings"
@@ -1103,8 +1083,6 @@ button{
 </section>
 
 
-<!-- SETTINGS -->
-
 <section
   id="page-settings"
   class="hidden">
@@ -1115,7 +1093,7 @@ button{
       <h2>اتصال و تنظیمات</h2>
 
       <p>
-        Token فقط در همین مرورگر و Session فعلی نگهداری می‌شود.
+        توکن فقط در همین مرورگر و session فعلی نگهداری می‌شود.
       </p>
 
     </div>
@@ -1135,7 +1113,7 @@ button{
         class="input"
         id="ghOwner"
         value="Amirpasha-melk"
-        placeholder="Amirpasha-melk">
+        placeholder="مثلاً Amirpasha-melk">
 
     </div>
 
@@ -1201,17 +1179,13 @@ button{
 
     <div class="hint">
 
-      دسترسی Token باید Fine-grained باشد و فقط به Repository
-      <b>Amirpasha-melk</b>
-      دسترسی داشته باشد.
+      دسترسی Token باید Fine-grained و فقط برای همین Repository باشد.
+      برای ذخیره و آپلود فایل‌ها:
+      Repository permissions → Contents → Read and write
 
-      در Repository permissions قسمت
-      <b>Contents</b>
-      را روی
-      <b>Read and write</b>
-      قرار بده.
+      <br>
 
-      Token را برای هیچ‌کس ارسال نکن.
+      توکن را برای هیچ‌کس ارسال نکن.
 
     </div>
 
@@ -1228,13 +1202,11 @@ button{
 
 </section>
 
+
 </main>
-
 </div>
 </div>
 
-
-<!-- EDITOR MODAL -->
 
 <div
   class="modal-wrap"
@@ -1265,8 +1237,6 @@ button{
         type="hidden"
         id="editId">
 
-
-      <!-- MAIN -->
 
       <div class="section-title">
         اطلاعات اصلی
@@ -1393,8 +1363,6 @@ button{
       </div>
 
 
-      <!-- DYNAMIC -->
-
       <div class="section-title">
         مشخصات اختصاصی
       </div>
@@ -1405,8 +1373,6 @@ button{
       </div>
 
 
-      <!-- AMENITIES -->
-
       <div class="section-title">
         امکانات
       </div>
@@ -1416,8 +1382,6 @@ button{
         id="amenities">
       </div>
 
-
-      <!-- DESCRIPTION -->
 
       <div class="section-title">
         توضیحات
@@ -1438,19 +1402,15 @@ button{
       </div>
 
 
-      <!-- PHOTOS -->
-
       <div class="section-title">
         عکس‌ها
       </div>
 
+
       <div class="dropzone">
 
-        <div
-          style="font-size:11px;font-weight:800">
-
-          حداکثر ۸ عکس
-
+        <div style="font-size:11px;font-weight:800">
+          حداکثر ۸ عکس — بهتر است عکس‌ها افقی یا با کیفیت مناسب باشند.
         </div>
 
         <div
@@ -1485,8 +1445,6 @@ button{
       </div>
 
 
-      <!-- ACTIONS -->
-
       <div class="form-actions">
 
         <button
@@ -1497,6 +1455,7 @@ button{
           انصراف
 
         </button>
+
 
         <button
           type="submit"
@@ -1525,9 +1484,10 @@ button{
 <script>
 'use strict';
 
-/* ==========================================
-   CONFIGURATION
-========================================== */
+
+/* =========================
+   تنظیمات اصلی
+========================= */
 
 const API='https://api.github.com';
 
@@ -1546,12 +1506,12 @@ const DEFAULT_REPO='Amirpasha-melk';
 const DEFAULT_BRANCH='main';
 
 const DEFAULT_SITE=
-'https://Amirpasha-melk.github.io/Amirpasha-melk';
+  'https://Amirpasha-melk.github.io/Amirpasha-melk';
 
 
-/* ==========================================
-   CONSTANTS
-========================================== */
+/* =========================
+   اطلاعات ثابت
+========================= */
 
 const phases=[
   'فاز ۱',
@@ -1564,12 +1524,14 @@ const phases=[
   'فاز ۸'
 ];
 
+
 const typeFa={
   apartment:'آپارتمان',
   villa:'ویلا',
   mehr:'مسکن مهر',
   land:'زمین'
 };
+
 
 const amenityList=[
   ['parking','پارکینگ'],
@@ -1581,88 +1543,72 @@ const amenityList=[
 ];
 
 
-/* ==========================================
-   STATE
-========================================== */
+const $=id=>document.getElementById(id);
+
 
 const state={
   listings:[],
   editing:null,
-
-  /* عکس‌هایی که قبلاً در GitHub هستند */
-  existingPhotos:[],
-
-  /* فایل‌هایی که هنوز Upload نشده‌اند */
+  photos:[],
   pendingFiles:[],
-
-  /* Preview عکس‌های جدید */
-  pendingPreviews:[],
-
   saving:false
 };
 
 
-/* ==========================================
-   HELPERS
-========================================== */
+/* =========================
+   پیام
+========================= */
 
-const $=id=>document.getElementById(id);
-
-function esc(value){
-  return String(value??'')
-    .replace(/[&<>"']/g,m=>({
-      '&':'&amp;',
-      '<':'&lt;',
-      '>':'&gt;',
-      '"':'&quot;',
-      "'":'&#039;'
-    }[m]));
-}
-
-
-function toast(message,ok=true){
+function toast(msg,ok=true){
 
   const el=$('toast');
 
-  el.textContent=message;
+  el.textContent=msg;
 
   el.style.background=
-    ok ? 'var(--ink)' : '#991b1b';
+    ok
+    ? 'var(--ink)'
+    : '#991b1b';
 
   el.classList.add('show');
 
   clearTimeout(window.__toast);
 
-  window.__toast=setTimeout(()=>{
-    el.classList.remove('show');
-  },3500);
+  window.__toast=
+    setTimeout(
+      ()=>el.classList.remove('show'),
+      4000
+    );
 }
 
 
-/* ==========================================
-   GITHUB CONFIG
-========================================== */
+/* =========================
+   تنظیمات GitHub
+========================= */
 
 function cfg(){
 
   return {
 
-    owner:$('ghOwner').value.trim(),
+    owner:
+      $('ghOwner').value.trim(),
 
-    repo:$('ghRepo').value.trim(),
+    repo:
+      $('ghRepo').value.trim(),
 
     branch:
-      $('ghBranch').value.trim() ||
-      DEFAULT_BRANCH,
+      $('ghBranch').value.trim()
+      || DEFAULT_BRANCH,
 
-    token:$('ghToken').value.trim(),
+    token:
+      $('ghToken').value.trim(),
 
     siteBase:
-      $('siteBase').value
-      .trim()
+      $('siteBase').value.trim()
       .replace(/\/+$/,'')
 
   };
+
 }
 
 
@@ -1672,24 +1618,36 @@ function loadCfg(){
 
     const saved=
       JSON.parse(
-        sessionStorage.getItem('Amirpasha_melk_admin_cfg') ||
-        '{}'
+        sessionStorage.getItem(
+          'amlak_admin_cfg'
+        ) || '{}'
       );
 
+
     $('ghOwner').value=
-      saved.owner || DEFAULT_OWNER;
+      saved.owner
+      || DEFAULT_OWNER;
+
 
     $('ghRepo').value=
-      saved.repo || DEFAULT_REPO;
+      saved.repo
+      || DEFAULT_REPO;
+
 
     $('ghBranch').value=
-      saved.branch || DEFAULT_BRANCH;
+      saved.branch
+      || DEFAULT_BRANCH;
+
 
     $('ghToken').value=
-      saved.token || '';
+      saved.token
+      || '';
+
 
     $('siteBase').value=
-      saved.siteBase || DEFAULT_SITE;
+      saved.siteBase
+      || DEFAULT_SITE;
+
 
   }catch{
 
@@ -1702,6 +1660,7 @@ function loadCfg(){
     $('siteBase').value=DEFAULT_SITE;
 
   }
+
 }
 
 
@@ -1709,28 +1668,50 @@ function saveCfg(){
 
   const c=cfg();
 
-  if(!c.owner || !c.repo || !c.token){
+
+  if(!c.owner){
 
     throw new Error(
-      'نام کاربری، Repository و Token را کامل کن.'
+      'GitHub Username را وارد کن.'
     );
 
   }
 
+
+  if(!c.repo){
+
+    throw new Error(
+      'Repository را وارد کن.'
+    );
+
+  }
+
+
+  if(!c.token){
+
+    throw new Error(
+      'GitHub Token را وارد کن.'
+    );
+
+  }
+
+
   sessionStorage.setItem(
-    'Amirpasha_melk_admin_cfg',
+    'amlak_admin_cfg',
     JSON.stringify(c)
   );
+
 }
 
 
-/* ==========================================
-   GITHUB API
-========================================== */
+/* =========================
+   Header
+========================= */
 
 function headers(){
 
   const c=cfg();
+
 
   return {
 
@@ -1744,12 +1725,18 @@ function headers(){
       '2022-11-28'
 
   };
+
 }
 
+
+/* =========================
+   آدرس فایل Repository
+========================= */
 
 function repoUrl(path){
 
   const c=cfg();
+
 
   return API+
     '/repos/'+
@@ -1765,11 +1752,148 @@ function repoUrl(path){
 }
 
 
+/* =========================
+   API مخصوص خود Repository
+========================= */
+
+function repositoryUrl(){
+
+  const c=cfg();
+
+
+  return API+
+    '/repos/'+
+    encodeURIComponent(c.owner)+
+    '/'+
+    encodeURIComponent(c.repo);
+
+}
+
+
+async function repositoryApi(options={}){
+
+  const response=
+    await fetch(
+      repositoryUrl(),
+      {
+        ...options,
+
+        headers:{
+          ...headers(),
+          ...(options.headers||{})
+        }
+
+      }
+    );
+
+
+  let data=null;
+
+
+  try{
+
+    data=await response.json();
+
+  }catch{}
+
+
+  if(!response.ok){
+
+    let message=
+      data?.message
+      || ('GitHub API error '+response.status);
+
+
+    if(response.status===401){
+
+      message=
+        'Token نامعتبر است یا منقضی شده است.';
+
+    }
+
+
+    if(response.status===403){
+
+      message=
+        'GitHub دسترسی Token را رد کرد. دسترسی Token را بررسی کن.';
+
+    }
+
+
+    if(response.status===404){
+
+      message=
+        'Repository پیدا نشد یا Token به این Repository دسترسی ندارد.';
+
+    }
+
+
+    throw new Error(message);
+
+  }
+
+
+  return data;
+
+}
+
+
+/* =========================
+   API فایل‌ها
+========================= */
+
+async function api(path,options={}){
+
+  const response=
+    await fetch(
+      repoUrl(path),
+      {
+        ...options,
+
+        headers:{
+          ...headers(),
+          ...(options.headers||{})
+        }
+
+      }
+    );
+
+
+  let data=null;
+
+
+  try{
+
+    data=await response.json();
+
+  }catch{}
+
+
+  if(!response.ok){
+
+    throw new Error(
+      data?.message
+      || ('GitHub API error '+response.status)
+    );
+
+  }
+
+
+  return data;
+
+}
+
+
+/* =========================
+   Base64
+========================= */
+
 function bytesToBase64(bytes){
 
   let binary='';
 
   const chunk=0x8000;
+
 
   for(
     let i=0;
@@ -1786,28 +1910,37 @@ function bytesToBase64(bytes){
 
   }
 
+
   return btoa(binary);
+
 }
 
 
-function base64ToText(base64){
+function base64ToText(b64){
 
-  const binary=
-    atob(base64.replace(/\n/g,''));
+  const bin=
+    atob(
+      b64.replace(/\n/g,'')
+    );
+
 
   const bytes=
-    new Uint8Array(binary.length);
+    new Uint8Array(
+      bin.length
+    );
+
 
   for(
     let i=0;
-    i<binary.length;
+    i<bin.length;
     i++
   ){
 
     bytes[i]=
-      binary.charCodeAt(i);
+      bin.charCodeAt(i);
 
   }
+
 
   return new TextDecoder()
     .decode(bytes);
@@ -1818,52 +1951,16 @@ function base64ToText(base64){
 function textToBase64(text){
 
   return bytesToBase64(
-    new TextEncoder().encode(text)
+    new TextEncoder()
+      .encode(text)
   );
 
 }
 
 
-async function api(path,options={}){
-
-  const response=
-    await fetch(
-      repoUrl(path),
-      {
-        ...options,
-
-        headers:{
-          ...headers(),
-          ...(options.headers||{})
-        }
-      }
-    );
-
-  let data=null;
-
-  try{
-
-    data=await response.json();
-
-  }catch{}
-
-  if(!response.ok){
-
-    throw new Error(
-      data?.message ||
-      ('GitHub API error '+response.status)
-    );
-
-  }
-
-  return data;
-
-}
-
-
-/* ==========================================
-   LISTINGS JSON
-========================================== */
+/* =========================
+   Listings
+========================= */
 
 async function readListings(){
 
@@ -1871,23 +1968,33 @@ async function readListings(){
     await api(
       PATH+
       '?ref='+
-      encodeURIComponent(cfg().branch)
+      encodeURIComponent(
+        cfg().branch
+      )
     );
 
+
   const text=
-    base64ToText(data.content);
+    base64ToText(
+      data.content
+    );
+
 
   const parsed=
     JSON.parse(text);
 
+
   return {
 
     listings:
-      Array.isArray(parsed.listings)
+      Array.isArray(
+        parsed.listings
+      )
       ? parsed.listings
       : [],
 
-    sha:data.sha
+    sha:
+      data.sha
 
   };
 
@@ -1901,8 +2008,9 @@ async function writeListings(
 ){
 
   const payload={
-    listings:listings
+    listings
   };
+
 
   return api(
     PATH,
@@ -1942,13 +2050,39 @@ async function writeListings(
 }
 
 
-/* ==========================================
-   IMAGE UPLOAD
-========================================== */
+/* =========================
+   عکس
+========================= */
+
+async function getImageSha(path){
+
+  try{
+
+    return (
+      await api(
+        path+
+        '?ref='+
+        encodeURIComponent(
+          cfg().branch
+        )
+      )
+    ).sha;
+
+  }catch{
+
+    return null;
+
+  }
+
+}
+
 
 async function uploadImage(file){
 
-  if(file.size>MAX_SIZE){
+  if(
+    file.size >
+    MAX_SIZE
+  ){
 
     throw new Error(
       'حجم یکی از عکس‌ها بیشتر از ۸ مگابایت است.'
@@ -1956,29 +2090,23 @@ async function uploadImage(file){
 
   }
 
-  if(
-    !/^image\/(jpeg|png|webp)$/i
-      .test(file.type)
-  ){
-
-    throw new Error(
-      'فقط عکس‌های JPG، PNG و WEBP مجاز هستند.'
-    );
-
-  }
 
   const ext=
     (
       file.name
         .split('.')
-        .pop() ||
-      'jpg'
+        .pop()
+      || 'jpg'
     )
     .toLowerCase()
-    .replace(/[^a-z0-9]/g,'') ||
-    'jpg';
+    .replace(
+      /[^a-z0-9]/g,
+      ''
+    )
+    || 'jpg';
 
-  const filename=
+
+  const name=
     'property-'+
     Date.now()+
     '-'+
@@ -1988,13 +2116,18 @@ async function uploadImage(file){
     '.'+
     ext;
 
-  const path=
-    IMAGE_DIR+'/'+filename;
 
-  const buffer=
+  const path=
+    IMAGE_DIR+
+    '/'+
+    name;
+
+
+  const buf=
     new Uint8Array(
       await file.arrayBuffer()
     );
+
 
   await api(
     path,
@@ -2011,10 +2144,10 @@ async function uploadImage(file){
         JSON.stringify({
 
           message:
-            'Add property image '+filename,
+            'Add property image '+name,
 
           content:
-            bytesToBase64(buffer),
+            bytesToBase64(buf),
 
           branch:
             cfg().branch
@@ -2024,8 +2157,10 @@ async function uploadImage(file){
     }
   );
 
+
   const base=
-    cfg().siteBase ||
+    cfg().siteBase
+    ||
     (
       'https://'+
       cfg().owner+
@@ -2033,33 +2168,37 @@ async function uploadImage(file){
       cfg().repo
     );
 
+
   return base+'/'+path;
+
 }
 
-
-/* ==========================================
-   DELETE IMAGE
-========================================== */
 
 async function deleteImageByUrl(url){
 
   const base=
-    cfg().siteBase;
+    cfg().siteBase
+    || '';
+
 
   if(
     !url ||
     !base ||
-    !url.startsWith(base+'/')
+    !url.startsWith(
+      base+'/'
+    )
   ){
 
     return;
 
   }
 
+
   const path=
     url.slice(
       (base+'/').length
     );
+
 
   if(
     !path.startsWith(
@@ -2071,6 +2210,7 @@ async function deleteImageByUrl(url){
 
   }
 
+
   try{
 
     const data=
@@ -2081,6 +2221,7 @@ async function deleteImageByUrl(url){
           cfg().branch
         )
       );
+
 
     await api(
       path,
@@ -2099,126 +2240,25 @@ async function deleteImageByUrl(url){
             message:
               'Delete property image',
 
-            sha:data.sha,
+            sha:
+              data.sha,
 
             branch:
               cfg().branch
 
           })
 
-        }
-
-      );
+      }
+    );
 
   }catch{}
 
 }
 
 
-/* ==========================================
-   NORMALIZE
-========================================== */
-
-function normalize(p){
-
-  return {
-
-    id:
-      p.id ||
-      crypto.randomUUID(),
-
-    title:
-      p.title ||
-      'بدون عنوان',
-
-    type:
-      p.property_type ||
-      p.type ||
-      'apartment',
-
-    phase:
-      p.phase ||
-      '',
-
-    location:
-      p.location ||
-      '',
-
-    area:
-      Number(p.area) ||
-      0,
-
-    price:
-      p.price ||
-      'تماس بگیرید',
-
-    description:
-      p.description ||
-      '',
-
-    photos:
-      Array.isArray(p.photos)
-      ? p.photos
-      : [],
-
-    created_at:
-      p.created_at ||
-      new Date().toISOString(),
-
-    specs:
-      Array.isArray(p.specs)
-      ? p.specs
-      : [],
-
-    bedrooms:
-      p.bedrooms ||
-      '',
-
-    floor:
-      p.floor ||
-      '',
-
-    buildingArea:
-      p.buildingArea ||
-      '',
-
-    villaType:
-      p.villaType ||
-      '',
-
-    usage:
-      p.usage ||
-      '',
-
-    heating:
-      p.heating ||
-      '',
-
-    cooling:
-      p.cooling ||
-      '',
-
-    year:
-      p.year ||
-      '',
-
-    documents:
-      p.documents ||
-      '',
-
-    amenities:
-      Array.isArray(p.amenities)
-      ? p.amenities
-      : []
-
-  };
-
-}
-
-
-/* ==========================================
-   STATUS
-========================================== */
+/* =========================
+   وضعیت اتصال
+========================= */
 
 function setStatus(
   kind,
@@ -2229,15 +2269,16 @@ function setStatus(
     'status-dot '+
     (kind||'');
 
+
   $('statusText').textContent=
     text;
 
 }
 
 
-/* ==========================================
-   TEST CONNECTION
-========================================== */
+/* =========================
+   تست واقعی GitHub
+========================= */
 
 async function testConnection(){
 
@@ -2247,25 +2288,51 @@ async function testConnection(){
 
     setStatus(
       '',
-      'در حال اتصال...'
+      'در حال اتصال به GitHub...'
     );
 
-    await api(
-      PATH+
-      '?ref='+
-      encodeURIComponent(
-        cfg().branch
-      )
-    );
+
+    /*
+      مهم:
+      اینجا دیگر data/listings.json
+      بررسی نمی‌شود.
+
+      اول خود Repository بررسی می‌شود.
+    */
+
+    const repo=
+      await repositoryApi();
+
+
+    if(
+      !repo ||
+      !repo.full_name
+    ){
+
+      throw new Error(
+        'پاسخ معتبر از GitHub دریافت نشد.'
+      );
+
+    }
+
 
     setStatus(
       'ok',
       'اتصال موفق'
     );
 
+
     toast(
-      'اتصال GitHub با موفقیت برقرار شد.'
+      'اتصال به Repository با موفقیت برقرار شد.'
     );
+
+
+    /*
+      بعد از موفقیت اتصال،
+      فایل listings را می‌خوانیم.
+      اگر فایل وجود نداشته باشد،
+      خود اتصال GitHub همچنان موفق است.
+    */
 
     await loadData();
 
@@ -2275,6 +2342,7 @@ async function testConnection(){
       'bad',
       'اتصال ناموفق'
     );
+
 
     toast(
       error.message,
@@ -2286,9 +2354,9 @@ async function testConnection(){
 }
 
 
-/* ==========================================
-   LOAD DATA
-========================================== */
+/* =========================
+   بارگذاری داده
+========================= */
 
 async function loadData(){
 
@@ -2296,24 +2364,30 @@ async function loadData(){
 
     saveCfg();
 
-    const result=
+
+    const r=
       await readListings();
 
+
     state.listings=
-      result.listings.map(normalize);
+      r.listings.map(
+        normalize
+      );
+
 
     render();
 
-  }catch(error){
+
+  }catch(e){
 
     if(
       /404/.test(
-        error.message
+        e.message
       )
     ){
 
       toast(
-        'فایل data/listings.json پیدا نشد.',
+        'اتصال GitHub موفق است، اما فایل data/listings.json پیدا نشد. آن را در Repository بساز.',
         false
       );
 
@@ -2321,11 +2395,12 @@ async function loadData(){
 
       toast(
         'خواندن آگهی‌ها انجام نشد: '+
-        error.message,
+        e.message,
         false
       );
 
     }
+
 
     render();
 
@@ -2334,15 +2409,140 @@ async function loadData(){
 }
 
 
-/* ==========================================
-   FILTER
-========================================== */
+/* =========================
+   نرمال‌سازی
+========================= */
 
-function priceNum(value){
+function normalize(p){
+
+  return {
+
+    id:
+      p.id
+      ||
+      crypto.randomUUID(),
+
+    title:
+      p.title
+      ||
+      'بدون عنوان',
+
+    type:
+      p.property_type
+      ||
+      p.type
+      ||
+      'apartment',
+
+    phase:
+      p.phase
+      ||
+      '',
+
+    location:
+      p.location
+      ||
+      '',
+
+    area:
+      Number(p.area)
+      ||
+      0,
+
+    price:
+      p.price
+      ||
+      'تماس بگیرید',
+
+    description:
+      p.description
+      ||
+      '',
+
+    photos:
+      Array.isArray(p.photos)
+      ? p.photos
+      : [],
+
+    created_at:
+      p.created_at
+      ||
+      new Date().toISOString(),
+
+    specs:
+      Array.isArray(p.specs)
+      ? p.specs
+      : [],
+
+    bedrooms:
+      p.bedrooms
+      ||
+      '',
+
+    floor:
+      p.floor
+      ||
+      '',
+
+    buildingArea:
+      p.buildingArea
+      ||
+      '',
+
+    villaType:
+      p.villaType
+      ||
+      '',
+
+    usage:
+      p.usage
+      ||
+      '',
+
+    heating:
+      p.heating
+      ||
+      '',
+
+    cooling:
+      p.cooling
+      ||
+      '',
+
+    year:
+      p.year
+      ||
+      '',
+
+    documents:
+      p.documents
+      ||
+      '',
+
+    amenities:
+      Array.isArray(
+        p.amenities
+      )
+      ? p.amenities
+      : []
+
+  };
+
+}
+
+
+/* =========================
+   جستجو و مرتب‌سازی
+========================= */
+
+function priceNum(x){
 
   return Number(
-    String(value||'')
-      .replace(/[^\d.]/g,'')
+    String(x||'')
+      .replace(
+        /[^\d.]/g,
+        ''
+      )
   ) || 0;
 
 }
@@ -2350,139 +2550,176 @@ function priceNum(value){
 
 function filtered(){
 
-  let list=[
-    ...state.listings
-  ];
-
-  const query=
-    $('search')?.value
-      .trim()
-      .toLowerCase() ||
-    '';
-
-  const type=
-    $('filterType')?.value ||
-    '';
-
-  const phase=
-    $('filterPhase')?.value ||
-    '';
-
-  const sort=
-    $('filterSort')?.value ||
-    'new';
+  let a=
+    [...state.listings];
 
 
-  if(query){
+  const q=
+    $('search')
+    ?.value
+    .trim()
+    .toLowerCase()
+    || '';
 
-    list=
-      list.filter(p=>
 
-        (
-          p.title+
-          ' '+
-          p.location+
-          ' '+
-          p.phase+
-          ' '+
+  const t=
+    $('filterType')
+    ?.value
+    || '';
+
+
+  const ph=
+    $('filterPhase')
+    ?.value
+    || '';
+
+
+  const so=
+    $('filterSort')
+    ?.value
+    || 'new';
+
+
+  if(q){
+
+    a=
+      a.filter(
+        p=>
           (
-            typeFa[p.type] ||
-            p.type
+            p.title+
+            ' '+
+            p.location+
+            ' '+
+            p.phase+
+            ' '+
+            (
+              typeFa[p.type]
+              || ''
+            )
           )
+          .toLowerCase()
+          .includes(q)
+      );
+
+  }
+
+
+  if(t){
+
+    a=
+      a.filter(
+        p=>p.type===t
+      );
+
+  }
+
+
+  if(ph){
+
+    a=
+      a.filter(
+        p=>p.phase===ph
+      );
+
+  }
+
+
+  if(
+    so==='old'
+  ){
+
+    a.sort(
+      (x,y)=>
+        new Date(
+          x.created_at
         )
-        .toLowerCase()
-        .includes(query)
-
-      );
-
-  }
-
-
-  if(type){
-
-    list=
-      list.filter(
-        p=>p.type===type
-      );
-
-  }
-
-
-  if(phase){
-
-    list=
-      list.filter(
-        p=>p.phase===phase
-      );
-
-  }
-
-
-  if(sort==='old'){
-
-    list.sort(
-      (a,b)=>
-        new Date(a.created_at)-
-        new Date(b.created_at)
-    );
-
-  }else if(sort==='cheap'){
-
-    list.sort(
-      (a,b)=>
-        priceNum(a.price)-
-        priceNum(b.price)
-    );
-
-  }else if(sort==='expensive'){
-
-    list.sort(
-      (a,b)=>
-        priceNum(b.price)-
-        priceNum(a.price)
-    );
-
-  }else{
-
-    list.sort(
-      (a,b)=>
-        new Date(b.created_at)-
-        new Date(a.created_at)
+        -
+        new Date(
+          y.created_at
+        )
     );
 
   }
 
-  return list;
+  else if(
+    so==='cheap'
+  ){
+
+    a.sort(
+      (x,y)=>
+        priceNum(x.price)
+        -
+        priceNum(y.price)
+    );
+
+  }
+
+  else if(
+    so==='expensive'
+  ){
+
+    a.sort(
+      (x,y)=>
+        priceNum(y.price)
+        -
+        priceNum(x.price)
+    );
+
+  }
+
+  else{
+
+    a.sort(
+      (x,y)=>
+        new Date(
+          y.created_at
+        )
+        -
+        new Date(
+          x.created_at
+        )
+    );
+
+  }
+
+
+  return a;
 
 }
 
 
-/* ==========================================
-   CARD
-========================================== */
+/* =========================
+   کارت
+========================= */
 
 function card(p){
 
-  const image=
-    p.photos[0] ||
+  const img=
+    p.photos[0]
+    ||
     'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=80';
 
+
   const specs=[];
+
 
   if(p.area)
     specs.push(
       p.area+' متر'
     );
 
+
   if(p.bedrooms)
     specs.push(
       p.bedrooms+' خواب'
     );
 
+
   if(p.floor)
     specs.push(
       'طبقه '+p.floor
     );
+
 
   if(p.phase)
     specs.push(
@@ -2491,114 +2728,101 @@ function card(p){
 
 
   return `
+    <article class="card">
 
-<article class="card">
+      <div class="card-img">
 
-  <div class="card-img">
+        <img
+          src="${esc(img)}"
+          loading="lazy"
+          alt="${esc(p.title)}">
 
-    <img
-      src="${esc(image)}"
-      loading="lazy"
-      alt="${esc(p.title)}">
+        <span class="badge">
+          ${esc(
+            typeFa[p.type]
+            || p.type
+          )}
+        </span>
 
-    <span class="badge">
-      ${esc(
-        typeFa[p.type] ||
-        p.type
-      )}
-    </span>
-
-  </div>
-
-
-  <div class="card-content">
-
-    <div class="card-title">
-      ${esc(p.title)}
-    </div>
-
-    <div class="card-location">
-      ${esc(p.location)}
-    </div>
-
-    <div class="card-price">
-      ${esc(p.price)}
-    </div>
-
-    <div class="card-meta">
-
-      ${
-        specs
-          .map(
-            x=>
-              `<span class="chip">
-                ${esc(x)}
-              </span>`
-          )
-          .join('')
-      }
-
-    </div>
+      </div>
 
 
-    <div class="card-actions">
+      <div class="card-content">
 
-      <button
-        class="small-btn"
-        onclick="editListing('${esc(p.id)}')">
+        <div class="card-title">
+          ${esc(p.title)}
+        </div>
 
-        ویرایش
+        <div class="card-location">
+          ${esc(p.location)}
+        </div>
 
-      </button>
+        <div class="card-price">
+          ${esc(p.price)}
+        </div>
+
+        <div class="card-meta">
+
+          ${
+            specs
+              .map(
+                x=>
+                  `<span class="chip">${esc(x)}</span>`
+              )
+              .join('')
+          }
+
+        </div>
 
 
-      <button
-        class="small-btn"
-        onclick="viewSiteListing('${esc(p.id)}')">
+        <div class="card-actions">
 
-        نمایش
+          <button
+            class="small-btn"
+            onclick="editListing('${esc(p.id)}')">
+            ویرایش
+          </button>
 
-      </button>
+          <button
+            class="small-btn"
+            onclick="viewSiteListing('${esc(p.id)}')">
+            نمایش
+          </button>
 
+          <button
+            class="small-btn danger"
+            onclick="removeListing('${esc(p.id)}')">
+            حذف
+          </button>
 
-      <button
-        class="small-btn danger"
-        onclick="removeListing('${esc(p.id)}')">
+        </div>
 
-        حذف
+      </div>
 
-      </button>
-
-    </div>
-
-  </div>
-
-</article>
-
-`;
+    </article>
+  `;
 
 }
 
 
-/* ==========================================
-   RENDER
-========================================== */
+/* =========================
+   Render
+========================= */
 
 function render(){
 
-  const list=
+  const a=
     filtered();
 
+
   $('allCards').innerHTML=
-    list.length
-    ? list.map(card).join('')
+    a.length
+    ? a.map(card).join('')
     : `
       <div
         class="empty"
         style="grid-column:1/-1">
-
         هیچ آگهی‌ای پیدا نشد.
-
       </div>
     `;
 
@@ -2606,9 +2830,14 @@ function render(){
   const recent=
     [...state.listings]
       .sort(
-        (a,b)=>
-          new Date(b.created_at)-
-          new Date(a.created_at)
+        (x,y)=>
+          new Date(
+            y.created_at
+          )
+          -
+          new Date(
+            x.created_at
+          )
       )
       .slice(0,10);
 
@@ -2620,9 +2849,7 @@ function render(){
       <div
         class="empty"
         style="grid-column:1/-1">
-
         هنوز آگهی‌ای ثبت نشده است.
-
       </div>
     `;
 
@@ -2654,7 +2881,8 @@ function render(){
     state.listings
       .filter(
         x=>
-          x.type==='mehr' ||
+          x.type==='mehr'
+          ||
           x.type==='land'
       )
       .length
@@ -2663,9 +2891,32 @@ function render(){
 }
 
 
-/* ==========================================
-   PAGE NAVIGATION
-========================================== */
+/* =========================
+   جلوگیری از HTML Injection
+========================= */
+
+function esc(s){
+
+  return String(
+    s ?? ''
+  ).replace(
+    /[&<>"']/g,
+    m=>
+      ({
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        '"':'&quot;',
+        "'":'&#039;'
+      }[m])
+  );
+
+}
+
+
+/* =========================
+   صفحات
+========================= */
 
 function showPage(name){
 
@@ -2675,12 +2926,12 @@ function showPage(name){
     'settings'
   ]
   .forEach(
-    page=>
-      $('page-'+page)
+    x=>
+      $('page-'+x)
         .classList
         .toggle(
           'hidden',
-          page!==name
+          x!==name
         )
   );
 
@@ -2690,10 +2941,10 @@ function showPage(name){
       '.nav button[data-page]'
     )
     .forEach(
-      button=>
-        button.classList.toggle(
+      b=>
+        b.classList.toggle(
           'active',
-          button.dataset.page===name
+          b.dataset.page===name
         )
     );
 
@@ -2703,15 +2954,20 @@ function showPage(name){
     .remove('open');
 
 
-  if(name==='listings')
+  if(
+    name==='listings'
+  ){
+
     render();
+
+  }
 
 }
 
 
-/* ==========================================
-   PHASES
-========================================== */
+/* =========================
+   فازها
+========================= */
 
 function fillPhases(){
 
@@ -2720,9 +2976,7 @@ function fillPhases(){
     phases
       .map(
         x=>
-          `<option value="${esc(x)}">
-            ${esc(x)}
-          </option>`
+          `<option value="${x}">${x}</option>`
       )
       .join('');
 
@@ -2732,18 +2986,16 @@ function fillPhases(){
     phases
       .map(
         x=>
-          `<option value="${esc(x)}">
-            ${esc(x)}
-          </option>`
+          `<option value="${x}">${x}</option>`
       )
       .join('');
 
 }
 
 
-/* ==========================================
-   DYNAMIC FIELDS
-========================================== */
+/* =========================
+   فیلدهای اختصاصی
+========================= */
 
 function renderDynamic(
   type,
@@ -2754,7 +3006,8 @@ function renderDynamic(
 
 
   if(
-    type==='apartment' ||
+    type==='apartment'
+    ||
     type==='mehr'
   ){
 
@@ -2807,7 +3060,9 @@ function renderDynamic(
   }
 
 
-  else if(type==='villa'){
+  else if(
+    type==='villa'
+  ){
 
     fields.push(
 
@@ -2851,7 +3106,9 @@ function renderDynamic(
   }
 
 
-  else if(type==='land'){
+  else if(
+    type==='land'
+  ){
 
     fields.push(
 
@@ -2877,32 +3134,31 @@ function renderDynamic(
   $('dynamicFormFields').innerHTML=
     fields
       .map(
-        field=>`
+        f=>
+          `
+          <div class="group">
 
-        <div class="group">
+            <label>
+              ${f[0]}
+            </label>
 
-          <label>
-            ${esc(field[0])}
-          </label>
+            <input
+              class="input"
+              data-field="${f[1]}"
+              value="${esc(f[3])}"
+              placeholder="${f[2]}">
 
-          <input
-            class="input"
-            data-field="${esc(field[1])}"
-            value="${esc(field[3])}"
-            placeholder="${esc(field[2])}">
-
-        </div>
-
-        `
+          </div>
+          `
       )
       .join('');
 
 }
 
 
-/* ==========================================
-   AMENITIES
-========================================== */
+/* =========================
+   امکانات
+========================= */
 
 function renderAmenities(
   selected=[]
@@ -2911,33 +3167,32 @@ function renderAmenities(
   $('amenities').innerHTML=
     amenityList
       .map(
-        item=>`
+        ([v,t])=>
+          `
+          <label class="check">
 
-        <label class="check">
+            <input
+              type="checkbox"
+              value="${v}"
+              ${
+                selected.includes(v)
+                ? 'checked'
+                : ''
+              }>
 
-          <input
-            type="checkbox"
-            value="${esc(item[0])}"
-            ${
-              selected.includes(item[0])
-              ? 'checked'
-              : ''
-            }>
+            ${t}
 
-          ${esc(item[1])}
-
-        </label>
-
-        `
+          </label>
+          `
       )
       .join('');
 
 }
 
 
-/* ==========================================
-   EDITOR
-========================================== */
+/* =========================
+   ادیتور
+========================= */
 
 function openEditor(p=null){
 
@@ -2947,17 +3202,13 @@ function openEditor(p=null){
     : null;
 
 
-  state.existingPhotos=
+  state.photos=
     p
     ? [...(p.photos||[])]
     : [];
 
 
   state.pendingFiles=[];
-
-  state.pendingPreviews=[];
-
-  $('photoInput').value='';
 
 
   $('editorTitle').textContent=
@@ -2967,60 +3218,63 @@ function openEditor(p=null){
 
 
   $('editId').value=
-    p?.id ||
-    '';
+    p?.id
+    || '';
 
 
   $('fTitle').value=
-    p?.title ||
-    '';
+    p?.title
+    || '';
 
 
   $('fType').value=
-    p?.type ||
-    '';
+    p?.type
+    || '';
 
 
   $('fPhase').value=
-    p?.phase ||
-    '';
+    p?.phase
+    || '';
 
 
   $('fArea').value=
-    p?.area ||
-    '';
+    p?.area
+    || '';
 
 
   $('fPrice').value=
-    p?.price ||
-    '';
+    p?.price
+    || '';
 
 
   $('fLocation').value=
-    p?.location ||
-    '';
+    p?.location
+    || '';
 
 
   $('fDescription').value=
-    p?.description ||
-    '';
+    p?.description
+    || '';
 
 
   renderDynamic(
-    p?.type ||
-    '',
-    p ||
-    {}
+    p?.type
+    || '',
+    p
+    || {}
   );
 
 
   renderAmenities(
-    p?.amenities ||
-    []
+    p?.amenities
+    || []
   );
 
 
   renderPreviews();
+
+
+  $('photoInput').value='';
 
 
   $('editorWrap')
@@ -3036,13 +3290,6 @@ function openEditor(p=null){
 
 function closeEditor(){
 
-  state.pendingPreviews
-    .forEach(
-      url=>
-        URL.revokeObjectURL(url)
-    );
-
-
   $('editorWrap')
     .classList
     .remove('open');
@@ -3053,238 +3300,72 @@ function closeEditor(){
 
   state.editing=null;
 
-  state.existingPhotos=[];
+  state.photos=[];
 
   state.pendingFiles=[];
-
-  state.pendingPreviews=[];
-
-  $('photoInput').value='';
-
-  renderPreviews();
 
 }
 
 
-/* ==========================================
-   PHOTO PREVIEWS
-========================================== */
-
 function renderPreviews(){
 
-  const items=[
-
-    ...state.existingPhotos
-      .map(
-        (src,index)=>({
-          src,
-          index,
-          pending:false
-        })
-      ),
-
-    ...state.pendingPreviews
-      .map(
-        (src,index)=>({
-          src,
-          index,
-          pending:true
-        })
-      )
-
-  ];
-
-
   $('previews').innerHTML=
-    items
+    state.photos
       .map(
-        item=>`
+        (src,i)=>
+          `
+          <div class="preview">
 
-        <div class="preview">
+            <img
+              src="${esc(src)}"
+              alt="">
 
-          <img
-            src="${esc(item.src)}"
-            alt="">
+            <button
+              type="button"
+              class="remove-photo"
+              onclick="removePhoto(${i})">
+              ×
+            </button>
 
-          <button
-            type="button"
-            class="remove-photo"
-            onclick="${
-              item.pending
-              ? 'removePendingPhoto'
-              : 'removePhoto'
-            }(${item.index})">
-
-            ×
-
-          </button>
-
-        </div>
-
-        `
+          </div>
+          `
       )
       .join('');
 
 }
 
 
-function removePhoto(index){
+function removePhoto(i){
 
-  state.existingPhotos
-    .splice(
-      index,
-      1
-    );
-
-  renderPreviews();
-
-}
-
-
-function removePendingPhoto(index){
-
-  if(
-    state.pendingPreviews[index]
-  ){
-
-    URL.revokeObjectURL(
-      state.pendingPreviews[index]
-    );
-
-  }
-
-
-  state.pendingPreviews
-    .splice(
-      index,
-      1
-    );
-
-
-  state.pendingFiles
-    .splice(
-      index,
-      1
-    );
+  state.photos.splice(
+    i,
+    1
+  );
 
 
   renderPreviews();
 
 }
 
-
-/* ==========================================
-   PHOTO INPUT
-========================================== */
-
-$('photoInput')
-.addEventListener(
-  'change',
-  ()=>{
-
-    const files=
-      [
-        ...$('photoInput').files
-      ];
-
-
-    if(!files.length)
-      return;
-
-
-    const current=
-      state.existingPhotos.length+
-      state.pendingFiles.length;
-
-
-    if(
-      current+files.length>
-      MAX_PHOTOS
-    ){
-
-      toast(
-        'حداکثر ۸ عکس مجاز است.',
-        false
-      );
-
-      $('photoInput').value='';
-
-      return;
-
-    }
-
-
-    for(
-      const file of files
-    ){
-
-      if(
-        !/^image\/(jpeg|png|webp)$/i
-          .test(file.type)
-      ){
-
-        toast(
-          'فقط JPG، PNG و WEBP مجاز است.',
-          false
-        );
-
-        continue;
-
-      }
-
-
-      if(file.size>MAX_SIZE){
-
-        toast(
-          'حجم هر عکس باید حداکثر ۸ مگابایت باشد.',
-          false
-        );
-
-        continue;
-
-      }
-
-
-      state.pendingFiles
-        .push(file);
-
-
-      state.pendingPreviews
-        .push(
-          URL.createObjectURL(file)
-        );
-
-    }
-
-
-    $('photoInput').value='';
-
-    renderPreviews();
-
-  }
-);
-
-
-/* ==========================================
-   COLLECT FORM
-========================================== */
 
 function collectDynamic(){
 
-  const result={};
+  const o={};
+
 
   document
     .querySelectorAll(
       '#dynamicFormFields [data-field]'
     )
     .forEach(
-      input=>{
-        result[input.dataset.field]=
-          input.value.trim();
-      }
+      x=>
+        o[x.dataset.field]
+        =
+        x.value.trim()
     );
 
-  return result;
+
+  return o;
 
 }
 
@@ -3298,17 +3379,13 @@ function collectAmenities(){
       )
   ]
   .map(
-    input=>input.value
+    x=>x.value
   );
 
 }
 
 
-/* ==========================================
-   BUILD SPECS
-========================================== */
-
-function buildSpecs(data){
+function buildSpecs(d){
 
   const map=[
 
@@ -3334,27 +3411,24 @@ function buildSpecs(data){
 
 
   return map
-
     .filter(
-      ([key])=>
-        data[key]
+      ([k])=>d[k]
     )
-
     .map(
-      ([key,label])=>
-        label+': '+data[key]
+      ([k,l])=>
+        l+': '+d[k]
     );
 
 }
 
 
-/* ==========================================
-   SAVE LISTING
-========================================== */
+/* =========================
+   ذخیره آگهی
+========================= */
 
-async function saveListing(event){
+async function saveListing(e){
 
-  event.preventDefault();
+  e.preventDefault();
 
 
   if(state.saving)
@@ -3365,17 +3439,23 @@ async function saveListing(event){
 
 
   if(
-    !c.owner ||
-    !c.repo ||
+    !c.owner
+    ||
+    !c.repo
+    ||
     !c.token
   ){
 
-    showPage('settings');
+    showPage(
+      'settings'
+    );
+
 
     toast(
       'اول اتصال GitHub را کامل کن.',
       false
     );
+
 
     return;
 
@@ -3389,16 +3469,19 @@ async function saveListing(event){
 
 
   const type=
-    $('fType').value;
+    $('fType')
+      .value;
 
 
   const phase=
-    $('fPhase').value;
+    $('fPhase')
+      .value;
 
 
   const area=
     Number(
-      $('fArea').value
+      $('fArea')
+        .value
     );
 
 
@@ -3409,9 +3492,12 @@ async function saveListing(event){
 
 
   if(
-    !title ||
-    !type ||
-    !area ||
+    !title
+    ||
+    !type
+    ||
+    !area
+    ||
     !location
   ){
 
@@ -3420,12 +3506,14 @@ async function saveListing(event){
       false
     );
 
+
     return;
 
   }
 
 
   state.saving=true;
+
 
   $('saveListing').disabled=true;
 
@@ -3441,26 +3529,33 @@ async function saveListing(event){
     const old=
       state.editing
       ? state.listings.find(
-          item=>
-            item.id===state.editing
+          x=>
+            x.id===
+            state.editing
         )
       : null;
 
 
+    let photos=[
+      ...state.photos
+    ];
+
+
     /*
-      ابتدا عکس‌های قبلی
-      سپس عکس‌های جدید
+      فقط فایل‌هایی که بعد از انتخاب
+      در pendingFiles قرار گرفته‌اند
+      آپلود می‌شوند.
     */
 
-    let photos=
-      [
-        ...state.existingPhotos
-      ];
+    const files=[
+      ...state.pendingFiles
+    ];
 
 
     if(
-      photos.length+
-      state.pendingFiles.length>
+      files.length+
+      photos.length
+      >
       MAX_PHOTOS
     ){
 
@@ -3471,28 +3566,23 @@ async function saveListing(event){
     }
 
 
-    /* Upload عکس‌های جدید */
-
     for(
-      const file of
-      state.pendingFiles
+      const f of files
     ){
 
       toast(
-        'در حال آپلود عکس...'
+        'در حال آپلود عکس‌ها...'
       );
 
 
-      const uploaded=
-        await uploadImage(file);
-
-
-      photos.push(uploaded);
+      photos.push(
+        await uploadImage(f)
+      );
 
     }
 
 
-    const dynamic=
+    const dyn=
       collectDynamic();
 
 
@@ -3505,14 +3595,16 @@ async function saveListing(event){
       normalize({
 
         id:
-          old?.id ||
+          old?.id
+          ||
           crypto.randomUUID(),
 
         title,
 
         type,
 
-        property_type:type,
+        property_type:
+          type,
 
         phase,
 
@@ -3521,7 +3613,8 @@ async function saveListing(event){
         price:
           $('fPrice')
             .value
-            .trim() ||
+            .trim()
+          ||
           'تماس بگیرید',
 
         location,
@@ -3534,58 +3627,57 @@ async function saveListing(event){
         photos,
 
         created_at:
-          old?.created_at ||
+          old?.created_at
+          ||
           now,
 
         specs:
-          buildSpecs(dynamic),
+          buildSpecs(dyn),
 
         amenities:
           collectAmenities(),
 
-        ...dynamic
+        ...dyn
 
       });
 
 
-    /*
-      دوباره JSON را از GitHub
-      می‌خوانیم تا SHA جدید داشته باشیم.
-    */
-
-    const latest=
+    const r=
       await readListings();
 
 
-    let listings=
-      latest.listings
-        .map(normalize);
-
-
-    const index=
-      listings.findIndex(
-        x=>x.id===item.id
+    let arr=
+      r.listings.map(
+        normalize
       );
 
 
-    if(index>=0){
+    const idx=
+      arr.findIndex(
+        x=>
+          x.id===
+          item.id
+      );
 
-      listings[index]=item;
+
+    if(idx>=0){
+
+      arr[idx]=item;
 
     }else{
 
-      listings.unshift(item);
+      arr.unshift(item);
 
     }
 
 
     await writeListings(
 
-      listings,
+      arr,
 
-      latest.sha,
+      r.sha,
 
-      index>=0
+      idx>=0
       ? 'Update property '+item.title
       : 'Add property '+item.title
 
@@ -3593,34 +3685,40 @@ async function saveListing(event){
 
 
     state.listings=
-      listings;
+      arr;
 
 
     render();
+
 
     closeEditor();
 
 
     toast(
-      index>=0
+      idx>=0
       ? 'آگهی با موفقیت ویرایش شد.'
       : 'آگهی با موفقیت ثبت شد.'
     );
 
 
-  }catch(error){
+  }catch(err){
 
     toast(
       'ذخیره انجام نشد: '+
-      error.message,
+      err.message,
       false
     );
 
-  }finally{
+  }
+
+
+  finally{
 
     state.saving=false;
 
+
     $('saveListing').disabled=false;
+
 
     $('saveListing').textContent=
       'ذخیره آگهی';
@@ -3630,33 +3728,33 @@ async function saveListing(event){
 }
 
 
-/* ==========================================
-   DELETE LISTING
-========================================== */
+/* =========================
+   حذف آگهی
+========================= */
 
 async function removeListing(id){
 
-  const property=
+  const p=
     state.listings.find(
-      item=>item.id===id
+      x=>x.id===id
     );
 
 
-  if(!property)
+  if(!p)
     return;
 
 
-  const confirmed=
-    confirm(
+  if(
+    !confirm(
       'آگهی «'+
-      property.title+
-      '» حذف شود؟\n\n'+
-      'این عملیات قابل برگشت نیست.'
-    );
+      p.title+
+      '» حذف شود؟ این عملیات قابل برگشت نیست.'
+    )
+  ){
 
-
-  if(!confirmed)
     return;
+
+  }
 
 
   try{
@@ -3664,63 +3762,51 @@ async function removeListing(id){
     saveCfg();
 
 
-    const latest=
+    const r=
       await readListings();
 
 
-    const listings=
-      latest.listings
+    const arr=
+      r.listings
         .map(normalize)
         .filter(
-          item=>item.id!==id
+          x=>x.id!==id
         );
 
 
     await writeListings(
-
-      listings,
-
-      latest.sha,
-
-      'Delete property '+
-      property.title
-
+      arr,
+      r.sha,
+      'Delete property '+p.title
     );
 
 
     state.listings=
-      listings;
+      arr;
 
 
     render();
 
 
     toast(
-      'آگهی با موفقیت حذف شد.'
+      'آگهی حذف شد.'
     );
 
 
-    /*
-      عکس‌های آگهی نیز پاک می‌شوند.
-      اگر پاک‌کردن عکس‌ها شکست بخورد،
-      خود آگهی قبلاً حذف شده است.
-    */
-
     for(
-      const url of
-      property.photos || []
+      const u of p.photos||[]
     ){
 
-      await deleteImageByUrl(url);
+      await deleteImageByUrl(u);
 
     }
 
 
-  }catch(error){
+  }catch(e){
 
     toast(
       'حذف انجام نشد: '+
-      error.message,
+      e.message,
       false
     );
 
@@ -3729,42 +3815,43 @@ async function removeListing(id){
 }
 
 
-/* ==========================================
-   EDIT
-========================================== */
+/* =========================
+   ویرایش
+========================= */
 
 function editListing(id){
 
-  const property=
+  const p=
     state.listings.find(
-      item=>item.id===id
+      x=>x.id===id
     );
 
 
-  if(property)
-    openEditor(property);
+  if(p)
+    openEditor(p);
 
 }
 
 
-/* ==========================================
-   VIEW SITE
-========================================== */
+/* =========================
+   نمایش در سایت
+========================= */
 
 function viewSiteListing(id){
 
-  const property=
+  const p=
     state.listings.find(
-      item=>item.id===id
+      x=>x.id===id
     );
 
 
-  if(!property)
+  if(!p)
     return;
 
 
   const base=
-    cfg().siteBase ||
+    cfg().siteBase
+    ||
     DEFAULT_SITE;
 
 
@@ -3772,50 +3859,134 @@ function viewSiteListing(id){
     base+
     '/#property-'+
     encodeURIComponent(id),
-
     '_blank',
-
     'noopener'
   );
 
 }
 
 
-/* ==========================================
-   EVENTS
-========================================== */
+/* =========================
+   رویدادها
+========================= */
 
-$('fType').onchange=()=>{
-
-  renderDynamic(
-    $('fType').value,
-    {}
-  );
-
-};
+$('fType').onchange=
+  ()=>
+    renderDynamic(
+      $('fType').value,
+      {}
+    );
 
 
-$('listingForm')
-  .onsubmit=
+/*
+  اصلاح مهم:
+  فایل‌ها فقط در pendingFiles
+  ذخیره می‌شوند و هنوز آپلود نشده‌اند.
+  بنابراین هنگام save دوباره شمرده نمی‌شوند.
+*/
+
+$('photoInput').onchange=
+  () => {
+
+    const files=[
+      ...$('photoInput').files
+    ];
+
+
+    const total=
+      state.photos.length+
+      state.pendingFiles.length+
+      files.length;
+
+
+    if(
+      total>
+      MAX_PHOTOS
+    ){
+
+      toast(
+        'حداکثر ۸ عکس مجاز است.',
+        false
+      );
+
+
+      $('photoInput').value='';
+
+
+      return;
+
+    }
+
+
+    for(
+      const f of files
+    ){
+
+      if(
+        f.size>
+        MAX_SIZE
+      ){
+
+        toast(
+          'حجم عکس بیشتر از ۸ مگابایت است.',
+          false
+        );
+
+
+        continue;
+
+      }
+
+
+      state.pendingFiles.push(
+        f
+      );
+
+
+      const reader=
+        new FileReader();
+
+
+      reader.onload=
+        e=>{
+
+          state.photos.push(
+            e.target.result
+          );
+
+
+          renderPreviews();
+
+        };
+
+
+      reader.readAsDataURL(f);
+
+    }
+
+
+    $('photoInput').value='';
+
+  };
+
+
+$('listingForm').onsubmit=
   saveListing;
 
 
-$('closeEditor')
-  .onclick=
+$('closeEditor').onclick=
   closeEditor;
 
 
-$('cancelEditor')
-  .onclick=
+$('cancelEditor').onclick=
   closeEditor;
 
 
-$('editorWrap')
-  .onclick=
-  event=>{
+$('editorWrap').onclick=
+  e=>{
 
     if(
-      event.target===
+      e.target===
       $('editorWrap')
     ){
 
@@ -3826,73 +3997,56 @@ $('editorWrap')
   };
 
 
-$('newBtn')
-  .onclick=
+$('newBtn').onclick=
   ()=>openEditor();
 
 
-$('dashboardNew')
-  .onclick=
+$('dashboardNew').onclick=
   ()=>openEditor();
 
 
-$('listNew')
-  .onclick=
+$('listNew').onclick=
   ()=>openEditor();
 
 
-$('refreshBtn')
-  .onclick=
+$('refreshBtn').onclick=
   ()=>loadData();
 
 
-$('testBtn')
-  .onclick=
-  ()=>testConnection();
+$('testBtn').onclick=
+  testConnection;
 
 
-$('saveSettings')
-  .onclick=
-  ()=>testConnection();
+$('saveSettings').onclick=
+  testConnection;
 
 
-$('goListings')
-  .onclick=
+$('goListings').onclick=
   ()=>showPage('listings');
 
 
-$('search')
-  .oninput=
-  ()=>render();
+$('search').oninput=
+  render;
 
 
-$('filterType')
-  .onchange=
-  ()=>render();
+$('filterType').onchange=
+  render;
 
 
-$('filterPhase')
-  .onchange=
-  ()=>render();
+$('filterPhase').onchange=
+  render;
 
 
-$('filterSort')
-  .onchange=
-  ()=>render();
+$('filterSort').onchange=
+  render;
 
 
-$('menuBtn')
-  .onclick=
+$('menuBtn').onclick=
   ()=>{
-
-    if(innerWidth<=760){
-
+    if(innerWidth<=760)
       $('sidebar')
         .classList
         .toggle('open');
-
-    }
-
   };
 
 
@@ -3901,35 +4055,33 @@ document
     '.nav button[data-page]'
   )
   .forEach(
-    button=>{
-
-      button.onclick=
-        ()=>showPage(
-          button.dataset.page
-        );
-
-    }
+    b=>
+      b.onclick=
+        ()=>{
+          showPage(
+            b.dataset.page
+          );
+        }
   );
 
 
-document
-  .addEventListener(
-    'keydown',
-    event=>{
+document.addEventListener(
+  'keydown',
+  e=>{
+    if(
+      e.key==='Escape'
+    ){
 
-      if(event.key==='Escape'){
-
-        closeEditor();
-
-      }
+      closeEditor();
 
     }
-  );
+  }
+);
 
 
-/* ==========================================
-   INIT
-========================================== */
+/* =========================
+   شروع پنل
+========================= */
 
 loadCfg();
 
@@ -3938,6 +4090,7 @@ fillPhases();
 renderAmenities();
 
 renderDynamic('');
+
 
 if(
   cfg().token &&
