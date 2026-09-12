@@ -2,44 +2,38 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="theme-color" content="#0b1220">
 <title>پنل مدیریت | املاک امیر پاشا</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Estedad:wght@400;500;600;700;800&display=swap');
+
 :root{
-  --ink:#0b1220;
-  --navy:#10233f;
-  --navy2:#162f52;
-  --white:#fff;
-  --bg:#f4f6f9;
-  --line:#e4e8ef;
-  --muted:#707989;
-  --green:#16a34a;
-  --red:#dc2626;
-  --gold:#b7791f;
-  --shadow:0 16px 45px rgba(11,18,32,.09);
-  --radius:20px;
+  --bg:#f4f6f8;
+  --card:#fff;
+  --navy:#0b1220;
+  --navy2:#111c30;
+  --text:#172033;
+  --muted:#718096;
+  --border:#e6eaf0;
+  --green:#16845b;
+  --red:#c83c3c;
+  --gold:#a77a24;
+  --shadow:0 12px 35px rgba(11,18,32,.08);
+  --radius:18px;
 }
 
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html{
-  scroll-behavior:smooth;
-}
+*{box-sizing:border-box}
 
 body{
-  font-family:Tahoma,Arial,sans-serif;
+  margin:0;
   background:var(--bg);
-  color:var(--ink);
-  line-height:1.8;
+  color:var(--text);
+  font-family:Estedad,Tahoma,sans-serif;
 }
 
-button,input,textarea,select{
+button,input,select,textarea{
   font:inherit;
 }
 
@@ -47,755 +41,540 @@ button{
   cursor:pointer;
 }
 
-a{
-  text-decoration:none;
-  color:inherit;
-}
-
-.hidden{
-  display:none!important;
-}
-
 .app{
   min-height:100vh;
-}
-
-.topbar{
-  height:72px;
-  background:rgba(255,255,255,.94);
-  backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--line);
-  position:sticky;
-  top:0;
-  z-index:50;
-}
-
-.topbar-in{
-  max-width:1380px;
-  height:100%;
-  margin:auto;
-  padding:0 18px;
   display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:14px;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:11px;
-}
-
-.brand-mark{
-  width:43px;
-  height:43px;
-  border-radius:14px;
-  background:var(--ink);
-  color:#fff;
-  display:grid;
-  place-items:center;
-  font-weight:900;
-  font-size:18px;
-}
-
-.brand h1{
-  font-size:15px;
-}
-
-.brand p{
-  font-size:9px;
-  color:var(--muted);
-}
-
-.top-actions{
-  display:flex;
-  gap:8px;
-  align-items:center;
-}
-
-.icon-btn,
-.ghost-btn{
-  border:1px solid var(--line);
-  background:#fff;
-  border-radius:13px;
-  min-width:42px;
-  height:42px;
-  display:grid;
-  place-items:center;
-  color:var(--ink);
-}
-
-.icon-btn:hover,
-.ghost-btn:hover{
-  background:#f7f8fa;
-}
-
-.layout{
-  max-width:1380px;
-  margin:auto;
-  padding:18px;
-  display:grid;
-  grid-template-columns:245px 1fr;
-  gap:18px;
 }
 
 .sidebar{
-  background:var(--ink);
+  width:255px;
+  background:var(--navy);
   color:#fff;
-  border-radius:24px;
-  padding:16px;
-  position:sticky;
-  top:90px;
-  height:calc(100vh - 108px);
-  overflow:auto;
+  padding:24px 16px;
+  position:fixed;
+  right:0;
+  top:0;
+  bottom:0;
+  z-index:20;
 }
 
-.side-title{
-  padding:10px 10px 15px;
-  color:#aeb7c5;
-  font-size:10px;
+.brand{
+  padding:8px 10px 24px;
+  border-bottom:1px solid rgba(255,255,255,.09);
+  margin-bottom:18px;
+}
+
+.brand h1{
+  font-size:19px;
+  margin:0 0 7px;
+}
+
+.brand p{
+  margin:0;
+  color:#9ca9bb;
+  font-size:12px;
 }
 
 .nav{
-  display:grid;
+  display:flex;
+  flex-direction:column;
   gap:7px;
 }
 
 .nav button{
-  border:1px solid transparent;
+  border:0;
   background:transparent;
-  color:#e8ebef;
-  border-radius:14px;
-  padding:12px;
+  color:#aeb9c9;
   text-align:right;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  font-size:12px;
+  padding:13px 14px;
+  border-radius:12px;
+  transition:.2s;
 }
 
 .nav button:hover,
 .nav button.active{
-  background:#ffffff12;
-  border-color:#ffffff12;
+  background:var(--navy2);
   color:#fff;
-}
-
-.nav .new{
-  background:#fff;
-  color:var(--ink);
-  font-weight:800;
-  margin-top:7px;
-}
-
-.connection{
-  margin-top:18px;
-  border-top:1px solid #ffffff12;
-  padding-top:15px;
-}
-
-.connection-status{
-  font-size:10px;
-  color:#aeb7c5;
-  margin-bottom:8px;
-}
-
-.status-dot{
-  display:inline-block;
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:#64748b;
-  margin-left:5px;
-}
-
-.status-dot.ok{
-  background:#22c55e;
-}
-
-.status-dot.bad{
-  background:#ef4444;
 }
 
 .main{
-  min-width:0;
+  width:calc(100% - 255px);
+  margin-right:255px;
+  padding:28px;
 }
 
-.page-head{
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:24px;
+}
+
+.topbar h2{
+  margin:0;
+  font-size:25px;
+}
+
+.status{
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  margin-bottom:16px;
+  gap:8px;
+  background:#fff;
+  border:1px solid var(--border);
+  padding:9px 13px;
+  border-radius:12px;
+  font-size:12px;
 }
 
-.page-head h2{
-  font-size:22px;
+.status-dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#9ca3af;
 }
 
-.page-head p{
-  font-size:11px;
-  color:var(--muted);
-}
+.status.ok .status-dot{background:var(--green)}
+.status.bad .status-dot{background:var(--red)}
+.status.loading .status-dot{background:var(--gold)}
 
-.primary{
-  border:0;
-  background:var(--ink);
-  color:#fff;
-  border-radius:14px;
-  padding:11px 15px;
-  font-weight:800;
-}
+.page{display:none}
+.page.active{display:block}
 
-.primary:hover{
-  background:#17233a;
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:22px;
+  margin-bottom:20px;
 }
 
 .stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:12px;
-  margin-bottom:16px;
+  gap:16px;
+  margin-bottom:20px;
 }
 
 .stat{
   background:#fff;
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:16px;
-  box-shadow:0 8px 24px rgba(11,18,32,.04);
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:20px;
+  box-shadow:var(--shadow);
 }
 
-.stat small{
+.stat span{
   display:block;
   color:var(--muted);
-  font-size:10px;
+  font-size:12px;
+  margin-bottom:10px;
 }
 
 .stat strong{
-  display:block;
-  font-size:25px;
-  margin-top:2px;
-}
-
-.panel{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:22px;
-  box-shadow:0 8px 28px rgba(11,18,32,.04);
-  overflow:hidden;
-}
-
-.panel-head{
-  padding:15px 17px;
-  border-bottom:1px solid var(--line);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-}
-
-.panel-head h3{
-  font-size:14px;
-}
-
-.panel-head p{
-  font-size:10px;
-  color:var(--muted);
-}
-
-.toolbar{
-  padding:12px;
-  display:grid;
-  grid-template-columns:1.5fr repeat(3,1fr);
-  gap:8px;
-  border-bottom:1px solid var(--line);
-}
-
-.input,
-.select,
-.textarea{
-  width:100%;
-  border:1px solid var(--line);
-  background:#f8f9fb;
-  border-radius:13px;
-  padding:11px 12px;
-  outline:none;
-  color:var(--ink);
-}
-
-.input:focus,
-.select:focus,
-.textarea:focus{
-  border-color:#aeb8c8;
-  box-shadow:0 0 0 3px #0b12200b;
-}
-
-.cards{
-  padding:14px;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-}
-
-.card{
-  border:1px solid var(--line);
-  border-radius:18px;
-  overflow:hidden;
-  background:#fff;
-}
-
-.card-img{
-  height:180px;
-  background:#e9edf2;
-  position:relative;
-}
-
-.card-img img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.badge{
-  position:absolute;
-  top:10px;
-  right:10px;
-  background:#0b1220dd;
-  color:#fff;
-  border-radius:999px;
-  padding:4px 9px;
-  font-size:9px;
-}
-
-.card-content{
-  padding:13px;
-}
-
-.card-title{
-  font-size:14px;
-  font-weight:800;
-}
-
-.card-location{
-  font-size:10px;
-  color:var(--muted);
-  margin-top:2px;
-}
-
-.card-price{
-  font-size:13px;
-  font-weight:800;
-  margin-top:7px;
-}
-
-.card-meta{
-  display:flex;
-  flex-wrap:wrap;
-  gap:5px;
-  margin-top:9px;
-}
-
-.chip{
-  background:#f3f5f8;
-  border:1px solid var(--line);
-  border-radius:9px;
-  padding:4px 7px;
-  font-size:9px;
-  color:#394150;
-}
-
-.card-actions{
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:6px;
-  margin-top:11px;
-}
-
-.small-btn{
-  border:1px solid var(--line);
-  background:#fff;
-  border-radius:10px;
-  padding:8px 5px;
-  font-size:10px;
-  font-weight:700;
-}
-
-.small-btn.danger{
-  color:var(--red);
-  border-color:#fecaca;
-  background:#fff7f7;
-}
-
-.empty{
-  padding:55px 20px;
-  text-align:center;
-  color:var(--muted);
-  font-size:12px;
-}
-
-.modal-wrap{
-  position:fixed;
-  inset:0;
-  background:#02060cd1;
-  z-index:100;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:12px;
-}
-
-.modal-wrap.open{
-  display:flex;
-}
-
-.modal{
-  background:#fff;
-  border-radius:23px;
-  width:min(1000px,100%);
-  max-height:94vh;
-  overflow:auto;
-  box-shadow:0 25px 80px #0006;
-}
-
-.modal-head{
-  position:sticky;
-  top:0;
-  z-index:3;
-  background:#fff;
-  border-bottom:1px solid var(--line);
-  padding:15px 18px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.modal-head h3{
-  font-size:16px;
-}
-
-.close{
-  width:40px;
-  height:40px;
-  border:1px solid var(--line);
-  background:#fff;
-  border-radius:12px;
-}
-
-.form{
-  padding:18px;
-}
-
-.section-title{
-  font-size:12px;
-  font-weight:900;
-  border-bottom:1px solid var(--line);
-  padding-bottom:9px;
-  margin:5px 0 13px;
+  font-size:28px;
 }
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  margin-bottom:18px;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
 }
 
-.group label{
-  display:block;
-  font-size:10px;
-  font-weight:800;
-  margin:0 0 5px 2px;
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
 }
 
-.full{
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.field.full{
   grid-column:1/-1;
 }
 
-.textarea{
-  min-height:100px;
+.field label{
+  font-size:12px;
+  font-weight:600;
+}
+
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:12px;
+  padding:12px 13px;
+  outline:none;
+  color:var(--text);
+}
+
+.field textarea{
+  min-height:110px;
   resize:vertical;
 }
 
-.checks{
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  border-color:#8b98aa;
+}
+
+.actions{
   display:flex;
+  gap:9px;
   flex-wrap:wrap;
-  gap:7px;
+  margin-top:20px;
 }
 
-.check{
-  border:1px solid var(--line);
-  background:#f8f9fb;
+.btn{
+  border:0;
   border-radius:11px;
-  padding:7px 9px;
-  font-size:10px;
+  padding:11px 15px;
+  font-weight:600;
+  font-size:12px;
+}
+
+.btn-primary{
+  background:var(--navy);
+  color:#fff;
+}
+
+.btn-secondary{
+  background:#eef1f5;
+  color:var(--text);
+}
+
+.btn-success{
+  background:#e5f5ee;
+  color:#14764f;
+}
+
+.btn-danger{
+  background:#fdeaea;
+  color:#ad2f2f;
+}
+
+.btn-gold{
+  background:#f8f0df;
+  color:#8d651d;
+}
+
+.btn:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+}
+
+.section-title{
   display:flex;
-  gap:6px;
+  justify-content:space-between;
   align-items:center;
+  gap:15px;
+  margin-bottom:18px;
 }
 
-.check input{
-  accent-color:var(--ink);
+.section-title h3{
+  margin:0;
+  font-size:17px;
 }
 
-.dropzone{
-  border:1px dashed #cbd2dc;
-  border-radius:16px;
-  padding:17px;
-  text-align:center;
+.muted{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.table-wrap{
+  overflow:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:760px;
+}
+
+th,td{
+  text-align:right;
+  padding:13px 10px;
+  border-bottom:1px solid var(--border);
+  font-size:12px;
+  vertical-align:middle;
+}
+
+th{
+  color:var(--muted);
+  font-weight:600;
   background:#fafbfc;
 }
 
-.dropzone input{
-  display:none;
-}
-
-.choose{
+.badge{
   display:inline-flex;
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:11px;
-  padding:9px 13px;
+  align-items:center;
+  border-radius:999px;
+  padding:5px 9px;
   font-size:10px;
-  font-weight:800;
+  font-weight:600;
 }
 
-.previews{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
+.badge.pending{
+  background:#fff4dd;
+  color:#986d19;
+}
+
+.badge.approved{
+  background:#e4f5ed;
+  color:#14764f;
+}
+
+.badge.rejected{
+  background:#fde8e8;
+  color:#ae3030;
+}
+
+.badge.published{
+  background:#e8eef9;
+  color:#274a83;
+}
+
+.empty{
+  text-align:center;
+  padding:40px 20px;
+  color:var(--muted);
+}
+
+.list-card{
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:16px;
+  background:#fff;
+}
+
+.list-card h4{
+  margin:0 0 8px;
+}
+
+.list-meta{
+  display:flex;
+  flex-wrap:wrap;
   gap:7px;
-  margin-top:11px;
+  color:var(--muted);
+  font-size:11px;
 }
 
-.preview{
-  height:90px;
-  border-radius:10px;
-  overflow:hidden;
+.list-actions{
+  margin-top:13px;
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+.photo-box{
+  border:1px dashed #bdc6d2;
+  border-radius:15px;
+  padding:16px;
+  background:#fafbfc;
+}
+
+.photo-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-top:14px;
+}
+
+.photo-item{
   position:relative;
-  background:#eee;
-  border:1px solid var(--line);
+  aspect-ratio:1;
+  border-radius:12px;
+  overflow:hidden;
+  background:#edf0f4;
 }
 
-.preview img{
+.photo-item img{
   width:100%;
   height:100%;
   object-fit:cover;
 }
 
-.remove-photo{
+.photo-remove{
   position:absolute;
-  top:4px;
-  left:4px;
-  width:24px;
-  height:24px;
+  top:6px;
+  left:6px;
+  width:27px;
+  height:27px;
   border:0;
   border-radius:50%;
-  background:#000b;
+  background:rgba(0,0,0,.7);
   color:#fff;
 }
 
-.form-actions{
-  display:flex;
-  gap:8px;
-  margin-top:8px;
-}
-
-.form-actions button{
-  flex:1;
-}
-
-.secondary{
-  border:1px solid var(--line);
-  background:#fff;
-  color:var(--ink);
+.request-detail{
+  background:#fafbfc;
+  border:1px solid var(--border);
   border-radius:14px;
-  padding:12px;
-  font-weight:800;
+  padding:15px;
+  line-height:2;
+  font-size:12px;
 }
 
-.settings{
-  padding:17px;
+.connection{
   display:grid;
-  gap:14px;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
 }
 
-.setting-row{
-  display:grid;
-  grid-template-columns:1fr 2fr;
-  gap:12px;
-  align-items:center;
-}
-
-.setting-row label{
+.help{
   font-size:11px;
-  font-weight:800;
-}
-
-.hint{
-  font-size:9px;
   color:var(--muted);
+  line-height:1.9;
+  margin-top:6px;
 }
 
 .toast{
   position:fixed;
-  bottom:18px;
-  right:18px;
-  z-index:200;
-  background:var(--ink);
+  left:22px;
+  bottom:22px;
+  z-index:100;
+  background:#111827;
   color:#fff;
-  padding:12px 15px;
-  border-radius:13px;
-  font-size:11px;
-  box-shadow:0 14px 40px #0003;
-  transform:translateY(120px);
+  padding:12px 16px;
+  border-radius:12px;
+  font-size:12px;
+  box-shadow:0 15px 35px rgba(0,0,0,.2);
+  transform:translateY(20px);
   opacity:0;
+  pointer-events:none;
   transition:.25s;
-  max-width:calc(100vw - 36px);
 }
 
 .toast.show{
-  transform:none;
+  transform:translateY(0);
   opacity:1;
 }
 
-.loading{
-  opacity:.6;
-  pointer-events:none;
-}
-
-.mobile-only{
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(5,10,18,.6);
   display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:90;
+  padding:20px;
 }
 
-@media(max-width:1050px){
-  .cards{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .stats{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .toolbar{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .grid{
-    grid-template-columns:repeat(2,1fr);
-  }
+.modal.show{
+  display:flex;
 }
 
-@media(max-width:760px){
+.modal-box{
+  width:min(850px,100%);
+  max-height:92vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:20px;
+  padding:22px;
+}
 
-  .topbar{
-    height:64px;
-  }
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:20px;
+}
 
-  .topbar-in{
-    padding:0 12px;
-  }
+.modal-head h3{
+  margin:0;
+}
 
-  .brand h1{
-    font-size:13px;
-  }
+.close{
+  border:0;
+  background:#eef1f5;
+  width:36px;
+  height:36px;
+  border-radius:50%;
+}
 
-  .brand p{
-    display:none;
-  }
+.loader{
+  width:18px;
+  height:18px;
+  border:2px solid #dbe1e8;
+  border-top-color:var(--navy);
+  border-radius:50%;
+  animation:spin .7s linear infinite;
+  display:inline-block;
+  vertical-align:middle;
+}
 
-  .brand-mark{
-    width:39px;
-    height:39px;
-  }
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
 
-  .layout{
-    display:block;
-    padding:10px;
-  }
-
+@media(max-width:900px){
   .sidebar{
-    position:fixed;
-    top:64px;
-    right:0;
-    bottom:0;
-    width:min(310px,88vw);
-    height:auto;
-    border-radius:20px 0 0 20px;
-    z-index:80;
-    transform:translateX(110%);
-    transition:.25s;
+    width:215px;
   }
-
-  .sidebar.open{
-    transform:none;
+  .main{
+    width:calc(100% - 215px);
+    margin-right:215px;
+    padding:18px;
   }
-
-  .mobile-only{
-    display:grid;
-  }
-
   .stats{
-    grid-template-columns:1fr 1fr;
-    gap:8px;
+    grid-template-columns:repeat(2,1fr);
   }
+}
 
-  .stat{
+@media(max-width:650px){
+  .app{
+    display:block;
+  }
+  .sidebar{
+    position:relative;
+    width:100%;
+    height:auto;
     padding:13px;
   }
-
-  .stat strong{
-    font-size:21px;
+  .brand{
+    padding-bottom:13px;
+    margin-bottom:10px;
   }
-
-  .page-head{
+  .nav{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+  }
+  .main{
+    width:100%;
+    margin:0;
+    padding:13px;
+  }
+  .topbar{
     align-items:flex-start;
+    flex-direction:column;
   }
-
-  .page-head h2{
-    font-size:18px;
-  }
-
-  .page-head p{
-    font-size:9px;
-  }
-
-  .cards{
-    grid-template-columns:1fr;
-    padding:9px;
-  }
-
-  .card-img{
-    height:210px;
-  }
-
-  .toolbar{
+  .grid,
+  .form-grid,
+  .connection{
     grid-template-columns:1fr;
   }
-
-  .grid{
-    grid-template-columns:1fr;
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+    gap:9px;
   }
-
-  .full{
-    grid-column:auto;
+  .stat{
+    padding:15px;
   }
-
-  .previews{
+  .stat strong{
+    font-size:22px;
+  }
+  .photo-grid{
     grid-template-columns:repeat(3,1fr);
-  }
-
-  .setting-row{
-    grid-template-columns:1fr;
-  }
-
-  .modal-wrap{
-    padding:6px;
-  }
-
-  .modal{
-    max-height:96vh;
-    border-radius:19px;
   }
 }
 </style>
@@ -805,1480 +584,789 @@ a{
 
 <div class="app">
 
-<header class="topbar">
-  <div class="topbar-in">
-
-    <div class="brand">
-      <div class="brand-mark">م</div>
-
-      <div>
-        <h1>پنل مدیریت املاک امیر پاشا</h1>
-        <p>مدیریت فایل‌های شهر جدید مهستان</p>
-      </div>
-    </div>
-
-    <div class="top-actions">
-
-      <button
-        class="icon-btn mobile-only"
-        id="menuBtn"
-        aria-label="منو">
-        ☰
-      </button>
-
-      <button
-        class="ghost-btn"
-        id="refreshBtn"
-        title="بروزرسانی">
-        ↻
-      </button>
-
-    </div>
-
-  </div>
-</header>
-
-
-<div class="layout">
-
-<aside class="sidebar" id="sidebar">
-
-  <div class="side-title">
-    مدیریت سیستم
+<aside class="sidebar">
+  <div class="brand">
+    <h1>املاک امیر پاشا</h1>
+    <p>پنل مدیریت فایلینگ</p>
   </div>
 
-  <nav class="nav">
-
-    <button
-      class="active"
-      data-page="dashboard">
-      داشبورد
-      <span>⌂</span>
-    </button>
-
-    <button
-      data-page="listings">
-      همه آگهی‌ها
-      <span>▤</span>
-    </button>
-
-    <button
-      data-page="settings">
-      اتصال و تنظیمات
-      <span>⚙</span>
-    </button>
-
-    <button
-      class="new"
-      id="newBtn">
-      ＋ افزودن آگهی
-    </button>
-
-  </nav>
-
-
-  <div class="connection">
-
-    <div class="connection-status">
-
-      <span
-        class="status-dot"
-        id="statusDot">
-      </span>
-
-      <span id="statusText">
-        اتصال بررسی نشده
-      </span>
-
-    </div>
-
-    <button
-      class="small-btn"
-      style="width:100%"
-      id="testBtn">
-      تست اتصال
-    </button>
-
+  <div class="nav">
+    <button class="active" data-page="dashboard">داشبورد</button>
+    <button data-page="listings">همه آگهی‌ها</button>
+    <button data-page="requests">درخواست‌های مشتریان</button>
+    <button data-page="add">افزودن آگهی</button>
+    <button data-page="settings">اتصال و تنظیمات</button>
   </div>
-
 </aside>
-
 
 <main class="main">
 
-
-<section id="page-dashboard">
-
-  <div class="page-head">
-
+  <div class="topbar">
     <div>
-      <h2>داشبورد</h2>
-      <p>
-        مدیریت سریع فایل‌های منتشرشده در سایت
-      </p>
+      <h2 id="pageTitle">داشبورد</h2>
+      <div class="muted">مدیریت سایت املاک امیر پاشا</div>
     </div>
 
-    <button
-      class="primary"
-      id="dashboardNew">
-      ＋ آگهی جدید
-    </button>
-
+    <div class="status" id="connectionStatus">
+      <span class="status-dot"></span>
+      <span id="statusText">اتصال بررسی نشده</span>
+    </div>
   </div>
 
+  <!-- DASHBOARD -->
+  <section class="page active" id="page-dashboard">
 
-  <div class="stats">
-
-    <div class="stat">
-      <small>کل آگهی‌ها</small>
-      <strong id="statTotal">۰</strong>
-    </div>
-
-    <div class="stat">
-      <small>آپارتمان</small>
-      <strong id="statApartment">۰</strong>
-    </div>
-
-    <div class="stat">
-      <small>ویلا</small>
-      <strong id="statVilla">۰</strong>
-    </div>
-
-    <div class="stat">
-      <small>مسکن مهر / زمین</small>
-      <strong id="statOther">۰</strong>
-    </div>
-
-  </div>
-
-
-  <div class="panel">
-
-    <div class="panel-head">
-
-      <div>
-        <h3>آخرین فایل‌ها</h3>
-        <p>۱۰ آگهی آخر</p>
+    <div class="stats">
+      <div class="stat">
+        <span>کل آگهی‌ها</span>
+        <strong id="statListings">0</strong>
       </div>
 
-      <button
-        class="small-btn"
-        id="goListings">
-        مشاهده همه
-      </button>
+      <div class="stat">
+        <span>درخواست‌های جدید</span>
+        <strong id="statPending">0</strong>
+      </div>
+
+      <div class="stat">
+        <span>آگهی‌های منتشرشده</span>
+        <strong id="statPublished">0</strong>
+      </div>
+
+      <div class="stat">
+        <span>آگهی‌های تأییدنشده</span>
+        <strong id="statUnpublished">0</strong>
+      </div>
+    </div>
+
+    <div class="grid">
+
+      <div class="card">
+        <div class="section-title">
+          <h3>آخرین آگهی‌ها</h3>
+          <button class="btn btn-secondary" onclick="showPage('listings')">مشاهده همه</button>
+        </div>
+        <div id="dashboardListings"></div>
+      </div>
+
+      <div class="card">
+        <div class="section-title">
+          <h3>آخرین درخواست‌ها</h3>
+          <button class="btn btn-secondary" onclick="showPage('requests')">مشاهده همه</button>
+        </div>
+        <div id="dashboardRequests"></div>
+      </div>
 
     </div>
 
-    <div
-      class="cards"
-      id="recentCards">
+  </section>
+
+  <!-- LISTINGS -->
+  <section class="page" id="page-listings">
+
+    <div class="card">
+      <div class="section-title">
+        <div>
+          <h3>همه آگهی‌ها</h3>
+          <div class="muted">آگهی‌های موجود در data/listings.json</div>
+        </div>
+
+        <button class="btn btn-primary" onclick="newListing()">+ افزودن آگهی</button>
+      </div>
+
+      <div id="listingsContainer"></div>
     </div>
 
-  </div>
+  </section>
 
-</section>
+  <!-- REQUESTS -->
+  <section class="page" id="page-requests">
 
+    <div class="card">
 
-<section
-  id="page-listings"
-  class="hidden">
+      <div class="section-title">
+        <div>
+          <h3>درخواست‌های مشتریان</h3>
+          <div class="muted">
+            درخواست‌ها قبل از انتشار باید توسط مدیریت بررسی شوند.
+          </div>
+        </div>
 
-  <div class="page-head">
+        <button class="btn btn-secondary" onclick="loadData()">↻ بروزرسانی</button>
+      </div>
 
-    <div>
-      <h2>همه آگهی‌ها</h2>
-      <p>
-        افزودن، ویرایش، حذف و مدیریت عکس‌ها
-      </p>
-    </div>
-
-    <button
-      class="primary"
-      id="listNew">
-      ＋ آگهی جدید
-    </button>
-
-  </div>
-
-
-  <div class="panel">
-
-    <div class="toolbar">
-
-      <input
-        class="input"
-        id="search"
-        placeholder="جستجو در عنوان، آدرس، فاز...">
-
-      <select
-        class="select"
-        id="filterType">
-
-        <option value="">
-          همه انواع
-        </option>
-
-        <option value="apartment">
-          آپارتمان
-        </option>
-
-        <option value="villa">
-          ویلا
-        </option>
-
-        <option value="mehr">
-          مسکن مهر
-        </option>
-
-        <option value="land">
-          زمین
-        </option>
-
-      </select>
-
-
-      <select
-        class="select"
-        id="filterPhase">
-
-        <option value="">
-          همه فازها
-        </option>
-
-      </select>
-
-
-      <select
-        class="select"
-        id="filterSort">
-
-        <option value="new">
-          جدیدترین
-        </option>
-
-        <option value="old">
-          قدیمی‌ترین
-        </option>
-
-        <option value="cheap">
-          ارزان‌ترین
-        </option>
-
-        <option value="expensive">
-          گران‌ترین
-        </option>
-
-      </select>
+      <div id="requestsContainer"></div>
 
     </div>
 
+  </section>
 
-    <div
-      class="cards"
-      id="allCards">
+  <!-- ADD -->
+  <section class="page" id="page-add">
+
+    <div class="card">
+
+      <div class="section-title">
+        <div>
+          <h3 id="editorTitle">افزودن آگهی</h3>
+          <div class="muted">اطلاعات ملک را وارد کنید.</div>
+        </div>
+      </div>
+
+      <form id="listingForm">
+
+        <div class="form-grid">
+
+          <div class="field">
+            <label>عنوان آگهی</label>
+            <input id="title" required placeholder="مثلاً آپارتمان ۹۵ متری فاز ۱">
+          </div>
+
+          <div class="field">
+            <label>دسته‌بندی</label>
+            <select id="category">
+              <option value="apartment">آپارتمان</option>
+              <option value="villa">ویلا</option>
+              <option value="maskan-mehr">مسکن مهر</option>
+              <option value="land">زمین</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>قیمت</label>
+            <input id="price" placeholder="مثلاً ۳ میلیارد تومان">
+          </div>
+
+          <div class="field">
+            <label>متراژ</label>
+            <input id="area" placeholder="مثلاً ۹۵ متر">
+          </div>
+
+          <div class="field">
+            <label>تعداد خواب</label>
+            <input id="bedrooms" type="number" min="0" placeholder="۲">
+          </div>
+
+          <div class="field">
+            <label>فاز</label>
+            <input id="phase" placeholder="مثلاً فاز ۱">
+          </div>
+
+          <div class="field">
+            <label>پارکینگ</label>
+            <select id="parking">
+              <option value="">نامشخص</option>
+              <option value="دارد">دارد</option>
+              <option value="ندارد">ندارد</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>انباری</label>
+            <select id="storage">
+              <option value="">نامشخص</option>
+              <option value="دارد">دارد</option>
+              <option value="ندارد">ندارد</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>آسانسور</label>
+            <select id="elevator">
+              <option value="">نامشخص</option>
+              <option value="دارد">دارد</option>
+              <option value="ندارد">ندارد</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>وضعیت انتشار</label>
+            <select id="published">
+              <option value="true">منتشر شود</option>
+              <option value="false">منتشر نشود</option>
+            </select>
+          </div>
+
+          <div class="field full">
+            <label>توضیحات</label>
+            <textarea id="description" placeholder="توضیحات کامل ملک..."></textarea>
+          </div>
+
+          <div class="field full">
+
+            <label>تصاویر ملک</label>
+
+            <div class="photo-box">
+
+              <input
+                id="photoInput"
+                type="file"
+                accept="image/*"
+                multiple
+              >
+
+              <div class="help">
+                حداکثر ۸ تصویر. تصاویر جدید هنگام ذخیره در پوشه images/listings قرار می‌گیرند.
+              </div>
+
+              <div class="photo-grid" id="photoPreview"></div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="actions">
+
+          <button class="btn btn-primary" type="submit" id="saveBtn">
+            ذخیره آگهی
+          </button>
+
+          <button class="btn btn-secondary" type="button" onclick="showPage('listings')">
+            انصراف
+          </button>
+
+        </div>
+
+      </form>
+
     </div>
 
-  </div>
+  </section>
 
-</section>
+  <!-- SETTINGS -->
+  <section class="page" id="page-settings">
 
+    <div class="card">
 
-<section
-  id="page-settings"
-  class="hidden">
+      <div class="section-title">
+        <div>
+          <h3>اتصال به GitHub</h3>
+          <div class="muted">
+            اطلاعات Repository برای مدیریت فایل‌های سایت.
+          </div>
+        </div>
+      </div>
 
-  <div class="page-head">
+      <div class="connection">
 
-    <div>
-      <h2>اتصال و تنظیمات</h2>
+        <div class="field">
+          <label>GitHub Username</label>
+          <input id="ghOwner" value="Amirpasha-melk">
+        </div>
 
-      <p>
-        توکن فقط در همین مرورگر و session فعلی نگهداری می‌شود.
-      </p>
+        <div class="field">
+          <label>Repository</label>
+          <input id="ghRepo" value="Amirpasha-melk">
+        </div>
 
-    </div>
+        <div class="field">
+          <label>Branch</label>
+          <input id="ghBranch" value="main">
+        </div>
 
-  </div>
+        <div class="field">
+          <label>GitHub Token</label>
+          <input id="ghToken" type="password" autocomplete="off">
+        </div>
 
+        <div class="field">
+          <label>آدرس سایت</label>
+          <input id="siteBase" value="https://Amirpasha-melk.github.io/Amirpasha-melk">
+        </div>
 
-  <div class="panel settings">
+      </div>
 
-    <div class="setting-row">
+      <div class="actions">
 
-      <label>
-        GitHub Username
-      </label>
+        <button class="btn btn-primary" onclick="testConnection()">
+          تست اتصال و ذخیره
+        </button>
 
-      <input
-        class="input"
-        id="ghOwner"
-        value="Amirpasha-melk"
-        placeholder="مثلاً Amirpasha-melk">
+        <button class="btn btn-secondary" onclick="loadData()">
+          خواندن دوباره اطلاعات
+        </button>
 
-    </div>
+      </div>
 
-
-    <div class="setting-row">
-
-      <label>
-        Repository
-      </label>
-
-      <input
-        class="input"
-        id="ghRepo"
-        value="Amirpasha-melk">
-
-    </div>
-
-
-    <div class="setting-row">
-
-      <label>
-        Branch
-      </label>
-
-      <input
-        class="input"
-        id="ghBranch"
-        value="main">
+      <div class="help" style="margin-top:15px">
+        توکن GitHub فقط در مرورگر شما ذخیره می‌شود و نباید آن را در فایل index.html قرار دهید.
+      </div>
 
     </div>
 
+    <div class="card">
 
-    <div class="setting-row">
+      <div class="section-title">
+        <h3>مسیرهای سیستم</h3>
+      </div>
 
-      <label>
-        GitHub Token
-      </label>
-
-      <input
-        class="input"
-        id="ghToken"
-        type="password"
-        autocomplete="off"
-        placeholder="توکن را اینجا وارد کن">
-
-    </div>
-
-
-    <div class="setting-row">
-
-      <label>
-        آدرس سایت
-      </label>
-
-      <input
-        class="input"
-        id="siteBase"
-        value="https://Amirpasha-melk.github.io/Amirpasha-melk"
-        placeholder="https://Amirpasha-melk.github.io/Amirpasha-melk">
+      <div class="request-detail">
+        <div><b>فایل آگهی‌ها:</b> data/listings.json</div>
+        <div><b>پوشه تصاویر:</b> images/listings</div>
+        <div><b>پنل:</b> Admin/admin.html</div>
+        <div><b>Branch:</b> main</div>
+      </div>
 
     </div>
 
-
-    <div class="hint">
-
-      دسترسی Token باید Fine-grained و فقط برای همین Repository باشد.
-      برای ذخیره و آپلود فایل‌ها:
-      Repository permissions → Contents → Read and write
-
-      <br>
-
-      توکن را برای هیچ‌کس ارسال نکن.
-
-    </div>
-
-
-    <button
-      class="primary"
-      id="saveSettings">
-
-      ذخیره تنظیمات و تست اتصال
-
-    </button>
-
-  </div>
-
-</section>
-
+  </section>
 
 </main>
 </div>
-</div>
 
+<div class="toast" id="toast"></div>
 
-<div
-  class="modal-wrap"
-  id="editorWrap">
+<!-- REQUEST MODAL -->
+<div class="modal" id="requestModal">
 
-  <div class="modal">
+  <div class="modal-box">
 
     <div class="modal-head">
-
-      <h3 id="editorTitle">
-        افزودن آگهی
-      </h3>
-
-      <button
-        class="close"
-        id="closeEditor">
-        ×
-      </button>
-
+      <h3>جزئیات درخواست</h3>
+      <button class="close" onclick="closeRequestModal()">×</button>
     </div>
 
-
-    <form
-      class="form"
-      id="listingForm">
-
-      <input
-        type="hidden"
-        id="editId">
-
-
-      <div class="section-title">
-        اطلاعات اصلی
-      </div>
-
-
-      <div class="grid">
-
-        <div class="group">
-
-          <label>
-            عنوان آگهی *
-          </label>
-
-          <input
-            class="input"
-            id="fTitle"
-            required
-            placeholder="مثلاً آپارتمان ۸۵ متری فاز ۲">
-
-        </div>
-
-
-        <div class="group">
-
-          <label>
-            نوع ملک *
-          </label>
-
-          <select
-            class="select"
-            id="fType"
-            required>
-
-            <option value="">
-              انتخاب کنید
-            </option>
-
-            <option value="apartment">
-              آپارتمان
-            </option>
-
-            <option value="villa">
-              ویلا
-            </option>
-
-            <option value="mehr">
-              مسکن مهر
-            </option>
-
-            <option value="land">
-              زمین
-            </option>
-
-          </select>
-
-        </div>
-
-
-        <div class="group">
-
-          <label>
-            فاز
-          </label>
-
-          <select
-            class="select"
-            id="fPhase">
-
-            <option value="">
-              بدون فاز
-            </option>
-
-          </select>
-
-        </div>
-
-
-        <div class="group">
-
-          <label>
-            متراژ *
-          </label>
-
-          <input
-            class="input"
-            id="fArea"
-            type="number"
-            min="1"
-            required
-            placeholder="مثلاً ۸۵">
-
-        </div>
-
-
-        <div class="group">
-
-          <label>
-            قیمت
-          </label>
-
-          <input
-            class="input"
-            id="fPrice"
-            placeholder="مثلاً ۳ میلیارد تومان">
-
-        </div>
-
-
-        <div class="group">
-
-          <label>
-            لوکیشن / آدرس *
-          </label>
-
-          <input
-            class="input"
-            id="fLocation"
-            required
-            placeholder="مثلاً فاز ۲، بلوار ...">
-
-        </div>
-
-      </div>
-
-
-      <div class="section-title">
-        مشخصات اختصاصی
-      </div>
-
-      <div
-        class="grid"
-        id="dynamicFormFields">
-      </div>
-
-
-      <div class="section-title">
-        امکانات
-      </div>
-
-      <div
-        class="checks"
-        id="amenities">
-      </div>
-
-
-      <div class="section-title">
-        توضیحات
-      </div>
-
-      <div class="grid">
-
-        <div class="group full">
-
-          <textarea
-            class="textarea"
-            id="fDescription"
-            placeholder="توضیحات کامل و شفاف درباره ملک...">
-          </textarea>
-
-        </div>
-
-      </div>
-
-
-      <div class="section-title">
-        عکس‌ها
-      </div>
-
-
-      <div class="dropzone">
-
-        <div style="font-size:11px;font-weight:800">
-          حداکثر ۸ عکس — بهتر است عکس‌ها افقی یا با کیفیت مناسب باشند.
-        </div>
-
-        <div
-          style="font-size:9px;color:#707989;margin:4px 0 10px">
-
-          حجم هر عکس حداکثر ۸ مگابایت
-
-        </div>
-
-
-        <label
-          class="choose"
-          for="photoInput">
-
-          انتخاب عکس‌ها
-
-        </label>
-
-
-        <input
-          id="photoInput"
-          type="file"
-          accept="image/jpeg,image/png,image/webp"
-          multiple>
-
-
-        <div
-          class="previews"
-          id="previews">
-        </div>
-
-      </div>
-
-
-      <div class="form-actions">
-
-        <button
-          type="button"
-          class="secondary"
-          id="cancelEditor">
-
-          انصراف
-
-        </button>
-
-
-        <button
-          type="submit"
-          class="primary"
-          id="saveListing">
-
-          ذخیره آگهی
-
-        </button>
-
-      </div>
-
-    </form>
+    <div id="requestModalContent"></div>
 
   </div>
 
 </div>
-
-
-<div
-  class="toast"
-  id="toast">
-</div>
-
 
 <script>
 'use strict';
 
-
-/* =========================
-   تنظیمات اصلی
-========================= */
+/* =========================================================
+   CONFIG
+========================================================= */
 
 const API='https://api.github.com';
 
 const PATH='data/listings.json';
-
+const REQUESTS_PATH='data/requests.json';
 const IMAGE_DIR='images/listings';
 
 const MAX_PHOTOS=8;
-
 const MAX_SIZE=8*1024*1024;
 
 const DEFAULT_OWNER='Amirpasha-melk';
-
 const DEFAULT_REPO='Amirpasha-melk';
-
 const DEFAULT_BRANCH='main';
+const DEFAULT_SITE='https://Amirpasha-melk.github.io/Amirpasha-melk';
 
-const DEFAULT_SITE=
-  'https://Amirpasha-melk.github.io/Amirpasha-melk';
-
-
-/* =========================
-   اطلاعات ثابت
-========================= */
-
-const phases=[
-  'فاز ۱',
-  'فاز ۲',
-  'فاز ۳',
-  'فاز ۴',
-  'فاز ۵',
-  'فاز ۶',
-  'فاز ۷',
-  'فاز ۸'
-];
-
-
-const typeFa={
-  apartment:'آپارتمان',
-  villa:'ویلا',
-  mehr:'مسکن مهر',
-  land:'زمین'
-};
-
-
-const amenityList=[
-  ['parking','پارکینگ'],
-  ['storage','انباری'],
-  ['elevator','آسانسور'],
-  ['balcony','بالکن'],
-  ['yard','حیاط'],
-  ['document','مدارک کامل']
-];
-
-
-const $=id=>document.getElementById(id);
-
+/* =========================================================
+   STATE
+========================================================= */
 
 const state={
   listings:[],
-  editing:null,
+  requests:[],
+  listingsSha:null,
+  requestsSha:null,
+  editingId:null,
   photos:[],
   pendingFiles:[],
-  saving:false
+  pendingPreviews:[]
 };
 
+/* =========================================================
+   HELPERS
+========================================================= */
 
-/* =========================
-   پیام
-========================= */
+function $(id){
+  return document.getElementById(id);
+}
 
-function toast(msg,ok=true){
-
+function toast(message,success=true){
   const el=$('toast');
-
-  el.textContent=msg;
-
-  el.style.background=
-    ok
-    ? 'var(--ink)'
-    : '#991b1b';
-
+  el.textContent=message;
+  el.style.background=success?'#111827':'#b42323';
   el.classList.add('show');
 
-  clearTimeout(window.__toast);
+  clearTimeout(window.__toastTimer);
 
-  window.__toast=
-    setTimeout(
-      ()=>el.classList.remove('show'),
-      4000
-    );
+  window.__toastTimer=setTimeout(()=>{
+    el.classList.remove('show');
+  },3000);
 }
 
-
-/* =========================
-   تنظیمات GitHub
-========================= */
+function setStatus(type,text){
+  const box=$('connectionStatus');
+  box.className='status '+type;
+  $('statusText').textContent=text;
+}
 
 function cfg(){
-
   return {
-
-    owner:
-      $('ghOwner').value.trim(),
-
-    repo:
-      $('ghRepo').value.trim(),
-
-    branch:
-      $('ghBranch').value.trim()
-      || DEFAULT_BRANCH,
-
-    token:
-      $('ghToken').value.trim(),
-
-    siteBase:
-      $('siteBase').value.trim()
-      .replace(/\/+$/,'')
-
+    owner:$('ghOwner').value.trim(),
+    repo:$('ghRepo').value.trim(),
+    branch:$('ghBranch').value.trim()||DEFAULT_BRANCH,
+    token:$('ghToken').value.trim(),
+    siteBase:$('siteBase').value.trim().replace(/\/+$/,'')
   };
-
 }
-
-
-function loadCfg(){
-
-  try{
-
-    const saved=
-      JSON.parse(
-        sessionStorage.getItem(
-          'amlak_admin_cfg'
-        ) || '{}'
-      );
-
-
-    $('ghOwner').value=
-      saved.owner
-      || DEFAULT_OWNER;
-
-
-    $('ghRepo').value=
-      saved.repo
-      || DEFAULT_REPO;
-
-
-    $('ghBranch').value=
-      saved.branch
-      || DEFAULT_BRANCH;
-
-
-    $('ghToken').value=
-      saved.token
-      || '';
-
-
-    $('siteBase').value=
-      saved.siteBase
-      || DEFAULT_SITE;
-
-
-  }catch{
-
-    $('ghOwner').value=DEFAULT_OWNER;
-
-    $('ghRepo').value=DEFAULT_REPO;
-
-    $('ghBranch').value=DEFAULT_BRANCH;
-
-    $('siteBase').value=DEFAULT_SITE;
-
-  }
-
-}
-
 
 function saveCfg(){
-
   const c=cfg();
 
-
-  if(!c.owner){
-
-    throw new Error(
-      'GitHub Username را وارد کن.'
-    );
-
-  }
-
-
-  if(!c.repo){
-
-    throw new Error(
-      'Repository را وارد کن.'
-    );
-
-  }
-
-
-  if(!c.token){
-
-    throw new Error(
-      'GitHub Token را وارد کن.'
-    );
-
-  }
-
-
-  sessionStorage.setItem(
-    'amlak_admin_cfg',
-    JSON.stringify(c)
-  );
-
+  localStorage.setItem('amp_gh_owner',c.owner);
+  localStorage.setItem('amp_gh_repo',c.repo);
+  localStorage.setItem('amp_gh_branch',c.branch);
+  localStorage.setItem('amp_gh_token',c.token);
+  localStorage.setItem('amp_site_base',c.siteBase);
 }
 
+function loadCfg(){
+  $('ghOwner').value=
+    localStorage.getItem('amp_gh_owner')||DEFAULT_OWNER;
 
-/* =========================
-   Header
-========================= */
+  $('ghRepo').value=
+    localStorage.getItem('amp_gh_repo')||DEFAULT_REPO;
+
+  $('ghBranch').value=
+    localStorage.getItem('amp_gh_branch')||DEFAULT_BRANCH;
+
+  $('ghToken').value=
+    localStorage.getItem('amp_gh_token')||'';
+
+  $('siteBase').value=
+    localStorage.getItem('amp_site_base')||DEFAULT_SITE;
+}
 
 function headers(){
-
   const c=cfg();
-
 
   return {
-
-    'Accept':
-      'application/vnd.github+json',
-
-    'Authorization':
-      'Bearer '+c.token,
-
-    'X-GitHub-Api-Version':
-      '2022-11-28'
-
+    'Accept':'application/vnd.github+json',
+    'Authorization':'Bearer '+c.token,
+    'X-GitHub-Api-Version':'2022-11-28'
   };
-
 }
-
-
-/* =========================
-   آدرس فایل Repository
-========================= */
-
-function repoUrl(path){
-
-  const c=cfg();
-
-
-  return API+
-    '/repos/'+
-    encodeURIComponent(c.owner)+
-    '/'+
-    encodeURIComponent(c.repo)+
-    '/contents/'+
-    path
-      .split('/')
-      .map(encodeURIComponent)
-      .join('/');
-
-}
-
-
-/* =========================
-   API مخصوص خود Repository
-========================= */
 
 function repositoryUrl(){
-
   const c=cfg();
-
 
   return API+
     '/repos/'+
     encodeURIComponent(c.owner)+
     '/'+
     encodeURIComponent(c.repo);
-
 }
 
+/* =========================================================
+   GITHUB API
+========================================================= */
 
 async function repositoryApi(options={}){
-
-  const response=
-    await fetch(
-      repositoryUrl(),
-      {
-        ...options,
-
-        headers:{
-          ...headers(),
-          ...(options.headers||{})
-        }
-
-      }
-    );
-
+  const response=await fetch(repositoryUrl(),{
+    ...options,
+    headers:{
+      ...headers(),
+      ...(options.headers||{})
+    }
+  });
 
   let data=null;
 
-
   try{
-
     data=await response.json();
-
   }catch{}
-
 
   if(!response.ok){
 
     let message=
-      data?.message
-      || ('GitHub API error '+response.status);
-
+      data?.message||
+      ('GitHub API error '+response.status);
 
     if(response.status===401){
-
-      message=
-        'Token نامعتبر است یا منقضی شده است.';
-
+      message='Token نامعتبر است یا منقضی شده است.';
     }
-
 
     if(response.status===403){
-
-      message=
-        'GitHub دسترسی Token را رد کرد. دسترسی Token را بررسی کن.';
-
+      message='GitHub دسترسی Token را رد کرد. دسترسی Token را بررسی کن.';
     }
-
 
     if(response.status===404){
-
-      message=
-        'Repository پیدا نشد یا Token به این Repository دسترسی ندارد.';
-
+      message='Repository پیدا نشد یا Token به این Repository دسترسی ندارد.';
     }
 
-
     throw new Error(message);
-
   }
 
-
   return data;
-
 }
 
-
-/* =========================
-   API فایل‌ها
-========================= */
-
 async function api(path,options={}){
+  const c=cfg();
 
-  const response=
-    await fetch(
-      repoUrl(path),
-      {
-        ...options,
+  const url=
+    API+
+    '/repos/'+
+    encodeURIComponent(c.owner)+
+    '/'+
+    encodeURIComponent(c.repo)+
+    '/contents/'+
+    path.replace(/^\/+/,'')+
+    (options.query||'');
 
-        headers:{
-          ...headers(),
-          ...(options.headers||{})
-        }
+  const cleanOptions={...options};
+  delete cleanOptions.query;
 
-      }
-    );
-
+  const response=await fetch(url,{
+    ...cleanOptions,
+    headers:{
+      ...headers(),
+      ...(cleanOptions.headers||{})
+    }
+  });
 
   let data=null;
 
-
   try{
-
     data=await response.json();
-
   }catch{}
-
 
   if(!response.ok){
 
-    throw new Error(
-      data?.message
-      || ('GitHub API error '+response.status)
-    );
+    let message=
+      data?.message||
+      ('GitHub API error '+response.status);
 
+    if(response.status===401){
+      message='Token نامعتبر است یا منقضی شده است.';
+    }
+
+    if(response.status===403){
+      message='GitHub دسترسی Token را رد کرد.';
+    }
+
+    if(response.status===404){
+      message='File not found: '+path;
+    }
+
+    throw new Error(message);
   }
 
-
   return data;
-
 }
 
+/* =========================================================
+   BASE64
+========================================================= */
 
-/* =========================
-   Base64
-========================= */
+function textToBase64(text){
 
-function bytesToBase64(bytes){
+  const bytes=new TextEncoder().encode(text);
 
   let binary='';
 
   const chunk=0x8000;
 
-
-  for(
-    let i=0;
-    i<bytes.length;
-    i+=chunk
-  ){
-
+  for(let i=0;i<bytes.length;i+=chunk){
     binary+=String.fromCharCode(
-      ...bytes.subarray(
-        i,
-        i+chunk
-      )
+      ...bytes.subarray(i,i+chunk)
     );
-
   }
-
 
   return btoa(binary);
-
 }
 
+function base64ToText(base64){
 
-function base64ToText(b64){
+  const clean=base64.replace(/\n/g,'');
 
-  const bin=
-    atob(
-      b64.replace(/\n/g,'')
-    );
+  const binary=atob(clean);
 
-
-  const bytes=
-    new Uint8Array(
-      bin.length
-    );
-
-
-  for(
-    let i=0;
-    i<bin.length;
-    i++
-  ){
-
-    bytes[i]=
-      bin.charCodeAt(i);
-
-  }
-
-
-  return new TextDecoder()
-    .decode(bytes);
-
-}
-
-
-function textToBase64(text){
-
-  return bytesToBase64(
-    new TextEncoder()
-      .encode(text)
+  const bytes=Uint8Array.from(
+    binary,
+    c=>c.charCodeAt(0)
   );
 
+  return new TextDecoder().decode(bytes);
 }
 
-
-/* =========================
-   Listings
-========================= */
+/* =========================================================
+   READ LISTINGS
+========================================================= */
 
 async function readListings(){
 
-  const data=
-    await api(
-      PATH+
-      '?ref='+
-      encodeURIComponent(
-        cfg().branch
-      )
-    );
-
-
-  const text=
-    base64ToText(
-      data.content
-    );
-
-
-  const parsed=
-    JSON.parse(text);
-
-
-  return {
-
-    listings:
-      Array.isArray(
-        parsed.listings
-      )
-      ? parsed.listings
-      : [],
-
-    sha:
-      data.sha
-
-  };
-
-}
-
-
-async function writeListings(
-  listings,
-  sha,
-  message
-){
-
-  const payload={
-    listings
-  };
-
-
-  return api(
-    PATH,
-    {
-
-      method:'PUT',
-
-      headers:{
-        'Content-Type':
-          'application/json'
-      },
-
-      body:
-        JSON.stringify({
-
-          message,
-
-          content:
-            textToBase64(
-              JSON.stringify(
-                payload,
-                null,
-                2
-              )
-            ),
-
-          branch:
-            cfg().branch,
-
-          sha
-
-        })
-
-    }
-  );
-
-}
-
-
-/* =========================
-   عکس
-========================= */
-
-async function getImageSha(path){
-
   try{
 
-    return (
-      await api(
-        path+
-        '?ref='+
-        encodeURIComponent(
-          cfg().branch
-        )
-      )
-    ).sha;
-
-  }catch{
-
-    return null;
-
-  }
-
-}
-
-
-async function uploadImage(file){
-
-  if(
-    file.size >
-    MAX_SIZE
-  ){
-
-    throw new Error(
-      'حجم یکی از عکس‌ها بیشتر از ۸ مگابایت است.'
-    );
-
-  }
-
-
-  const ext=
-    (
-      file.name
-        .split('.')
-        .pop()
-      || 'jpg'
-    )
-    .toLowerCase()
-    .replace(
-      /[^a-z0-9]/g,
-      ''
-    )
-    || 'jpg';
-
-
-  const name=
-    'property-'+
-    Date.now()+
-    '-'+
-    Math.random()
-      .toString(36)
-      .slice(2,8)+
-    '.'+
-    ext;
-
-
-  const path=
-    IMAGE_DIR+
-    '/'+
-    name;
-
-
-  const buf=
-    new Uint8Array(
-      await file.arrayBuffer()
-    );
-
-
-  await api(
-    path,
-    {
-
-      method:'PUT',
-
-      headers:{
-        'Content-Type':
-          'application/json'
-      },
-
-      body:
-        JSON.stringify({
-
-          message:
-            'Add property image '+name,
-
-          content:
-            bytesToBase64(buf),
-
-          branch:
-            cfg().branch
-
-        })
-
-    }
-  );
-
-
-  const base=
-    cfg().siteBase
-    ||
-    (
-      'https://'+
-      cfg().owner+
-      '.github.io/'+
-      cfg().repo
-    );
-
-
-  return base+'/'+path;
-
-}
-
-
-async function deleteImageByUrl(url){
-
-  const base=
-    cfg().siteBase
-    || '';
-
-
-  if(
-    !url ||
-    !base ||
-    !url.startsWith(
-      base+'/'
-    )
-  ){
-
-    return;
-
-  }
-
-
-  const path=
-    url.slice(
-      (base+'/').length
-    );
-
-
-  if(
-    !path.startsWith(
-      IMAGE_DIR+'/'
-    )
-  ){
-
-    return;
-
-  }
-
-
-  try{
-
-    const data=
-      await api(
-        path+
-        '?ref='+
-        encodeURIComponent(
-          cfg().branch
-        )
-      );
-
-
-    await api(
-      path,
+    const data=await api(
+      PATH,
       {
-
-        method:'DELETE',
-
-        headers:{
-          'Content-Type':
-            'application/json'
-        },
-
-        body:
-          JSON.stringify({
-
-            message:
-              'Delete property image',
-
-            sha:
-              data.sha,
-
-            branch:
-              cfg().branch
-
-          })
-
+        query:'?ref='+encodeURIComponent(cfg().branch)
       }
     );
 
-  }catch{}
+    const text=base64ToText(data.content);
 
+    const parsed=JSON.parse(text);
+
+    return {
+      listings:
+        Array.isArray(parsed.listings)
+        ?parsed.listings
+        :[],
+      sha:data.sha
+    };
+
+  }catch(error){
+
+    /*
+      مهم:
+      اگر listings.json هنوز ساخته نشده باشد،
+      آن را به عنوان دیتاست خالی در نظر می‌گیریم.
+      بعداً هنگام ذخیره اولین آگهی ساخته خواهد شد.
+    */
+
+    if(
+      String(error.message||'').includes('File not found')
+    ){
+      return {
+        listings:[],
+        sha:null
+      };
+    }
+
+    throw error;
+  }
 }
 
+/* =========================================================
+   READ REQUESTS
+========================================================= */
 
-/* =========================
-   وضعیت اتصال
-========================= */
+async function readRequests(){
 
-function setStatus(
-  kind,
-  text
-){
+  try{
 
-  $('statusDot').className=
-    'status-dot '+
-    (kind||'');
+    const data=await api(
+      REQUESTS_PATH,
+      {
+        query:'?ref='+encodeURIComponent(cfg().branch)
+      }
+    );
 
+    const text=base64ToText(data.content);
 
-  $('statusText').textContent=
-    text;
+    const parsed=JSON.parse(text);
 
+    return {
+      requests:
+        Array.isArray(parsed.requests)
+        ?parsed.requests
+        :[],
+      sha:data.sha
+    };
+
+  }catch(error){
+
+    /*
+      اگر requests.json هنوز ساخته نشده،
+      طبیعی است که هیچ درخواستی ثبت نشده باشد.
+    */
+
+    if(
+      String(error.message||'').includes('File not found')
+    ){
+      return {
+        requests:[],
+        sha:null
+      };
+    }
+
+    throw error;
+  }
 }
 
+/* =========================================================
+   WRITE JSON
+========================================================= */
 
-/* =========================
-   تست واقعی GitHub
-========================= */
+async function writeListings(listings,sha=null){
+
+  const text=
+    JSON.stringify(
+      {
+        listings
+      },
+      null,
+      2
+    );
+
+  const body={
+    message:
+      state.editingId
+      ?'Update listing'
+      :'Add listing',
+
+    content:textToBase64(text),
+
+    branch:cfg().branch
+  };
+
+  /*
+    هنگام ساخت فایل جدید SHA نباید ارسال شود.
+  */
+
+  if(sha){
+    body.sha=sha;
+  }
+
+  const data=await api(
+    PATH,
+    {
+      method:'PUT',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify(body)
+    }
+  );
+
+  return data.sha;
+}
+
+async function writeRequests(requests,sha=null){
+
+  const text=
+    JSON.stringify(
+      {
+        requests
+      },
+      null,
+      2
+    );
+
+  const body={
+    message:'Update customer requests',
+    content:textToBase64(text),
+    branch:cfg().branch
+  };
+
+  if(sha){
+    body.sha=sha;
+  }
+
+  const data=await api(
+    REQUESTS_PATH,
+    {
+      method:'PUT',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify(body)
+    }
+  );
+
+  return data.sha;
+}
+
+/* =========================================================
+   CONNECTION
+========================================================= */
 
 async function testConnection(){
 
@@ -2286,53 +1374,31 @@ async function testConnection(){
 
     saveCfg();
 
+    if(!cfg().token){
+      throw new Error('ابتدا GitHub Token را وارد کن.');
+    }
+
     setStatus(
-      '',
+      'loading',
       'در حال اتصال به GitHub...'
     );
 
+    const repo=await repositoryApi();
 
-    /*
-      مهم:
-      اینجا دیگر data/listings.json
-      بررسی نمی‌شود.
-
-      اول خود Repository بررسی می‌شود.
-    */
-
-    const repo=
-      await repositoryApi();
-
-
-    if(
-      !repo ||
-      !repo.full_name
-    ){
-
+    if(!repo||!repo.full_name){
       throw new Error(
         'پاسخ معتبر از GitHub دریافت نشد.'
       );
-
     }
-
 
     setStatus(
       'ok',
       'اتصال موفق'
     );
 
-
     toast(
       'اتصال به Repository با موفقیت برقرار شد.'
     );
-
-
-    /*
-      بعد از موفقیت اتصال،
-      فایل listings را می‌خوانیم.
-      اگر فایل وجود نداشته باشد،
-      خود اتصال GitHub همچنان موفق است.
-    */
 
     await loadData();
 
@@ -2343,455 +1409,370 @@ async function testConnection(){
       'اتصال ناموفق'
     );
 
-
     toast(
-      error.message,
+      error.message||'خطا در اتصال',
       false
     );
-
   }
-
 }
 
-
-/* =========================
-   بارگذاری داده
-========================= */
+/* =========================================================
+   LOAD DATA
+========================================================= */
 
 async function loadData(){
 
   try{
 
-    saveCfg();
-
-
-    const r=
-      await readListings();
-
-
-    state.listings=
-      r.listings.map(
-        normalize
+    if(!cfg().token){
+      setStatus(
+        '',
+        'توکن وارد نشده'
       );
-
-
-    render();
-
-
-  }catch(e){
-
-    if(
-      /404/.test(
-        e.message
-      )
-    ){
-
-      toast(
-        'اتصال GitHub موفق است، اما فایل data/listings.json پیدا نشد. آن را در Repository بساز.',
-        false
-      );
-
-    }else{
-
-      toast(
-        'خواندن آگهی‌ها انجام نشد: '+
-        e.message,
-        false
-      );
-
+      return;
     }
 
+    setStatus(
+      'loading',
+      'در حال خواندن اطلاعات...'
+    );
 
-    render();
+    const [
+      listingData,
+      requestData
+    ]=await Promise.all([
+      readListings(),
+      readRequests()
+    ]);
 
+    state.listings=listingData.listings;
+    state.listingsSha=listingData.sha;
+
+    state.requests=requestData.requests;
+    state.requestsSha=requestData.sha;
+
+    renderAll();
+
+    setStatus(
+      'ok',
+      'اتصال موفق'
+    );
+
+  }catch(error){
+
+    setStatus(
+      'bad',
+      'خواندن اطلاعات ناموفق'
+    );
+
+    toast(
+      error.message||
+      'خواندن اطلاعات انجام نشد.',
+      false
+    );
   }
-
 }
 
+/* =========================================================
+   NAVIGATION
+========================================================= */
 
-/* =========================
-   نرمال‌سازی
-========================= */
+const pageTitles={
+  dashboard:'داشبورد',
+  listings:'همه آگهی‌ها',
+  requests:'درخواست‌های مشتریان',
+  add:'افزودن آگهی',
+  settings:'اتصال و تنظیمات'
+};
 
-function normalize(p){
+document.querySelectorAll('.nav button')
+.forEach(button=>{
 
-  return {
+  button.addEventListener(
+    'click',
+    ()=>{
+      showPage(button.dataset.page);
+    }
+  );
 
-    id:
-      p.id
-      ||
-      crypto.randomUUID(),
+});
 
-    title:
-      p.title
-      ||
-      'بدون عنوان',
+function showPage(page){
 
-    type:
-      p.property_type
-      ||
-      p.type
-      ||
-      'apartment',
+  document
+    .querySelectorAll('.page')
+    .forEach(p=>{
+      p.classList.remove('active');
+    });
 
-    phase:
-      p.phase
-      ||
-      '',
+  const target=$('page-'+page);
 
-    location:
-      p.location
-      ||
-      '',
+  if(target){
+    target.classList.add('active');
+  }
 
-    area:
-      Number(p.area)
-      ||
-      0,
+  document
+    .querySelectorAll('.nav button')
+    .forEach(button=>{
+      button.classList.toggle(
+        'active',
+        button.dataset.page===page
+      );
+    });
 
-    price:
-      p.price
-      ||
-      'تماس بگیرید',
+  $('pageTitle').textContent=
+    pageTitles[page]||'پنل مدیریت';
 
-    description:
-      p.description
-      ||
-      '',
+  if(page==='dashboard'){
+    renderDashboard();
+  }
 
-    photos:
-      Array.isArray(p.photos)
-      ? p.photos
-      : [],
+  if(page==='listings'){
+    renderListings();
+  }
 
-    created_at:
-      p.created_at
-      ||
-      new Date().toISOString(),
+  if(page==='requests'){
+    renderRequests();
+  }
+}
 
-    specs:
-      Array.isArray(p.specs)
-      ? p.specs
-      : [],
+/* =========================================================
+   CATEGORY
+========================================================= */
 
-    bedrooms:
-      p.bedrooms
-      ||
-      '',
+function categoryLabel(category){
 
-    floor:
-      p.floor
-      ||
-      '',
-
-    buildingArea:
-      p.buildingArea
-      ||
-      '',
-
-    villaType:
-      p.villaType
-      ||
-      '',
-
-    usage:
-      p.usage
-      ||
-      '',
-
-    heating:
-      p.heating
-      ||
-      '',
-
-    cooling:
-      p.cooling
-      ||
-      '',
-
-    year:
-      p.year
-      ||
-      '',
-
-    documents:
-      p.documents
-      ||
-      '',
-
-    amenities:
-      Array.isArray(
-        p.amenities
-      )
-      ? p.amenities
-      : []
-
+  const map={
+    apartment:'آپارتمان',
+    villa:'ویلا',
+    'maskan-mehr':'مسکن مهر',
+    land:'زمین'
   };
 
+  return map[category]||category||'—';
 }
 
+/* =========================================================
+   DATE
+========================================================= */
 
-/* =========================
-   جستجو و مرتب‌سازی
-========================= */
+function formatDate(value){
 
-function priceNum(x){
+  if(!value) return '—';
 
-  return Number(
-    String(x||'')
-      .replace(
-        /[^\d.]/g,
-        ''
+  try{
+
+    return new Intl.DateTimeFormat(
+      'fa-IR',
+      {
+        dateStyle:'medium',
+        timeStyle:'short'
+      }
+    ).format(new Date(value));
+
+  }catch{
+    return value;
+  }
+}
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+function renderDashboard(){
+
+  const published=
+    state.listings.filter(
+      x=>x.published===true||x.published==='true'
+    ).length;
+
+  $('statListings').textContent=
+    state.listings.length;
+
+  $('statPending').textContent=
+    state.requests.filter(
+      x=>(x.status||'pending')==='pending'
+    ).length;
+
+  $('statPublished').textContent=
+    published;
+
+  $('statUnpublished').textContent=
+    state.listings.length-published;
+
+  const latest=
+    [...state.listings]
+      .sort(
+        (a,b)=>
+          new Date(b.createdAt||0)-
+          new Date(a.createdAt||0)
       )
-  ) || 0;
+      .slice(0,5);
 
+  const box=$('dashboardListings');
+
+  if(!latest.length){
+
+    box.innerHTML=
+      '<div class="empty">هنوز آگهی‌ای ثبت نشده است.</div>';
+
+  }else{
+
+    box.innerHTML=
+      latest.map(item=>`
+
+        <div class="list-card" style="margin-bottom:9px">
+
+          <h4>${escapeHtml(item.title||'بدون عنوان')}</h4>
+
+          <div class="list-meta">
+            <span>${categoryLabel(item.category)}</span>
+            <span>•</span>
+            <span>${escapeHtml(item.area||'—')}</span>
+            <span>•</span>
+            <span>${escapeHtml(item.price||'قیمت توافقی')}</span>
+          </div>
+
+        </div>
+
+      `).join('');
+  }
+
+  const requests=
+    [...state.requests]
+      .sort(
+        (a,b)=>
+          new Date(b.createdAt||0)-
+          new Date(a.createdAt||0)
+      )
+      .slice(0,5);
+
+  const requestBox=$('dashboardRequests');
+
+  if(!requests.length){
+
+    requestBox.innerHTML=
+      '<div class="empty">درخواستی ثبت نشده است.</div>';
+
+  }else{
+
+    requestBox.innerHTML=
+      requests.map(item=>`
+
+        <div class="list-card" style="margin-bottom:9px">
+
+          <h4>${escapeHtml(
+            item.title||
+            item.name||
+            'درخواست ملک'
+          )}</h4>
+
+          <div class="list-meta">
+            <span>${requestStatus(item.status)}</span>
+            <span>•</span>
+            <span>${escapeHtml(item.phone||'بدون شماره')}</span>
+          </div>
+
+        </div>
+
+      `).join('');
+  }
 }
 
+/* =========================================================
+   LISTINGS
+========================================================= */
 
-function filtered(){
+function renderListings(){
 
-  let a=
-    [...state.listings];
+  const box=$('listingsContainer');
 
+  if(!state.listings.length){
 
-  const q=
-    $('search')
-    ?.value
-    .trim()
-    .toLowerCase()
-    || '';
-
-
-  const t=
-    $('filterType')
-    ?.value
-    || '';
-
-
-  const ph=
-    $('filterPhase')
-    ?.value
-    || '';
-
-
-  const so=
-    $('filterSort')
-    ?.value
-    || 'new';
-
-
-  if(q){
-
-    a=
-      a.filter(
-        p=>
-          (
-            p.title+
-            ' '+
-            p.location+
-            ' '+
-            p.phase+
-            ' '+
-            (
-              typeFa[p.type]
-              || ''
-            )
-          )
-          .toLowerCase()
-          .includes(q)
-      );
-
-  }
-
-
-  if(t){
-
-    a=
-      a.filter(
-        p=>p.type===t
-      );
-
-  }
-
-
-  if(ph){
-
-    a=
-      a.filter(
-        p=>p.phase===ph
-      );
-
-  }
-
-
-  if(
-    so==='old'
-  ){
-
-    a.sort(
-      (x,y)=>
-        new Date(
-          x.created_at
-        )
-        -
-        new Date(
-          y.created_at
-        )
-    );
-
-  }
-
-  else if(
-    so==='cheap'
-  ){
-
-    a.sort(
-      (x,y)=>
-        priceNum(x.price)
-        -
-        priceNum(y.price)
-    );
-
-  }
-
-  else if(
-    so==='expensive'
-  ){
-
-    a.sort(
-      (x,y)=>
-        priceNum(y.price)
-        -
-        priceNum(x.price)
-    );
-
-  }
-
-  else{
-
-    a.sort(
-      (x,y)=>
-        new Date(
-          y.created_at
-        )
-        -
-        new Date(
-          x.created_at
-        )
-    );
-
-  }
-
-
-  return a;
-
-}
-
-
-/* =========================
-   کارت
-========================= */
-
-function card(p){
-
-  const img=
-    p.photos[0]
-    ||
-    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=80';
-
-
-  const specs=[];
-
-
-  if(p.area)
-    specs.push(
-      p.area+' متر'
-    );
-
-
-  if(p.bedrooms)
-    specs.push(
-      p.bedrooms+' خواب'
-    );
-
-
-  if(p.floor)
-    specs.push(
-      'طبقه '+p.floor
-    );
-
-
-  if(p.phase)
-    specs.push(
-      p.phase
-    );
-
-
-  return `
-    <article class="card">
-
-      <div class="card-img">
-
-        <img
-          src="${esc(img)}"
-          loading="lazy"
-          alt="${esc(p.title)}">
-
-        <span class="badge">
-          ${esc(
-            typeFa[p.type]
-            || p.type
-          )}
-        </span>
-
+    box.innerHTML=`
+      <div class="empty">
+        هنوز آگهی‌ای وجود ندارد.<br><br>
+        می‌توانی اولین آگهی را اضافه کنی.
       </div>
+    `;
 
+    return;
+  }
 
-      <div class="card-content">
+  const sorted=
+    [...state.listings]
+      .sort(
+        (a,b)=>
+          new Date(b.createdAt||0)-
+          new Date(a.createdAt||0)
+      );
 
-        <div class="card-title">
-          ${esc(p.title)}
+  box.innerHTML=
+    sorted.map(item=>`
+
+      <div class="list-card" style="margin-bottom:12px">
+
+        <div class="section-title">
+
+          <div>
+
+            <h4>
+              ${escapeHtml(item.title||'بدون عنوان')}
+            </h4>
+
+            <div class="list-meta">
+
+              <span>
+                ${categoryLabel(item.category)}
+              </span>
+
+              <span>•</span>
+
+              <span>
+                ${escapeHtml(item.area||'—')}
+              </span>
+
+              <span>•</span>
+
+              <span>
+                ${escapeHtml(item.price||'قیمت توافقی')}
+              </span>
+
+              <span>•</span>
+
+              <span>
+                ${item.published===true||item.published==='true'
+                  ?'<span class="badge published">منتشرشده</span>'
+                  :'<span class="badge pending">منتشرنشده</span>'
+                }
+              </span>
+
+            </div>
+
+          </div>
+
         </div>
 
-        <div class="card-location">
-          ${esc(p.location)}
-        </div>
-
-        <div class="card-price">
-          ${esc(p.price)}
-        </div>
-
-        <div class="card-meta">
-
-          ${
-            specs
-              .map(
-                x=>
-                  `<span class="chip">${esc(x)}</span>`
-              )
-              .join('')
-          }
-
-        </div>
-
-
-        <div class="card-actions">
+        <div class="list-actions">
 
           <button
-            class="small-btn"
-            onclick="editListing('${esc(p.id)}')">
+            class="btn btn-secondary"
+            onclick="editListing('${escapeAttr(item.id)}')">
             ویرایش
           </button>
 
           <button
-            class="small-btn"
-            onclick="viewSiteListing('${esc(p.id)}')">
-            نمایش
+            class="btn btn-gold"
+            onclick="togglePublished('${escapeAttr(item.id)}')">
+            ${item.published===true||item.published==='true'
+              ?'لغو انتشار'
+              :'انتشار'
+            }
           </button>
 
           <button
-            class="small-btn danger"
-            onclick="removeListing('${esc(p.id)}')">
+            class="btn btn-danger"
+            onclick="deleteListing('${escapeAttr(item.id)}')">
             حذف
           </button>
 
@@ -2799,1307 +1780,1089 @@ function card(p){
 
       </div>
 
-    </article>
-  `;
-
+    `).join('');
 }
 
+/* =========================================================
+   REQUESTS
+========================================================= */
 
-/* =========================
-   Render
-========================= */
+function requestStatus(status){
 
-function render(){
+  if(status==='approved'){
+    return '<span class="badge approved">تأیید شده</span>';
+  }
 
-  const a=
-    filtered();
+  if(status==='rejected'){
+    return '<span class="badge rejected">رد شده</span>';
+  }
 
+  if(status==='published'){
+    return '<span class="badge published">تبدیل به آگهی شده</span>';
+  }
 
-  $('allCards').innerHTML=
-    a.length
-    ? a.map(card).join('')
-    : `
-      <div
-        class="empty"
-        style="grid-column:1/-1">
-        هیچ آگهی‌ای پیدا نشد.
+  return '<span class="badge pending">در انتظار بررسی</span>';
+}
+
+function renderRequests(){
+
+  const box=$('requestsContainer');
+
+  if(!state.requests.length){
+
+    box.innerHTML=`
+      <div class="empty">
+        هنوز هیچ درخواست مشتری ثبت نشده است.
       </div>
     `;
 
+    return;
+  }
 
-  const recent=
-    [...state.listings]
+  const sorted=
+    [...state.requests]
       .sort(
-        (x,y)=>
-          new Date(
-            y.created_at
-          )
-          -
-          new Date(
-            x.created_at
-          )
-      )
-      .slice(0,10);
+        (a,b)=>
+          new Date(b.createdAt||0)-
+          new Date(a.createdAt||0)
+      );
 
+  box.innerHTML=
+    sorted.map(item=>`
 
-  $('recentCards').innerHTML=
-    recent.length
-    ? recent.map(card).join('')
-    : `
-      <div
-        class="empty"
-        style="grid-column:1/-1">
-        هنوز آگهی‌ای ثبت نشده است.
+      <div class="list-card" style="margin-bottom:14px">
+
+        <div class="section-title">
+
+          <div>
+
+            <h4>
+              ${escapeHtml(
+                item.title||
+                item.name||
+                'درخواست ثبت ملک'
+              )}
+            </h4>
+
+            <div class="list-meta">
+              <span>${requestStatus(item.status)}</span>
+              <span>•</span>
+              <span>
+                ${escapeHtml(item.name||'بدون نام')}
+              </span>
+              <span>•</span>
+              <span>
+                ${escapeHtml(item.phone||'بدون شماره')}
+              </span>
+            </div>
+
+          </div>
+
+          <span class="muted">
+            ${formatDate(item.createdAt)}
+          </span>
+
+        </div>
+
+        <div class="request-detail">
+
+          ${item.category
+            ?'<div><b>دسته:</b> '+escapeHtml(categoryLabel(item.category))+'</div>'
+            :''}
+
+          ${item.area
+            ?'<div><b>متراژ:</b> '+escapeHtml(item.area)+'</div>'
+            :''}
+
+          ${item.phase
+            ?'<div><b>فاز:</b> '+escapeHtml(item.phase)+'</div>'
+            :''}
+
+          ${item.price
+            ?'<div><b>قیمت:</b> '+escapeHtml(item.price)+'</div>'
+            :''}
+
+          ${item.description
+            ?'<div><b>توضیحات:</b><br>'+escapeHtml(item.description)+'</div>'
+            :''}
+
+        </div>
+
+        <div class="list-actions">
+
+          <button
+            class="btn btn-secondary"
+            onclick="viewRequest('${escapeAttr(item.id)}')">
+            جزئیات کامل
+          </button>
+
+          ${
+            (item.status||'pending')==='pending'
+            ?`
+              <button
+                class="btn btn-success"
+                onclick="approveRequest('${escapeAttr(item.id)}')">
+                تأیید درخواست
+              </button>
+
+              <button
+                class="btn btn-danger"
+                onclick="rejectRequest('${escapeAttr(item.id)}')">
+                رد درخواست
+              </button>
+            `
+            :''
+          }
+
+          ${
+            item.status==='approved'
+            ?`
+              <button
+                class="btn btn-primary"
+                onclick="convertRequestToListing('${escapeAttr(item.id)}')">
+                تبدیل به آگهی
+              </button>
+            `
+            :''
+          }
+
+        </div>
+
       </div>
-    `;
 
-
-  $('statTotal').textContent=
-    state.listings.length
-      .toLocaleString('fa-IR');
-
-
-  $('statApartment').textContent=
-    state.listings
-      .filter(
-        x=>x.type==='apartment'
-      )
-      .length
-      .toLocaleString('fa-IR');
-
-
-  $('statVilla').textContent=
-    state.listings
-      .filter(
-        x=>x.type==='villa'
-      )
-      .length
-      .toLocaleString('fa-IR');
-
-
-  $('statOther').textContent=
-    state.listings
-      .filter(
-        x=>
-          x.type==='mehr'
-          ||
-          x.type==='land'
-      )
-      .length
-      .toLocaleString('fa-IR');
-
+    `).join('');
 }
 
+/* =========================================================
+   REQUEST ACTIONS
+========================================================= */
 
-/* =========================
-   جلوگیری از HTML Injection
-========================= */
+async function updateRequestStatus(id,status){
 
-function esc(s){
-
-  return String(
-    s ?? ''
-  ).replace(
-    /[&<>"']/g,
-    m=>
-      ({
-        '&':'&amp;',
-        '<':'&lt;',
-        '>':'&gt;',
-        '"':'&quot;',
-        "'":'&#039;'
-      }[m])
-  );
-
-}
-
-
-/* =========================
-   صفحات
-========================= */
-
-function showPage(name){
-
-  [
-    'dashboard',
-    'listings',
-    'settings'
-  ]
-  .forEach(
-    x=>
-      $('page-'+x)
-        .classList
-        .toggle(
-          'hidden',
-          x!==name
-        )
-  );
-
-
-  document
-    .querySelectorAll(
-      '.nav button[data-page]'
-    )
-    .forEach(
-      b=>
-        b.classList.toggle(
-          'active',
-          b.dataset.page===name
-        )
+  const index=
+    state.requests.findIndex(
+      x=>String(x.id)===String(id)
     );
 
-
-  $('sidebar')
-    .classList
-    .remove('open');
-
-
-  if(
-    name==='listings'
-  ){
-
-    render();
-
+  if(index<0){
+    throw new Error('درخواست پیدا نشد.');
   }
 
+  state.requests[index].status=status;
+
+  state.requests[index].reviewedAt=
+    new Date().toISOString();
+
+  state.requestsSha=
+    await writeRequests(
+      state.requests,
+      state.requestsSha
+    );
+
+  renderAll();
 }
 
-
-/* =========================
-   فازها
-========================= */
-
-function fillPhases(){
-
-  $('fPhase').innerHTML=
-    '<option value="">بدون فاز</option>'+
-    phases
-      .map(
-        x=>
-          `<option value="${x}">${x}</option>`
-      )
-      .join('');
-
-
-  $('filterPhase').innerHTML=
-    '<option value="">همه فازها</option>'+
-    phases
-      .map(
-        x=>
-          `<option value="${x}">${x}</option>`
-      )
-      .join('');
-
-}
-
-
-/* =========================
-   فیلدهای اختصاصی
-========================= */
-
-function renderDynamic(
-  type,
-  values={}
-){
-
-  const fields=[];
-
-
-  if(
-    type==='apartment'
-    ||
-    type==='mehr'
-  ){
-
-    fields.push(
-
-      [
-        'تعداد خواب',
-        'bedrooms',
-        'مثلاً ۲',
-        values.bedrooms||''
-      ],
-
-      [
-        'طبقه',
-        'floor',
-        'مثلاً ۳',
-        values.floor||''
-      ],
-
-      [
-        'گرمایش',
-        'heating',
-        'مثلاً پکیج',
-        values.heating||''
-      ],
-
-      [
-        'سرمایش',
-        'cooling',
-        'مثلاً کولر',
-        values.cooling||''
-      ],
-
-      [
-        'سال ساخت',
-        'year',
-        'مثلاً ۱۴۰۲',
-        values.year||''
-      ],
-
-      [
-        'مدارک',
-        'documents',
-        'مثلاً سند تک‌برگ',
-        values.documents||''
-      ]
-
-    );
-
-  }
-
-
-  else if(
-    type==='villa'
-  ){
-
-    fields.push(
-
-      [
-        'متراژ بنا',
-        'buildingArea',
-        'مثلاً ۱۸۰',
-        values.buildingArea||''
-      ],
-
-      [
-        'تعداد خواب',
-        'bedrooms',
-        'مثلاً ۳',
-        values.bedrooms||''
-      ],
-
-      [
-        'سال ساخت',
-        'year',
-        'مثلاً ۱۴۰۱',
-        values.year||''
-      ],
-
-      [
-        'نوع ویلا',
-        'villaType',
-        'مثلاً مستقل',
-        values.villaType||''
-      ],
-
-      [
-        'مدارک',
-        'documents',
-        'مثلاً سند تک‌برگ',
-        values.documents||''
-      ]
-
-    );
-
-  }
-
-
-  else if(
-    type==='land'
-  ){
-
-    fields.push(
-
-      [
-        'کاربری',
-        'usage',
-        'مثلاً مسکونی',
-        values.usage||''
-      ],
-
-      [
-        'مدارک',
-        'documents',
-        'مثلاً سند',
-        values.documents||''
-      ]
-
-    );
-
-  }
-
-
-  $('dynamicFormFields').innerHTML=
-    fields
-      .map(
-        f=>
-          `
-          <div class="group">
-
-            <label>
-              ${f[0]}
-            </label>
-
-            <input
-              class="input"
-              data-field="${f[1]}"
-              value="${esc(f[3])}"
-              placeholder="${f[2]}">
-
-          </div>
-          `
-      )
-      .join('');
-
-}
-
-
-/* =========================
-   امکانات
-========================= */
-
-function renderAmenities(
-  selected=[]
-){
-
-  $('amenities').innerHTML=
-    amenityList
-      .map(
-        ([v,t])=>
-          `
-          <label class="check">
-
-            <input
-              type="checkbox"
-              value="${v}"
-              ${
-                selected.includes(v)
-                ? 'checked'
-                : ''
-              }>
-
-            ${t}
-
-          </label>
-          `
-      )
-      .join('');
-
-}
-
-
-/* =========================
-   ادیتور
-========================= */
-
-function openEditor(p=null){
-
-  state.editing=
-    p
-    ? p.id
-    : null;
-
-
-  state.photos=
-    p
-    ? [...(p.photos||[])]
-    : [];
-
-
-  state.pendingFiles=[];
-
-
-  $('editorTitle').textContent=
-    p
-    ? 'ویرایش آگهی'
-    : 'افزودن آگهی';
-
-
-  $('editId').value=
-    p?.id
-    || '';
-
-
-  $('fTitle').value=
-    p?.title
-    || '';
-
-
-  $('fType').value=
-    p?.type
-    || '';
-
-
-  $('fPhase').value=
-    p?.phase
-    || '';
-
-
-  $('fArea').value=
-    p?.area
-    || '';
-
-
-  $('fPrice').value=
-    p?.price
-    || '';
-
-
-  $('fLocation').value=
-    p?.location
-    || '';
-
-
-  $('fDescription').value=
-    p?.description
-    || '';
-
-
-  renderDynamic(
-    p?.type
-    || '',
-    p
-    || {}
-  );
-
-
-  renderAmenities(
-    p?.amenities
-    || []
-  );
-
-
-  renderPreviews();
-
-
-  $('photoInput').value='';
-
-
-  $('editorWrap')
-    .classList
-    .add('open');
-
-
-  document.body.style.overflow=
-    'hidden';
-
-}
-
-
-function closeEditor(){
-
-  $('editorWrap')
-    .classList
-    .remove('open');
-
-
-  document.body.style.overflow='';
-
-
-  state.editing=null;
-
-  state.photos=[];
-
-  state.pendingFiles=[];
-
-}
-
-
-function renderPreviews(){
-
-  $('previews').innerHTML=
-    state.photos
-      .map(
-        (src,i)=>
-          `
-          <div class="preview">
-
-            <img
-              src="${esc(src)}"
-              alt="">
-
-            <button
-              type="button"
-              class="remove-photo"
-              onclick="removePhoto(${i})">
-              ×
-            </button>
-
-          </div>
-          `
-      )
-      .join('');
-
-}
-
-
-function removePhoto(i){
-
-  state.photos.splice(
-    i,
-    1
-  );
-
-
-  renderPreviews();
-
-}
-
-
-function collectDynamic(){
-
-  const o={};
-
-
-  document
-    .querySelectorAll(
-      '#dynamicFormFields [data-field]'
-    )
-    .forEach(
-      x=>
-        o[x.dataset.field]
-        =
-        x.value.trim()
-    );
-
-
-  return o;
-
-}
-
-
-function collectAmenities(){
-
-  return [
-    ...document
-      .querySelectorAll(
-        '#amenities input:checked'
-      )
-  ]
-  .map(
-    x=>x.value
-  );
-
-}
-
-
-function buildSpecs(d){
-
-  const map=[
-
-    ['bedrooms','خواب'],
-
-    ['floor','طبقه'],
-
-    ['buildingArea','متراژ بنا'],
-
-    ['villaType','نوع ویلا'],
-
-    ['usage','کاربری'],
-
-    ['heating','گرمایش'],
-
-    ['cooling','سرمایش'],
-
-    ['year','سال ساخت'],
-
-    ['documents','مدارک']
-
-  ];
-
-
-  return map
-    .filter(
-      ([k])=>d[k]
-    )
-    .map(
-      ([k,l])=>
-        l+': '+d[k]
-    );
-
-}
-
-
-/* =========================
-   ذخیره آگهی
-========================= */
-
-async function saveListing(e){
-
-  e.preventDefault();
-
-
-  if(state.saving)
-    return;
-
-
-  const c=cfg();
-
-
-  if(
-    !c.owner
-    ||
-    !c.repo
-    ||
-    !c.token
-  ){
-
-    showPage(
-      'settings'
-    );
-
-
-    toast(
-      'اول اتصال GitHub را کامل کن.',
-      false
-    );
-
-
-    return;
-
-  }
-
-
-  const title=
-    $('fTitle')
-      .value
-      .trim();
-
-
-  const type=
-    $('fType')
-      .value;
-
-
-  const phase=
-    $('fPhase')
-      .value;
-
-
-  const area=
-    Number(
-      $('fArea')
-        .value
-    );
-
-
-  const location=
-    $('fLocation')
-      .value
-      .trim();
-
-
-  if(
-    !title
-    ||
-    !type
-    ||
-    !area
-    ||
-    !location
-  ){
-
-    toast(
-      'عنوان، نوع ملک، متراژ و لوکیشن الزامی هستند.',
-      false
-    );
-
-
-    return;
-
-  }
-
-
-  state.saving=true;
-
-
-  $('saveListing').disabled=true;
-
-  $('saveListing').textContent=
-    'در حال ذخیره...';
-
-
-  try{
-
-    saveCfg();
-
-
-    const old=
-      state.editing
-      ? state.listings.find(
-          x=>
-            x.id===
-            state.editing
-        )
-      : null;
-
-
-    let photos=[
-      ...state.photos
-    ];
-
-
-    /*
-      فقط فایل‌هایی که بعد از انتخاب
-      در pendingFiles قرار گرفته‌اند
-      آپلود می‌شوند.
-    */
-
-    const files=[
-      ...state.pendingFiles
-    ];
-
-
-    if(
-      files.length+
-      photos.length
-      >
-      MAX_PHOTOS
-    ){
-
-      throw new Error(
-        'حداکثر ۸ عکس مجاز است.'
-      );
-
-    }
-
-
-    for(
-      const f of files
-    ){
-
-      toast(
-        'در حال آپلود عکس‌ها...'
-      );
-
-
-      photos.push(
-        await uploadImage(f)
-      );
-
-    }
-
-
-    const dyn=
-      collectDynamic();
-
-
-    const now=
-      new Date()
-        .toISOString();
-
-
-    const item=
-      normalize({
-
-        id:
-          old?.id
-          ||
-          crypto.randomUUID(),
-
-        title,
-
-        type,
-
-        property_type:
-          type,
-
-        phase,
-
-        area,
-
-        price:
-          $('fPrice')
-            .value
-            .trim()
-          ||
-          'تماس بگیرید',
-
-        location,
-
-        description:
-          $('fDescription')
-            .value
-            .trim(),
-
-        photos,
-
-        created_at:
-          old?.created_at
-          ||
-          now,
-
-        specs:
-          buildSpecs(dyn),
-
-        amenities:
-          collectAmenities(),
-
-        ...dyn
-
-      });
-
-
-    const r=
-      await readListings();
-
-
-    let arr=
-      r.listings.map(
-        normalize
-      );
-
-
-    const idx=
-      arr.findIndex(
-        x=>
-          x.id===
-          item.id
-      );
-
-
-    if(idx>=0){
-
-      arr[idx]=item;
-
-    }else{
-
-      arr.unshift(item);
-
-    }
-
-
-    await writeListings(
-
-      arr,
-
-      r.sha,
-
-      idx>=0
-      ? 'Update property '+item.title
-      : 'Add property '+item.title
-
-    );
-
-
-    state.listings=
-      arr;
-
-
-    render();
-
-
-    closeEditor();
-
-
-    toast(
-      idx>=0
-      ? 'آگهی با موفقیت ویرایش شد.'
-      : 'آگهی با موفقیت ثبت شد.'
-    );
-
-
-  }catch(err){
-
-    toast(
-      'ذخیره انجام نشد: '+
-      err.message,
-      false
-    );
-
-  }
-
-
-  finally{
-
-    state.saving=false;
-
-
-    $('saveListing').disabled=false;
-
-
-    $('saveListing').textContent=
-      'ذخیره آگهی';
-
-  }
-
-}
-
-
-/* =========================
-   حذف آگهی
-========================= */
-
-async function removeListing(id){
-
-  const p=
-    state.listings.find(
-      x=>x.id===id
-    );
-
-
-  if(!p)
-    return;
-
+async function approveRequest(id){
 
   if(
     !confirm(
-      'آگهی «'+
-      p.title+
-      '» حذف شود؟ این عملیات قابل برگشت نیست.'
+      'این درخواست تأیید شود؟\n\n' +
+      'پس از تأیید، هنوز به صورت خودکار در سایت منتشر نمی‌شود.'
     )
   ){
-
     return;
-
   }
-
 
   try{
 
-    saveCfg();
-
-
-    const r=
-      await readListings();
-
-
-    const arr=
-      r.listings
-        .map(normalize)
-        .filter(
-          x=>x.id!==id
-        );
-
-
-    await writeListings(
-      arr,
-      r.sha,
-      'Delete property '+p.title
+    await updateRequestStatus(
+      id,
+      'approved'
     );
 
+    toast('درخواست تأیید شد.');
 
-    state.listings=
-      arr;
-
-
-    render();
-
+  }catch(error){
 
     toast(
-      'آگهی حذف شد.'
-    );
-
-
-    for(
-      const u of p.photos||[]
-    ){
-
-      await deleteImageByUrl(u);
-
-    }
-
-
-  }catch(e){
-
-    toast(
-      'حذف انجام نشد: '+
-      e.message,
+      error.message||'خطا',
       false
     );
-
   }
-
 }
 
+async function rejectRequest(id){
 
-/* =========================
-   ویرایش
-========================= */
+  if(
+    !confirm(
+      'این درخواست رد شود؟'
+    )
+  ){
+    return;
+  }
+
+  try{
+
+    await updateRequestStatus(
+      id,
+      'rejected'
+    );
+
+    toast('درخواست رد شد.');
+
+  }catch(error){
+
+    toast(
+      error.message||'خطا',
+      false
+    );
+  }
+}
+
+function viewRequest(id){
+
+  const item=
+    state.requests.find(
+      x=>String(x.id)===String(id)
+    );
+
+  if(!item){
+    toast('درخواست پیدا نشد.',false);
+    return;
+  }
+
+  const fields=[
+    ['عنوان',item.title],
+    ['نام مالک',item.name],
+    ['شماره تماس',item.phone],
+    ['دسته‌بندی',categoryLabel(item.category)],
+    ['متراژ',item.area],
+    ['تعداد خواب',item.bedrooms],
+    ['فاز',item.phase],
+    ['قیمت',item.price],
+    ['پارکینگ',item.parking],
+    ['انباری',item.storage],
+    ['آسانسور',item.elevator],
+    ['وضعیت',requestStatus(item.status)],
+    ['زمان ثبت',formatDate(item.createdAt)],
+    ['توضیحات',item.description]
+  ];
+
+  $('requestModalContent').innerHTML=
+    fields
+      .filter(x=>x[1]!==undefined&&x[1]!==null&&x[1]!=='')
+      .map(x=>`
+        <div style="margin-bottom:9px">
+          <b>${escapeHtml(x[0])}:</b>
+          ${
+            x[0]==='وضعیت'
+            ?x[1]
+            :escapeHtml(String(x[1]))
+          }
+        </div>
+      `)
+      .join('');
+
+  $('requestModal').classList.add('show');
+}
+
+function closeRequestModal(){
+  $('requestModal').classList.remove('show');
+}
+
+/* =========================================================
+   CONVERT REQUEST TO LISTING
+========================================================= */
+
+async function convertRequestToListing(id){
+
+  const request=
+    state.requests.find(
+      x=>String(x.id)===String(id)
+    );
+
+  if(!request){
+    toast('درخواست پیدا نشد.',false);
+    return;
+  }
+
+  if(request.status!=='approved'){
+    toast(
+      'ابتدا درخواست را تأیید کن.',
+      false
+    );
+    return;
+  }
+
+  /*
+    اطلاعات درخواست را داخل فرم می‌گذاریم.
+    هنوز هیچ آگهی‌ای ساخته یا منتشر نمی‌شود
+    تا مدیریت آن را ذخیره کند.
+  */
+
+  newListing();
+
+  $('title').value=
+    request.title||
+    request.name||
+    'ملک جدید';
+
+  $('category').value=
+    request.category||
+    'apartment';
+
+  $('price').value=
+    request.price||'';
+
+  $('area').value=
+    request.area||'';
+
+  $('bedrooms').value=
+    request.bedrooms||'';
+
+  $('phase').value=
+    request.phase||'';
+
+  $('parking').value=
+    request.parking||'';
+
+  $('storage').value=
+    request.storage||'';
+
+  $('elevator').value=
+    request.elevator||'';
+
+  $('description').value=
+    request.description||'';
+
+  /*
+    آگهی جدید به صورت پیش‌فرض منتشر نمی‌شود.
+  */
+
+  $('published').value='false';
+
+  /*
+    شناسه درخواست برای استفاده بعد از ذخیره
+  */
+
+  window.__sourceRequestId=
+    request.id;
+
+  toast(
+    'اطلاعات درخواست وارد فرم آگهی شد. پس از بررسی، ذخیره کن.'
+  );
+}
+
+/* =========================================================
+   NEW LISTING
+========================================================= */
+
+function resetPhotoState(){
+
+  state.photos=[];
+  state.pendingFiles=[];
+  state.pendingPreviews=[];
+
+  $('photoInput').value='';
+
+  renderPreviews();
+}
+
+function newListing(){
+
+  state.editingId=null;
+
+  window.__sourceRequestId=null;
+
+  $('listingForm').reset();
+
+  $('editorTitle').textContent=
+    'افزودن آگهی';
+
+  $('category').value='apartment';
+
+  $('published').value='false';
+
+  resetPhotoState();
+
+  showPage('add');
+}
+
+/* =========================================================
+   EDIT LISTING
+========================================================= */
 
 function editListing(id){
 
-  const p=
+  const item=
     state.listings.find(
-      x=>x.id===id
+      x=>String(x.id)===String(id)
     );
 
-
-  if(p)
-    openEditor(p);
-
-}
-
-
-/* =========================
-   نمایش در سایت
-========================= */
-
-function viewSiteListing(id){
-
-  const p=
-    state.listings.find(
-      x=>x.id===id
-    );
-
-
-  if(!p)
+  if(!item){
+    toast('آگهی پیدا نشد.',false);
     return;
+  }
 
+  state.editingId=item.id;
 
-  const base=
-    cfg().siteBase
-    ||
-    DEFAULT_SITE;
+  window.__sourceRequestId=null;
 
+  $('editorTitle').textContent=
+    'ویرایش آگهی';
 
-  window.open(
-    base+
-    '/#property-'+
-    encodeURIComponent(id),
-    '_blank',
-    'noopener'
-  );
+  $('title').value=item.title||'';
+  $('category').value=item.category||'apartment';
+  $('price').value=item.price||'';
+  $('area').value=item.area||'';
+  $('bedrooms').value=item.bedrooms||'';
+  $('phase').value=item.phase||'';
+  $('parking').value=item.parking||'';
+  $('storage').value=item.storage||'';
+  $('elevator').value=item.elevator||'';
+  $('description').value=item.description||'';
 
+  $('published').value=
+    item.published===true||
+    item.published==='true'
+    ?'true'
+    :'false';
+
+  state.photos=
+    Array.isArray(item.photos)
+    ?item.photos.filter(
+      x=>typeof x==='string'
+    )
+    :[];
+
+  state.pendingFiles=[];
+  state.pendingPreviews=[];
+
+  $('photoInput').value='';
+
+  renderPreviews();
+
+  showPage('add');
 }
 
+/* =========================================================
+   PHOTO INPUT
+========================================================= */
 
-/* =========================
-   رویدادها
-========================= */
+$('photoInput').addEventListener(
+  'change',
+  async function(){
 
-$('fType').onchange=
-  ()=>
-    renderDynamic(
-      $('fType').value,
-      {}
-    );
+    const files=
+      Array.from(this.files||[]);
 
-
-/*
-  اصلاح مهم:
-  فایل‌ها فقط در pendingFiles
-  ذخیره می‌شوند و هنوز آپلود نشده‌اند.
-  بنابراین هنگام save دوباره شمرده نمی‌شوند.
-*/
-
-$('photoInput').onchange=
-  () => {
-
-    const files=[
-      ...$('photoInput').files
-    ];
-
-
-    const total=
+    const current=
       state.photos.length+
-      state.pendingFiles.length+
-      files.length;
+      state.pendingFiles.length;
 
-
-    if(
-      total>
-      MAX_PHOTOS
-    ){
+    if(current+files.length>MAX_PHOTOS){
 
       toast(
-        'حداکثر ۸ عکس مجاز است.',
+        'حداکثر ۸ تصویر می‌توانی اضافه کنی.',
         false
       );
 
-
-      $('photoInput').value='';
-
-
       return;
-
     }
 
+    for(const file of files){
 
-    for(
-      const f of files
-    ){
+      if(!file.type.startsWith('image/')){
+        toast(
+          'فقط فایل تصویری مجاز است.',
+          false
+        );
+        continue;
+      }
 
-      if(
-        f.size>
-        MAX_SIZE
-      ){
+      if(file.size>MAX_SIZE){
 
         toast(
-          'حجم عکس بیشتر از ۸ مگابایت است.',
+          'حجم هر تصویر باید حداکثر ۸ مگابایت باشد.',
           false
         );
 
-
         continue;
-
       }
 
+      state.pendingFiles.push(file);
 
-      state.pendingFiles.push(
-        f
-      );
+      const preview=
+        await fileToDataUrl(file);
 
+      state.pendingPreviews.push(preview);
+    }
+
+    this.value='';
+
+    renderPreviews();
+  }
+);
+
+function fileToDataUrl(file){
+
+  return new Promise(
+    (resolve,reject)=>{
 
       const reader=
         new FileReader();
 
-
       reader.onload=
-        e=>{
+        ()=>resolve(reader.result);
 
-          state.photos.push(
-            e.target.result
-          );
+      reader.onerror=
+        ()=>reject(
+          new Error('خواندن تصویر ناموفق بود.')
+        );
 
-
-          renderPreviews();
-
-        };
-
-
-      reader.readAsDataURL(f);
-
+      reader.readAsDataURL(file);
     }
+  );
+}
 
+/* =========================================================
+   PREVIEWS
+========================================================= */
 
-    $('photoInput').value='';
+function renderPreviews(){
 
-  };
+  const box=$('photoPreview');
 
+  let html='';
 
-$('listingForm').onsubmit=
-  saveListing;
+  state.photos.forEach(
+    (src,index)=>{
 
+      html+=`
 
-$('closeEditor').onclick=
-  closeEditor;
+        <div class="photo-item">
 
+          <img
+            src="${escapeAttr(src)}"
+            alt="تصویر">
 
-$('cancelEditor').onclick=
-  closeEditor;
+          <button
+            type="button"
+            class="photo-remove"
+            onclick="removeExistingPhoto(${index})">
+            ×
+          </button>
 
+        </div>
 
-$('editorWrap').onclick=
-  e=>{
-
-    if(
-      e.target===
-      $('editorWrap')
-    ){
-
-      closeEditor();
-
+      `;
     }
-
-  };
-
-
-$('newBtn').onclick=
-  ()=>openEditor();
-
-
-$('dashboardNew').onclick=
-  ()=>openEditor();
-
-
-$('listNew').onclick=
-  ()=>openEditor();
-
-
-$('refreshBtn').onclick=
-  ()=>loadData();
-
-
-$('testBtn').onclick=
-  testConnection;
-
-
-$('saveSettings').onclick=
-  testConnection;
-
-
-$('goListings').onclick=
-  ()=>showPage('listings');
-
-
-$('search').oninput=
-  render;
-
-
-$('filterType').onchange=
-  render;
-
-
-$('filterPhase').onchange=
-  render;
-
-
-$('filterSort').onchange=
-  render;
-
-
-$('menuBtn').onclick=
-  ()=>{
-    if(innerWidth<=760)
-      $('sidebar')
-        .classList
-        .toggle('open');
-  };
-
-
-document
-  .querySelectorAll(
-    '.nav button[data-page]'
-  )
-  .forEach(
-    b=>
-      b.onclick=
-        ()=>{
-          showPage(
-            b.dataset.page
-          );
-        }
   );
 
+  state.pendingPreviews.forEach(
+    (src,index)=>{
 
-document.addEventListener(
-  'keydown',
-  e=>{
-    if(
-      e.key==='Escape'
-    ){
+      html+=`
 
-      closeEditor();
+        <div class="photo-item">
 
+          <img
+            src="${escapeAttr(src)}"
+            alt="تصویر جدید">
+
+          <button
+            type="button"
+            class="photo-remove"
+            onclick="removePendingPhoto(${index})">
+            ×
+          </button>
+
+        </div>
+
+      `;
+    }
+  );
+
+  box.innerHTML=html;
+}
+
+function removeExistingPhoto(index){
+
+  state.photos.splice(index,1);
+
+  renderPreviews();
+}
+
+function removePendingPhoto(index){
+
+  state.pendingFiles.splice(index,1);
+  state.pendingPreviews.splice(index,1);
+
+  renderPreviews();
+}
+
+/* =========================================================
+   IMAGE UPLOAD
+========================================================= */
+
+async function uploadImage(file){
+
+  const extension=
+    (
+      file.name.split('.').pop()||
+      'jpg'
+    )
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g,'');
+
+  const safeExt=
+    extension||'jpg';
+
+  const id=
+    Date.now()+
+    '-'+
+    Math.random()
+      .toString(36)
+      .slice(2,9);
+
+  const filename=
+    'property-'+
+    id+
+    '.'+
+    safeExt;
+
+  const path=
+    IMAGE_DIR+
+    '/'+
+    filename;
+
+  const dataUrl=
+    await fileToDataUrl(file);
+
+  const comma=
+    dataUrl.indexOf(',');
+
+  if(comma<0){
+    throw new Error(
+      'فرمت تصویر قابل پردازش نیست.'
+    );
+  }
+
+  const base64=
+    dataUrl.slice(comma+1);
+
+  const body={
+    message:
+      'Upload property image '+filename,
+
+    content:base64,
+
+    branch:cfg().branch
+  };
+
+  const data=
+    await api(
+      path,
+      {
+        method:'PUT',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify(body)
+      }
+    );
+
+  return data.content?.download_url||
+    (
+      cfg().siteBase+
+      '/'+
+      path
+    );
+}
+
+/* =========================================================
+   SAVE LISTING
+========================================================= */
+
+$('listingForm').addEventListener(
+  'submit',
+  async function(event){
+
+    event.preventDefault();
+
+    const button=$('saveBtn');
+
+    if(button.disabled){
+      return;
+    }
+
+    try{
+
+      button.disabled=true;
+      button.innerHTML=
+        '<span class="loader"></span> در حال ذخیره...';
+
+      /*
+        فقط URLهای واقعی ذخیره‌شده
+        در state.photos قرار دارند.
+      */
+
+      const photos=[
+        ...state.photos
+      ];
+
+      /*
+        فایل‌های جدید ابتدا آپلود می‌شوند
+        و فقط URL آنها در JSON ذخیره می‌شود.
+      */
+
+      for(
+        const file of state.pendingFiles
+      ){
+
+        const url=
+          await uploadImage(file);
+
+        photos.push(url);
+      }
+
+      if(photos.length>MAX_PHOTOS){
+        throw new Error(
+          'تعداد تصاویر بیشتر از حد مجاز است.'
+        );
+      }
+
+      const existing=
+        state.editingId
+        ?state.listings.find(
+          x=>String(x.id)===String(state.editingId)
+        )
+        :null;
+
+      const item={
+
+        id:
+          state.editingId||
+          (
+            Date.now()+
+            '-'+
+            Math.random()
+              .toString(36)
+              .slice(2,8)
+          ),
+
+        title:
+          $('title').value.trim(),
+
+        category:
+          $('category').value,
+
+        price:
+          $('price').value.trim(),
+
+        area:
+          $('area').value.trim(),
+
+        bedrooms:
+          $('bedrooms').value.trim(),
+
+        phase:
+          $('phase').value.trim(),
+
+        parking:
+          $('parking').value,
+
+        storage:
+          $('storage').value,
+
+        elevator:
+          $('elevator').value,
+
+        description:
+          $('description').value.trim(),
+
+        photos,
+
+        published:
+          $('published').value==='true',
+
+        createdAt:
+          existing?.createdAt||
+          new Date().toISOString(),
+
+        updatedAt:
+          new Date().toISOString(),
+
+        source:
+          existing?.source||
+          (
+            window.__sourceRequestId
+            ?'customer-request'
+            :'admin'
+          ),
+
+        sourceRequestId:
+          window.__sourceRequestId||
+          existing?.sourceRequestId||
+          null
+      };
+
+      if(!item.title){
+        throw new Error(
+          'عنوان آگهی را وارد کن.'
+        );
+      }
+
+      const index=
+        state.listings.findIndex(
+          x=>String(x.id)===String(item.id)
+        );
+
+      if(index>=0){
+        state.listings[index]=item;
+      }else{
+        state.listings.unshift(item);
+      }
+
+      state.listingsSha=
+        await writeListings(
+          state.listings,
+          state.listingsSha
+        );
+
+      /*
+        اگر آگهی از یک درخواست مشتری آمده،
+        پس از ذخیره موفق، درخواست به published
+        تغییر می‌کند.
+      */
+
+      if(window.__sourceRequestId){
+
+        const request=
+          state.requests.find(
+            x=>
+              String(x.id)===
+              String(window.__sourceRequestId)
+          );
+
+        if(request){
+
+          request.status='published';
+
+          request.publishedListingId=
+            item.id;
+
+          request.reviewedAt=
+            new Date().toISOString();
+
+          state.requestsSha=
+            await writeRequests(
+              state.requests,
+              state.requestsSha
+            );
+        }
+      }
+
+      toast(
+        state.editingId
+        ?'آگهی با موفقیت ویرایش شد.'
+        :'آگهی با موفقیت ذخیره شد.'
+      );
+
+      newListing();
+
+      await loadData();
+
+      showPage('listings');
+
+    }catch(error){
+
+      toast(
+        error.message||
+        'ذخیره آگهی انجام نشد.',
+        false
+      );
+
+    }finally{
+
+      button.disabled=false;
+      button.textContent='ذخیره آگهی';
     }
   }
 );
 
+/* =========================================================
+   PUBLISH
+========================================================= */
 
-/* =========================
-   شروع پنل
-========================= */
+async function togglePublished(id){
+
+  const item=
+    state.listings.find(
+      x=>String(x.id)===String(id)
+    );
+
+  if(!item){
+    toast('آگهی پیدا نشد.',false);
+    return;
+  }
+
+  const current=
+    item.published===true||
+    item.published==='true';
+
+  item.published=!current;
+  item.updatedAt=
+    new Date().toISOString();
+
+  try{
+
+    state.listingsSha=
+      await writeListings(
+        state.listings,
+        state.listingsSha
+      );
+
+    renderAll();
+
+    toast(
+      item.published
+      ?'آگهی منتشر شد.'
+      :'انتشار آگهی لغو شد.'
+    );
+
+  }catch(error){
+
+    item.published=current;
+
+    toast(
+      error.message||
+      'تغییر وضعیت انجام نشد.',
+      false
+    );
+  }
+}
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+async function deleteListing(id){
+
+  const item=
+    state.listings.find(
+      x=>String(x.id)===String(id)
+    );
+
+  if(!item){
+    toast('آگهی پیدا نشد.',false);
+    return;
+  }
+
+  if(
+    !confirm(
+      'آیا از حذف این آگهی مطمئن هستی؟'
+    )
+  ){
+    return;
+  }
+
+  const old=
+    [...state.listings];
+
+  state.listings=
+    state.listings.filter(
+      x=>String(x.id)!==String(id)
+    );
+
+  try{
+
+    state.listingsSha=
+      await writeListings(
+        state.listings,
+        state.listingsSha
+      );
+
+    renderAll();
+
+    toast('آگهی حذف شد.');
+
+  }catch(error){
+
+    state.listings=old;
+
+    toast(
+      error.message||
+      'حذف آگهی انجام نشد.',
+      false
+    );
+  }
+}
+
+/* =========================================================
+   SECURITY / HTML ESCAPE
+========================================================= */
+
+function escapeHtml(value){
+
+  return String(value??'')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#039;');
+}
+
+function escapeAttr(value){
+  return escapeHtml(value);
+}
+
+/* =========================================================
+   RENDER ALL
+========================================================= */
+
+function renderAll(){
+
+  renderDashboard();
+  renderListings();
+  renderRequests();
+}
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
 
 loadCfg();
 
-fillPhases();
-
-renderAmenities();
-
-renderDynamic('');
-
-
-if(
-  cfg().token &&
-  cfg().owner
-){
+if(cfg().token){
 
   loadData();
 
+}else{
+
+  setStatus(
+    '',
+    'توکن وارد نشده'
+  );
+
+  renderAll();
 }
+
+/* =========================================================
+   CLOSE MODAL WITH BACKDROP
+========================================================= */
+
+$('requestModal')
+.addEventListener(
+  'click',
+  function(event){
+
+    if(event.target===this){
+      closeRequestModal();
+    }
+
+  }
+);
 
 </script>
 
