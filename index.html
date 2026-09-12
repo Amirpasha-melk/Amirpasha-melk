@@ -1266,6 +1266,102 @@ visibility:visible;
 transform:none
 }
 
+.about-logo{
+width:110px;
+height:110px;
+object-fit:contain;
+margin:22px auto 0;
+border-radius:20px;
+padding:4px;
+background:#fff;
+box-shadow:0 10px 28px #0b122018
+}
+
+.about-slogan{
+font-family:Estedad;
+font-size:22px;
+font-weight:800;
+color:#fff;
+margin-top:16px;
+text-align:center
+}
+
+.contact-card .contact-row{
+display:flex;
+align-items:center;
+gap:12px;
+border:1px solid var(--line);
+background:#f8f9fb;
+border-radius:15px;
+padding:12px 13px;
+margin-top:9px;
+font-size:12px
+}
+
+.contact-card .contact-row:first-of-type{
+margin-top:0
+}
+
+.contact-icon{
+width:34px;
+height:34px;
+min-width:34px;
+border-radius:11px;
+background:var(--ink);
+color:#fff;
+display:grid;
+place-items:center
+}
+
+.contact-icon svg{
+width:17px;
+height:17px;
+fill:none;
+stroke:currentColor;
+stroke-width:1.8
+}
+
+.contact-actions{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:9px;
+margin-top:12px
+}
+
+.contact-actions .whatsapp-btn,
+.contact-actions .call-btn{
+min-height:46px
+}
+
+.location-btn{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+width:100%;
+min-height:46px;
+margin-top:10px;
+border-radius:13px;
+background:var(--ink);
+color:#fff;
+font-size:11px;
+font-weight:700
+}
+
+.location-btn svg{
+width:18px;
+height:18px;
+fill:none;
+stroke:currentColor;
+stroke-width:1.8
+}
+
+@media(max-width:650px){
+.contact-grid{
+grid-template-columns:1fr
+}
+}
+
 @media(max-width:900px){
 .cards{
 grid-template-columns:repeat(2,1fr)
@@ -1475,6 +1571,11 @@ text-align:center
 
 <button class="drawer-item" data-page="about">
 <span>درباره ما</span>
+<span>›</span>
+</button>
+
+<button class="drawer-item" data-page="contact">
+<span>ارتباط با ما</span>
 <span>›</span>
 </button>
 
@@ -2038,8 +2139,12 @@ text-align:center
 </p>
 
 <p>
-آینده را با هم می‌سازیم.
+املاک امیر پاشا با بیش از ۱۴ سال سابقه و تجربه خدمت در زمینه‌ی املاک و مستغلات و دارا بودن جواز و مجوزهای لازم از اتحادیه و نهادهای مربوط، مفتخر است با تمرکز بر ارائه اطلاعات شفاف و ایجاد انتخاب‌های متنوع در تمام زمینه‌های ملکی، یک گزینه امن و مطلوب برای خرید، فروش، مشاوره و سرمایه‌گذاری‌های شما باشد.
 </p>
+
+<div class="about-slogan">آینده را با هم می‌سازیم</div>
+
+<img src="IMG_20260901_170057_369.jpg" class="about-logo" alt="لوگوی املاک امیر پاشا">
 
 </div>
 
@@ -2064,6 +2169,75 @@ text-align:center
 <strong>۴</strong>
 <span>دسته‌بندی فایل</span>
 </div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section class="page" id="page-contact">
+
+<div class="category-hero">
+<div class="category-inner">
+<div class="category-label">ارتباط با ما</div>
+<div class="category-title">در تماس باشیم</div>
+<div class="category-subtitle">برای خرید، فروش، مشاوره و سرمایه‌گذاری در مهستان</div>
+</div>
+</div>
+
+<div class="section">
+
+<div class="contact-grid">
+
+<div class="contact-card">
+<h3>راه‌های ارتباطی</h3>
+
+<div class="contact-row">
+<div class="contact-icon">
+<svg viewBox="0 0 24 24"><path d="M6.5 3.5h3l1.6 4-2 1.5a14 14 0 0 0 5.9 5.9l1.5-2 4 1.6v3c0 .8-.7 1.5-1.5 1.5C11.4 19 5 12.6 5 5c0-.8.7-1.5 1.5-1.5Z"/></svg>
+</div>
+<span>09019472293</span>
+</div>
+
+<div class="contact-row">
+<div class="contact-icon">
+<svg viewBox="0 0 24 24"><path d="M20 11.2a8.3 8.3 0 0 1-12.3 7.3L4 19.5l1.1-3.6A8.3 8.3 0 1 1 20 11.2Z"/><path d="M8.4 8.5c.2-.4.5-.5.8-.5h.5l.7 1.7c.1.3.1.5-.1.7l-.5.5a6.2 6.2 0 0 0 2.8 2.8l.5-.5c.2-.2.4-.2.7-.1l1.7.7v.5c0 .3-.1.6-.5.8-.5.2-1.1.2-1.7 0-2.8-.9-5.3-3.4-6.2-6.2-.2-.6-.2-1.2 0-1.7Z"/></svg>
+</div>
+<span>واتساپ و پاسخگویی مستقیم</span>
+</div>
+
+<div class="contact-actions">
+<a class="whatsapp-btn" href="https://wa.me/989019472293" target="_blank" rel="noopener">
+<svg viewBox="0 0 24 24" style="width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8"><path d="M20 11.2a8.3 8.3 0 0 1-12.3 7.3L4 19.5l1.1-3.6A8.3 8.3 0 1 1 20 11.2Z"/><path d="M8.4 8.5c.2-.4.5-.5.8-.5h.5l.7 1.7c.1.3.1.5-.1.7l-.5.5a6.2 6.2 0 0 0 2.8 2.8l.5-.5c.2-.2.4-.2.7-.1l1.7.7v.5c0 .3-.1.6-.5.8-.5.2-1.1.2-1.7 0-2.8-.9-5.3-3.4-6.2-6.2-.2-.6-.2-1.2 0-1.7Z"/></svg>
+واتساپ
+</a>
+<a class="call-btn" href="tel:09019472293">
+<svg viewBox="0 0 24 24" style="width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8"><path d="M6.5 3.5h3l1.6 4-2 1.5a14 14 0 0 0 5.9 5.9l1.5-2 4 1.6v3c0 .8-.7 1.5-1.5 1.5C11.4 19 5 12.6 5 5c0-.8.7-1.5 1.5-1.5Z"/></svg>
+تماس
+</a>
+</div>
+
+</div>
+
+<div class="contact-card">
+<h3>دفتر املاک امیر پاشا</h3>
+
+<div class="contact-row" style="align-items:flex-start">
+<div class="contact-icon">
+<svg viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2"/></svg>
+</div>
+<span>استان البرز، شهر جدید مهستان، فاز ۱، میدان شهرداری، بلوار ارکیده، پلاک ۱۹۸</span>
+</div>
+
+<a class="location-btn" href="https://www.google.com/maps/search/?api=1&query=%D8%A7%D8%B3%D8%AA%D8%A7%D9%86%20%D8%A7%D9%84%D8%A8%D8%B1%D8%B2%20%D8%B4%D9%87%D8%B1%20%D8%AC%D8%AF%DB%8C%D8%AF%20%D9%85%D9%87%D8%B3%D8%AA%D8%A7%D9%86%20%D9%81%D8%A7%D8%B2%201%20%D9%85%DB%8C%D8%AF%D8%A7%D9%86%20%D8%B4%D9%87%D8%B1%D8%AF%D8%A7%D8%B1%DB%8C%20%D8%A8%D9%84%D9%88%D8%A7%D8%B1%20%D8%A7%D8%B1%DA%A9%DB%8C%D8%AF%D9%87%20%D9%BE%D9%84%D8%A7%DA%A9%20198" target="_blank" rel="noopener">
+<svg viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2"/></svg>
+مشاهده لوکیشن و مسیریابی
+</a>
 
 </div>
 
@@ -3264,4 +3438,4 @@ btn.parentElement.classList.toggle('open');
 </script>
 
 </body>
-  </html>
+</html>
