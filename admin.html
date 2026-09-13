@@ -436,6 +436,20 @@ th{
   margin-top:6px;
 }
 
+.upload-status{
+  margin-top:12px;
+  padding:10px 12px;
+  border-radius:10px;
+  background:#eef1f5;
+  color:var(--muted);
+  font-size:11px;
+  display:none;
+}
+
+.upload-status.show{
+  display:block;
+}
+
 .toast{
   position:fixed;
   left:22px;
@@ -521,11 +535,13 @@ th{
   .sidebar{
     width:215px;
   }
+
   .main{
     width:calc(100% - 215px);
     margin-right:215px;
     padding:18px;
   }
+
   .stats{
     grid-template-columns:repeat(2,1fr);
   }
@@ -535,44 +551,54 @@ th{
   .app{
     display:block;
   }
+
   .sidebar{
     position:relative;
     width:100%;
     height:auto;
     padding:13px;
   }
+
   .brand{
     padding-bottom:13px;
     margin-bottom:10px;
   }
+
   .nav{
     display:grid;
     grid-template-columns:repeat(2,1fr);
   }
+
   .main{
     width:100%;
     margin:0;
     padding:13px;
   }
+
   .topbar{
     align-items:flex-start;
     flex-direction:column;
   }
+
   .grid,
   .form-grid,
   .connection{
     grid-template-columns:1fr;
   }
+
   .stats{
     grid-template-columns:repeat(2,1fr);
     gap:9px;
   }
+
   .stat{
     padding:15px;
   }
+
   .stat strong{
     font-size:22px;
   }
+
   .photo-grid{
     grid-template-columns:repeat(3,1fr);
   }
@@ -585,6 +611,7 @@ th{
 <div class="app">
 
 <aside class="sidebar">
+
   <div class="brand">
     <h1>املاک امیر پاشا</h1>
     <p>پنل مدیریت فایلینگ</p>
@@ -597,26 +624,34 @@ th{
     <button data-page="add">افزودن آگهی</button>
     <button data-page="settings">اتصال و تنظیمات</button>
   </div>
+
 </aside>
 
 <main class="main">
 
   <div class="topbar">
+
     <div>
       <h2 id="pageTitle">داشبورد</h2>
-      <div class="muted">مدیریت سایت املاک امیر پاشا</div>
+      <div class="muted">
+        مدیریت سایت املاک امیر پاشا
+      </div>
     </div>
 
     <div class="status" id="connectionStatus">
       <span class="status-dot"></span>
       <span id="statusText">اتصال بررسی نشده</span>
     </div>
+
   </div>
 
+
   <!-- DASHBOARD -->
+
   <section class="page active" id="page-dashboard">
 
     <div class="stats">
+
       <div class="stat">
         <span>کل آگهی‌ها</span>
         <strong id="statListings">0</strong>
@@ -636,62 +671,111 @@ th{
         <span>آگهی‌های تأییدنشده</span>
         <strong id="statUnpublished">0</strong>
       </div>
+
     </div>
+
 
     <div class="grid">
 
       <div class="card">
+
         <div class="section-title">
+
           <h3>آخرین آگهی‌ها</h3>
-          <button class="btn btn-secondary" onclick="showPage('listings')">مشاهده همه</button>
+
+          <button
+            class="btn btn-secondary"
+            onclick="showPage('listings')">
+            مشاهده همه
+          </button>
+
         </div>
+
         <div id="dashboardListings"></div>
+
       </div>
 
+
       <div class="card">
+
         <div class="section-title">
+
           <h3>آخرین درخواست‌ها</h3>
-          <button class="btn btn-secondary" onclick="showPage('requests')">مشاهده همه</button>
+
+          <button
+            class="btn btn-secondary"
+            onclick="showPage('requests')">
+            مشاهده همه
+          </button>
+
         </div>
+
         <div id="dashboardRequests"></div>
+
       </div>
 
     </div>
 
   </section>
 
+
   <!-- LISTINGS -->
+
   <section class="page" id="page-listings">
 
     <div class="card">
+
       <div class="section-title">
+
         <div>
+
           <h3>همه آگهی‌ها</h3>
-          <div class="muted">آگهی‌های موجود در data/listings.json</div>
+
+          <div class="muted">
+            آگهی‌های موجود در data/listings.json
+          </div>
+
         </div>
 
-        <button class="btn btn-primary" onclick="newListing()">+ افزودن آگهی</button>
+        <button
+          class="btn btn-primary"
+          onclick="newListing()">
+          + افزودن آگهی
+        </button>
+
       </div>
 
       <div id="listingsContainer"></div>
+
     </div>
 
   </section>
 
+
   <!-- REQUESTS -->
+
   <section class="page" id="page-requests">
 
     <div class="card">
 
       <div class="section-title">
+
         <div>
+
           <h3>درخواست‌های مشتریان</h3>
+
           <div class="muted">
             درخواست‌ها قبل از انتشار باید توسط مدیریت بررسی شوند.
           </div>
+
         </div>
 
-        <button class="btn btn-secondary" onclick="loadData()">↻ بروزرسانی</button>
+        <button
+          class="btn btn-secondary"
+          onclick="loadData()">
+          ↻ بروزرسانی
+        </button>
+
       </div>
 
       <div id="requestsContainer"></div>
@@ -700,96 +784,218 @@ th{
 
   </section>
 
-  <!-- ADD -->
+
+  <!-- ADD / EDIT -->
+
   <section class="page" id="page-add">
 
     <div class="card">
 
       <div class="section-title">
+
         <div>
-          <h3 id="editorTitle">افزودن آگهی</h3>
-          <div class="muted">اطلاعات ملک را وارد کنید.</div>
+
+          <h3 id="editorTitle">
+            افزودن آگهی
+          </h3>
+
+          <div class="muted">
+            اطلاعات ملک را وارد کنید.
+          </div>
+
         </div>
+
       </div>
+
 
       <form id="listingForm">
 
         <div class="form-grid">
 
+
           <div class="field">
+
             <label>عنوان آگهی</label>
-            <input id="title" required placeholder="مثلاً آپارتمان ۹۵ متری فاز ۱">
+
+            <input
+              id="title"
+              required
+              placeholder="مثلاً آپارتمان ۹۵ متری فاز ۱">
+
           </div>
 
+
           <div class="field">
+
             <label>دسته‌بندی</label>
+
             <select id="category">
-              <option value="apartment">آپارتمان</option>
-              <option value="villa">ویلا</option>
-              <option value="maskan-mehr">مسکن مهر</option>
-              <option value="land">زمین</option>
+
+              <option value="apartment">
+                آپارتمان
+              </option>
+
+              <option value="villa">
+                ویلا
+              </option>
+
+              <option value="maskan-mehr">
+                مسکن مهر
+              </option>
+
+              <option value="land">
+                زمین
+              </option>
+
             </select>
+
           </div>
 
+
           <div class="field">
+
             <label>قیمت</label>
-            <input id="price" placeholder="مثلاً ۳ میلیارد تومان">
+
+            <input
+              id="price"
+              placeholder="مثلاً ۳ میلیارد تومان">
+
           </div>
 
+
           <div class="field">
+
             <label>متراژ</label>
-            <input id="area" placeholder="مثلاً ۹۵ متر">
+
+            <input
+              id="area"
+              placeholder="مثلاً ۹۵ متر">
+
           </div>
 
+
           <div class="field">
+
             <label>تعداد خواب</label>
-            <input id="bedrooms" type="number" min="0" placeholder="۲">
+
+            <input
+              id="bedrooms"
+              type="number"
+              min="0"
+              placeholder="۲">
+
           </div>
 
+
           <div class="field">
+
             <label>فاز</label>
-            <input id="phase" placeholder="مثلاً فاز ۱">
+
+            <input
+              id="phase"
+              placeholder="مثلاً فاز ۱">
+
           </div>
 
+
           <div class="field">
+
             <label>پارکینگ</label>
+
             <select id="parking">
-              <option value="">نامشخص</option>
-              <option value="دارد">دارد</option>
-              <option value="ندارد">ندارد</option>
+
+              <option value="">
+                نامشخص
+              </option>
+
+              <option value="دارد">
+                دارد
+              </option>
+
+              <option value="ندارد">
+                ندارد
+              </option>
+
             </select>
+
           </div>
 
+
           <div class="field">
+
             <label>انباری</label>
+
             <select id="storage">
-              <option value="">نامشخص</option>
-              <option value="دارد">دارد</option>
-              <option value="ندارد">ندارد</option>
+
+              <option value="">
+                نامشخص
+              </option>
+
+              <option value="دارد">
+                دارد
+              </option>
+
+              <option value="ندارد">
+                ندارد
+              </option>
+
             </select>
+
           </div>
 
+
           <div class="field">
+
             <label>آسانسور</label>
+
             <select id="elevator">
-              <option value="">نامشخص</option>
-              <option value="دارد">دارد</option>
-              <option value="ندارد">ندارد</option>
+
+              <option value="">
+                نامشخص
+              </option>
+
+              <option value="دارد">
+                دارد
+              </option>
+
+              <option value="ندارد">
+                ندارد
+              </option>
+
             </select>
+
           </div>
 
+
           <div class="field">
+
             <label>وضعیت انتشار</label>
+
             <select id="published">
-              <option value="true">منتشر شود</option>
-              <option value="false">منتشر نشود</option>
+
+              <option value="true">
+                منتشر شود
+              </option>
+
+              <option value="false">
+                منتشر نشود
+              </option>
+
             </select>
+
           </div>
+
 
           <div class="field full">
+
             <label>توضیحات</label>
-            <textarea id="description" placeholder="توضیحات کامل ملک..."></textarea>
+
+            <textarea
+              id="description"
+              placeholder="توضیحات کامل ملک..."></textarea>
+
           </div>
+
 
           <div class="field full">
 
@@ -800,15 +1006,26 @@ th{
               <input
                 id="photoInput"
                 type="file"
-                accept="image/*"
-                multiple
-              >
+                accept="image/jpeg,image/png,image/webp,image/gif"
+                multiple>
 
               <div class="help">
-                حداکثر ۸ تصویر. تصاویر جدید هنگام ذخیره در پوشه images/listings قرار می‌گیرند.
+
+                حداکثر ۸ تصویر.
+                حجم هر تصویر حداکثر ۸ مگابایت.
+                تصاویر در پوشه images/listings ذخیره می‌شوند.
+
               </div>
 
-              <div class="photo-grid" id="photoPreview"></div>
+              <div
+                class="upload-status"
+                id="uploadStatus">
+              </div>
+
+              <div
+                class="photo-grid"
+                id="photoPreview">
+              </div>
 
             </div>
 
@@ -816,13 +1033,20 @@ th{
 
         </div>
 
+
         <div class="actions">
 
-          <button class="btn btn-primary" type="submit" id="saveBtn">
+          <button
+            class="btn btn-primary"
+            type="submit"
+            id="saveBtn">
             ذخیره آگهی
           </button>
 
-          <button class="btn btn-secondary" type="button" onclick="showPage('listings')">
+          <button
+            class="btn btn-secondary"
+            type="button"
+            onclick="showPage('listings')">
             انصراف
           </button>
 
@@ -834,66 +1058,116 @@ th{
 
   </section>
 
+
   <!-- SETTINGS -->
+
   <section class="page" id="page-settings">
 
     <div class="card">
 
       <div class="section-title">
+
         <div>
+
           <h3>اتصال به GitHub</h3>
+
           <div class="muted">
             اطلاعات Repository برای مدیریت فایل‌های سایت.
           </div>
+
         </div>
+
       </div>
+
 
       <div class="connection">
 
         <div class="field">
+
           <label>GitHub Username</label>
-          <input id="ghOwner" value="Amirpasha-melk">
+
+          <input
+            id="ghOwner"
+            value="Amirpasha-melk">
+
         </div>
 
+
         <div class="field">
+
           <label>Repository</label>
-          <input id="ghRepo" value="Amirpasha-melk">
+
+          <input
+            id="ghRepo"
+            value="Amirpasha-melk">
+
         </div>
 
+
         <div class="field">
+
           <label>Branch</label>
-          <input id="ghBranch" value="main">
+
+          <input
+            id="ghBranch"
+            value="main">
+
         </div>
 
+
         <div class="field">
+
           <label>GitHub Token</label>
-          <input id="ghToken" type="password" autocomplete="off">
+
+          <input
+            id="ghToken"
+            type="password"
+            autocomplete="off">
+
         </div>
 
+
         <div class="field">
+
           <label>آدرس سایت</label>
-          <input id="siteBase" value="https://Amirpasha-melk.github.io/Amirpasha-melk">
+
+          <input
+            id="siteBase"
+            value="https://Amirpasha-melk.github.io/Amirpasha-melk">
+
         </div>
 
       </div>
 
+
       <div class="actions">
 
-        <button class="btn btn-primary" onclick="testConnection()">
+        <button
+          class="btn btn-primary"
+          onclick="testConnection()">
           تست اتصال و ذخیره
         </button>
 
-        <button class="btn btn-secondary" onclick="loadData()">
+        <button
+          class="btn btn-secondary"
+          onclick="loadData()">
           خواندن دوباره اطلاعات
         </button>
 
       </div>
 
-      <div class="help" style="margin-top:15px">
-        توکن GitHub فقط در مرورگر شما ذخیره می‌شود و نباید آن را در فایل index.html قرار دهید.
+
+      <div
+        class="help"
+        style="margin-top:15px">
+
+        توکن GitHub فقط در مرورگر شما ذخیره می‌شود.
+        آن را در index.html قرار نده.
+
       </div>
 
     </div>
+
 
     <div class="card">
 
@@ -902,10 +1176,27 @@ th{
       </div>
 
       <div class="request-detail">
-        <div><b>فایل آگهی‌ها:</b> data/listings.json</div>
-        <div><b>پوشه تصاویر:</b> images/listings</div>
-        <div><b>پنل:</b> Admin/admin.html</div>
-        <div><b>Branch:</b> main</div>
+
+        <div>
+          <b>فایل آگهی‌ها:</b>
+          data/listings.json
+        </div>
+
+        <div>
+          <b>پوشه تصاویر:</b>
+          images/listings
+        </div>
+
+        <div>
+          <b>پنل:</b>
+          Admin/admin.html
+        </div>
+
+        <div>
+          <b>Branch:</b>
+          main
+        </div>
+
       </div>
 
     </div>
@@ -913,18 +1204,36 @@ th{
   </section>
 
 </main>
+
 </div>
 
-<div class="toast" id="toast"></div>
+
+<div
+  class="toast"
+  id="toast">
+</div>
+
 
 <!-- REQUEST MODAL -->
-<div class="modal" id="requestModal">
+
+<div
+  class="modal"
+  id="requestModal">
 
   <div class="modal-box">
 
     <div class="modal-head">
-      <h3>جزئیات درخواست</h3>
-      <button class="close" onclick="closeRequestModal()">×</button>
+
+      <h3>
+        جزئیات درخواست
+      </h3>
+
+      <button
+        class="close"
+        onclick="closeRequestModal()">
+        ×
+      </button>
+
     </div>
 
     <div id="requestModalContent"></div>
@@ -933,8 +1242,10 @@ th{
 
 </div>
 
+
 <script>
 'use strict';
+
 
 /* =========================================================
    CONFIG
@@ -943,31 +1254,49 @@ th{
 const API='https://api.github.com';
 
 const PATH='data/listings.json';
+
 const REQUESTS_PATH='data/requests.json';
+
 const IMAGE_DIR='images/listings';
 
 const MAX_PHOTOS=8;
+
 const MAX_SIZE=8*1024*1024;
 
 const DEFAULT_OWNER='Amirpasha-melk';
+
 const DEFAULT_REPO='Amirpasha-melk';
+
 const DEFAULT_BRANCH='main';
-const DEFAULT_SITE='https://Amirpasha-melk.github.io/Amirpasha-melk';
+
+const DEFAULT_SITE=
+  'https://Amirpasha-melk.github.io/Amirpasha-melk';
+
 
 /* =========================================================
    STATE
 ========================================================= */
 
 const state={
+
   listings:[],
+
   requests:[],
+
   listingsSha:null,
+
   requestsSha:null,
+
   editingId:null,
+
   photos:[],
+
   pendingFiles:[],
+
   pendingPreviews:[]
+
 };
+
 
 /* =========================================================
    HELPERS
@@ -977,73 +1306,170 @@ function $(id){
   return document.getElementById(id);
 }
 
+
 function toast(message,success=true){
+
   const el=$('toast');
+
   el.textContent=message;
-  el.style.background=success?'#111827':'#b42323';
+
+  el.style.background=
+    success
+    ?'#111827'
+    :'#b42323';
+
   el.classList.add('show');
 
   clearTimeout(window.__toastTimer);
 
   window.__toastTimer=setTimeout(()=>{
+
     el.classList.remove('show');
-  },3000);
+
+  },3500);
 }
 
+
 function setStatus(type,text){
+
   const box=$('connectionStatus');
+
   box.className='status '+type;
+
   $('statusText').textContent=text;
 }
 
-function cfg(){
-  return {
-    owner:$('ghOwner').value.trim(),
-    repo:$('ghRepo').value.trim(),
-    branch:$('ghBranch').value.trim()||DEFAULT_BRANCH,
-    token:$('ghToken').value.trim(),
-    siteBase:$('siteBase').value.trim().replace(/\/+$/,'')
-  };
+
+function setUploadStatus(text,show=true){
+
+  const el=$('uploadStatus');
+
+  el.textContent=text||'';
+
+  el.classList.toggle('show',show);
+
 }
+
+
+function cfg(){
+
+  return {
+
+    owner:
+      $('ghOwner').value.trim(),
+
+    repo:
+      $('ghRepo').value.trim(),
+
+    branch:
+      $('ghBranch').value.trim()||
+      DEFAULT_BRANCH,
+
+    token:
+      $('ghToken').value.trim(),
+
+    siteBase:
+      $('siteBase').value.trim()
+        .replace(/\/+$/,'')
+
+  };
+
+}
+
 
 function saveCfg(){
+
   const c=cfg();
 
-  localStorage.setItem('amp_gh_owner',c.owner);
-  localStorage.setItem('amp_gh_repo',c.repo);
-  localStorage.setItem('amp_gh_branch',c.branch);
-  localStorage.setItem('amp_gh_token',c.token);
-  localStorage.setItem('amp_site_base',c.siteBase);
+  localStorage.setItem(
+    'amp_gh_owner',
+    c.owner
+  );
+
+  localStorage.setItem(
+    'amp_gh_repo',
+    c.repo
+  );
+
+  localStorage.setItem(
+    'amp_gh_branch',
+    c.branch
+  );
+
+  localStorage.setItem(
+    'amp_gh_token',
+    c.token
+  );
+
+  localStorage.setItem(
+    'amp_site_base',
+    c.siteBase
+  );
+
 }
+
 
 function loadCfg(){
+
   $('ghOwner').value=
-    localStorage.getItem('amp_gh_owner')||DEFAULT_OWNER;
+    localStorage.getItem(
+      'amp_gh_owner'
+    )||
+    DEFAULT_OWNER;
+
 
   $('ghRepo').value=
-    localStorage.getItem('amp_gh_repo')||DEFAULT_REPO;
+    localStorage.getItem(
+      'amp_gh_repo'
+    )||
+    DEFAULT_REPO;
+
 
   $('ghBranch').value=
-    localStorage.getItem('amp_gh_branch')||DEFAULT_BRANCH;
+    localStorage.getItem(
+      'amp_gh_branch'
+    )||
+    DEFAULT_BRANCH;
+
 
   $('ghToken').value=
-    localStorage.getItem('amp_gh_token')||'';
+    localStorage.getItem(
+      'amp_gh_token'
+    )||
+    '';
+
 
   $('siteBase').value=
-    localStorage.getItem('amp_site_base')||DEFAULT_SITE;
+    localStorage.getItem(
+      'amp_site_base'
+    )||
+    DEFAULT_SITE;
+
 }
 
+
 function headers(){
+
   const c=cfg();
 
   return {
-    'Accept':'application/vnd.github+json',
-    'Authorization':'Bearer '+c.token,
-    'X-GitHub-Api-Version':'2022-11-28'
+
+    'Accept':
+      'application/vnd.github+json',
+
+    'Authorization':
+      'Bearer '+c.token,
+
+    'X-GitHub-Api-Version':
+      '2022-11-28'
+
   };
+
 }
 
+
 function repositoryUrl(){
+
   const c=cfg();
 
   return API+
@@ -1051,20 +1477,30 @@ function repositoryUrl(){
     encodeURIComponent(c.owner)+
     '/'+
     encodeURIComponent(c.repo);
+
 }
+
 
 /* =========================================================
    GITHUB API
 ========================================================= */
 
 async function repositoryApi(options={}){
-  const response=await fetch(repositoryUrl(),{
-    ...options,
-    headers:{
-      ...headers(),
-      ...(options.headers||{})
-    }
-  });
+
+  const response=
+    await fetch(
+      repositoryUrl(),
+      {
+        ...options,
+
+        headers:{
+          ...headers(),
+          ...(options.headers||{})
+        }
+
+      }
+    );
+
 
   let data=null;
 
@@ -1072,32 +1508,55 @@ async function repositoryApi(options={}){
     data=await response.json();
   }catch{}
 
+
   if(!response.ok){
 
     let message=
       data?.message||
       ('GitHub API error '+response.status);
 
+
     if(response.status===401){
-      message='Token نامعتبر است یا منقضی شده است.';
+
+      message=
+        'Token نامعتبر است یا منقضی شده است.';
+
     }
+
 
     if(response.status===403){
-      message='GitHub دسترسی Token را رد کرد. دسترسی Token را بررسی کن.';
+
+      message=
+        'GitHub دسترسی Token را رد کرد. دسترسی Token را بررسی کن.';
+
     }
+
 
     if(response.status===404){
-      message='Repository پیدا نشد یا Token به این Repository دسترسی ندارد.';
+
+      message=
+        'Repository پیدا نشد یا Token به این Repository دسترسی ندارد.';
+
     }
 
+
     throw new Error(message);
+
   }
 
+
   return data;
+
 }
 
+
 async function api(path,options={}){
+
   const c=cfg();
+
+  const cleanPath=
+    path.replace(/^\/+/,'');
+
 
   const url=
     API+
@@ -1106,19 +1565,31 @@ async function api(path,options={}){
     '/'+
     encodeURIComponent(c.repo)+
     '/contents/'+
-    path.replace(/^\/+/,'')+
+    cleanPath+
     (options.query||'');
 
-  const cleanOptions={...options};
+
+  const cleanOptions={
+    ...options
+  };
+
   delete cleanOptions.query;
 
-  const response=await fetch(url,{
-    ...cleanOptions,
-    headers:{
-      ...headers(),
-      ...(cleanOptions.headers||{})
-    }
-  });
+
+  const response=
+    await fetch(
+      url,
+      {
+        ...cleanOptions,
+
+        headers:{
+          ...headers(),
+          ...(cleanOptions.headers||{})
+        }
+
+      }
+    );
+
 
   let data=null;
 
@@ -1126,29 +1597,55 @@ async function api(path,options={}){
     data=await response.json();
   }catch{}
 
+
   if(!response.ok){
 
     let message=
       data?.message||
       ('GitHub API error '+response.status);
 
+
     if(response.status===401){
-      message='Token نامعتبر است یا منقضی شده است.';
+
+      message=
+        'Token نامعتبر است یا منقضی شده است.';
+
     }
+
 
     if(response.status===403){
-      message='GitHub دسترسی Token را رد کرد.';
+
+      message=
+        'GitHub دسترسی Token را رد کرد.';
+
     }
+
 
     if(response.status===404){
-      message='File not found: '+path;
+
+      message=
+        'File not found: '+path;
+
     }
 
+
+    if(response.status===409){
+
+      message=
+        'تداخل در فایل GitHub ایجاد شده است. دوباره اطلاعات را بخوان.';
+
+    }
+
+
     throw new Error(message);
+
   }
 
+
   return data;
+
 }
+
 
 /* =========================================================
    BASE64
@@ -1156,34 +1653,91 @@ async function api(path,options={}){
 
 function textToBase64(text){
 
-  const bytes=new TextEncoder().encode(text);
+  const bytes=
+    new TextEncoder().encode(text);
 
   let binary='';
 
   const chunk=0x8000;
 
-  for(let i=0;i<bytes.length;i+=chunk){
+
+  for(
+    let i=0;
+    i<bytes.length;
+    i+=chunk
+  ){
+
     binary+=String.fromCharCode(
-      ...bytes.subarray(i,i+chunk)
+      ...bytes.subarray(
+        i,
+        i+chunk
+      )
     );
+
   }
 
+
   return btoa(binary);
+
 }
+
 
 function base64ToText(base64){
 
-  const clean=base64.replace(/\n/g,'');
+  const clean=
+    base64.replace(/\n/g,'');
 
-  const binary=atob(clean);
+  const binary=
+    atob(clean);
 
-  const bytes=Uint8Array.from(
-    binary,
-    c=>c.charCodeAt(0)
+  const bytes=
+    Uint8Array.from(
+      binary,
+      c=>c.charCodeAt(0)
+    );
+
+  return new TextDecoder()
+    .decode(bytes);
+
+}
+
+
+/* =========================================================
+   FILE -> BASE64
+========================================================= */
+
+function fileToDataUrl(file){
+
+  return new Promise(
+    (resolve,reject)=>{
+
+      const reader=
+        new FileReader();
+
+
+      reader.onload=
+        ()=>{
+          resolve(reader.result);
+        };
+
+
+      reader.onerror=
+        ()=>{
+          reject(
+            new Error(
+              'خواندن تصویر ناموفق بود.'
+            )
+          );
+        };
+
+
+      reader.readAsDataURL(file);
+
+    }
   );
 
-  return new TextDecoder().decode(bytes);
 }
+
 
 /* =========================================================
    READ LISTINGS
@@ -1193,46 +1747,63 @@ async function readListings(){
 
   try{
 
-    const data=await api(
-      PATH,
-      {
-        query:'?ref='+encodeURIComponent(cfg().branch)
-      }
-    );
+    const data=
+      await api(
+        PATH,
+        {
+          query:
+            '?ref='+
+            encodeURIComponent(
+              cfg().branch
+            )
+        }
+      );
 
-    const text=base64ToText(data.content);
 
-    const parsed=JSON.parse(text);
+    const text=
+      base64ToText(data.content);
+
+
+    const parsed=
+      JSON.parse(text);
+
 
     return {
+
       listings:
-        Array.isArray(parsed.listings)
-        ?parsed.listings
-        :[],
+        Array.isArray(parsed)
+        ?parsed
+        :(
+          Array.isArray(parsed.listings)
+          ?parsed.listings
+          :[]
+        ),
+
       sha:data.sha
+
     };
 
   }catch(error){
 
-    /*
-      مهم:
-      اگر listings.json هنوز ساخته نشده باشد،
-      آن را به عنوان دیتاست خالی در نظر می‌گیریم.
-      بعداً هنگام ذخیره اولین آگهی ساخته خواهد شد.
-    */
-
     if(
-      String(error.message||'').includes('File not found')
+      String(
+        error.message||''
+      ).includes('File not found')
     ){
+
       return {
         listings:[],
         sha:null
       };
+
     }
 
     throw error;
+
   }
+
 }
+
 
 /* =========================================================
    READ REQUESTS
@@ -1242,127 +1813,189 @@ async function readRequests(){
 
   try{
 
-    const data=await api(
-      REQUESTS_PATH,
-      {
-        query:'?ref='+encodeURIComponent(cfg().branch)
-      }
-    );
+    const data=
+      await api(
+        REQUESTS_PATH,
+        {
+          query:
+            '?ref='+
+            encodeURIComponent(
+              cfg().branch
+            )
+        }
+      );
 
-    const text=base64ToText(data.content);
 
-    const parsed=JSON.parse(text);
+    const text=
+      base64ToText(data.content);
+
+
+    const parsed=
+      JSON.parse(text);
+
 
     return {
+
       requests:
-        Array.isArray(parsed.requests)
-        ?parsed.requests
-        :[],
+        Array.isArray(parsed)
+        ?parsed
+        :(
+          Array.isArray(parsed.requests)
+          ?parsed.requests
+          :[]
+        ),
+
       sha:data.sha
+
     };
 
   }catch(error){
 
-    /*
-      اگر requests.json هنوز ساخته نشده،
-      طبیعی است که هیچ درخواستی ثبت نشده باشد.
-    */
-
     if(
-      String(error.message||'').includes('File not found')
+      String(
+        error.message||''
+      ).includes('File not found')
     ){
+
       return {
         requests:[],
         sha:null
       };
+
     }
 
     throw error;
+
   }
+
 }
 
+
 /* =========================================================
-   WRITE JSON
+   WRITE LISTINGS
 ========================================================= */
 
-async function writeListings(listings,sha=null){
+async function writeListings(
+  listings,
+  sha=null
+){
 
   const text=
     JSON.stringify(
       {
-        listings
+        listings:listings
       },
       null,
       2
     );
 
+
   const body={
+
     message:
       state.editingId
       ?'Update listing'
       :'Add listing',
 
-    content:textToBase64(text),
+    content:
+      textToBase64(text),
 
-    branch:cfg().branch
+    branch:
+      cfg().branch
+
   };
 
-  /*
-    هنگام ساخت فایل جدید SHA نباید ارسال شود.
-  */
 
   if(sha){
     body.sha=sha;
   }
 
-  const data=await api(
-    PATH,
-    {
-      method:'PUT',
-      headers:{
-        'Content-Type':'application/json'
-      },
-      body:JSON.stringify(body)
-    }
-  );
 
-  return data.sha;
+  const data=
+    await api(
+      PATH,
+      {
+        method:'PUT',
+
+        headers:{
+          'Content-Type':
+            'application/json'
+        },
+
+        body:
+          JSON.stringify(body)
+      }
+    );
+
+
+  return data.content?.sha||
+    data.sha||
+    null;
+
 }
 
-async function writeRequests(requests,sha=null){
+
+/* =========================================================
+   WRITE REQUESTS
+========================================================= */
+
+async function writeRequests(
+  requests,
+  sha=null
+){
 
   const text=
     JSON.stringify(
       {
-        requests
+        requests:requests
       },
       null,
       2
     );
 
+
   const body={
-    message:'Update customer requests',
-    content:textToBase64(text),
-    branch:cfg().branch
+
+    message:
+      'Update customer requests',
+
+    content:
+      textToBase64(text),
+
+    branch:
+      cfg().branch
+
   };
+
 
   if(sha){
     body.sha=sha;
   }
 
-  const data=await api(
-    REQUESTS_PATH,
-    {
-      method:'PUT',
-      headers:{
-        'Content-Type':'application/json'
-      },
-      body:JSON.stringify(body)
-    }
-  );
 
-  return data.sha;
+  const data=
+    await api(
+      REQUESTS_PATH,
+      {
+        method:'PUT',
+
+        headers:{
+          'Content-Type':
+            'application/json'
+        },
+
+        body:
+          JSON.stringify(body)
+      }
+    );
+
+
+  return data.content?.sha||
+    data.sha||
+    null;
+
 }
+
 
 /* =========================================================
    CONNECTION
@@ -1374,31 +2007,48 @@ async function testConnection(){
 
     saveCfg();
 
+
     if(!cfg().token){
-      throw new Error('ابتدا GitHub Token را وارد کن.');
+
+      throw new Error(
+        'ابتدا GitHub Token را وارد کن.'
+      );
+
     }
+
 
     setStatus(
       'loading',
       'در حال اتصال به GitHub...'
     );
 
-    const repo=await repositoryApi();
 
-    if(!repo||!repo.full_name){
+    const repo=
+      await repositoryApi();
+
+
+    if(
+      !repo||
+      !repo.full_name
+    ){
+
       throw new Error(
         'پاسخ معتبر از GitHub دریافت نشد.'
       );
+
     }
+
 
     setStatus(
       'ok',
       'اتصال موفق'
     );
 
+
     toast(
       'اتصال به Repository با موفقیت برقرار شد.'
     );
+
 
     await loadData();
 
@@ -1409,12 +2059,17 @@ async function testConnection(){
       'اتصال ناموفق'
     );
 
+
     toast(
-      error.message||'خطا در اتصال',
+      error.message||
+      'خطا در اتصال',
       false
     );
+
   }
+
 }
+
 
 /* =========================================================
    LOAD DATA
@@ -1425,33 +2080,49 @@ async function loadData(){
   try{
 
     if(!cfg().token){
+
       setStatus(
         '',
         'توکن وارد نشده'
       );
+
       return;
+
     }
+
 
     setStatus(
       'loading',
       'در حال خواندن اطلاعات...'
     );
 
+
     const [
       listingData,
       requestData
-    ]=await Promise.all([
-      readListings(),
-      readRequests()
-    ]);
+    ]=
+      await Promise.all([
+        readListings(),
+        readRequests()
+      ]);
 
-    state.listings=listingData.listings;
-    state.listingsSha=listingData.sha;
 
-    state.requests=requestData.requests;
-    state.requestsSha=requestData.sha;
+    state.listings=
+      listingData.listings;
+
+    state.listingsSha=
+      listingData.sha;
+
+
+    state.requests=
+      requestData.requests;
+
+    state.requestsSha=
+      requestData.sha;
+
 
     renderAll();
+
 
     setStatus(
       'ok',
@@ -1465,37 +2136,57 @@ async function loadData(){
       'خواندن اطلاعات ناموفق'
     );
 
+
     toast(
       error.message||
       'خواندن اطلاعات انجام نشد.',
       false
     );
+
   }
+
 }
+
 
 /* =========================================================
    NAVIGATION
 ========================================================= */
 
 const pageTitles={
-  dashboard:'داشبورد',
-  listings:'همه آگهی‌ها',
-  requests:'درخواست‌های مشتریان',
-  add:'افزودن آگهی',
-  settings:'اتصال و تنظیمات'
+
+  dashboard:
+    'داشبورد',
+
+  listings:
+    'همه آگهی‌ها',
+
+  requests:
+    'درخواست‌های مشتریان',
+
+  add:
+    'افزودن آگهی',
+
+  settings:
+    'اتصال و تنظیمات'
+
 };
 
-document.querySelectorAll('.nav button')
-.forEach(button=>{
 
-  button.addEventListener(
-    'click',
-    ()=>{
-      showPage(button.dataset.page);
-    }
-  );
+document
+  .querySelectorAll('.nav button')
+  .forEach(button=>{
 
-});
+    button.addEventListener(
+      'click',
+      ()=>{
+        showPage(
+          button.dataset.page
+        );
+      }
+    );
+
+  });
+
 
 function showPage(page){
 
@@ -1505,36 +2196,49 @@ function showPage(page){
       p.classList.remove('active');
     });
 
-  const target=$('page-'+page);
+
+  const target=
+    $('page-'+page);
+
 
   if(target){
     target.classList.add('active');
   }
 
+
   document
     .querySelectorAll('.nav button')
     .forEach(button=>{
+
       button.classList.toggle(
         'active',
         button.dataset.page===page
       );
+
     });
 
+
   $('pageTitle').textContent=
-    pageTitles[page]||'پنل مدیریت';
+    pageTitles[page]||
+    'پنل مدیریت';
+
 
   if(page==='dashboard'){
     renderDashboard();
   }
 
+
   if(page==='listings'){
     renderListings();
   }
 
+
   if(page==='requests'){
     renderRequests();
   }
+
 }
+
 
 /* =========================================================
    CATEGORY
@@ -1543,14 +2247,28 @@ function showPage(page){
 function categoryLabel(category){
 
   const map={
-    apartment:'آپارتمان',
-    villa:'ویلا',
-    'maskan-mehr':'مسکن مهر',
-    land:'زمین'
+
+    apartment:
+      'آپارتمان',
+
+    villa:
+      'ویلا',
+
+    'maskan-mehr':
+      'مسکن مهر',
+
+    land:
+      'زمین'
+
   };
 
-  return map[category]||category||'—';
+
+  return map[category]||
+    category||
+    '—';
+
 }
+
 
 /* =========================================================
    DATE
@@ -1558,7 +2276,10 @@ function categoryLabel(category){
 
 function formatDate(value){
 
-  if(!value) return '—';
+  if(!value){
+    return '—';
+  }
+
 
   try{
 
@@ -1568,12 +2289,18 @@ function formatDate(value){
         dateStyle:'medium',
         timeStyle:'short'
       }
-    ).format(new Date(value));
+    ).format(
+      new Date(value)
+    );
 
   }catch{
+
     return value;
+
   }
+
 }
+
 
 /* =========================================================
    DASHBOARD
@@ -1583,33 +2310,50 @@ function renderDashboard(){
 
   const published=
     state.listings.filter(
-      x=>x.published===true||x.published==='true'
+      x=>
+        x.published===true||
+        x.published==='true'
     ).length;
+
 
   $('statListings').textContent=
     state.listings.length;
 
+
   $('statPending').textContent=
     state.requests.filter(
-      x=>(x.status||'pending')==='pending'
+      x=>
+        (x.status||'pending')===
+        'pending'
     ).length;
+
 
   $('statPublished').textContent=
     published;
 
+
   $('statUnpublished').textContent=
-    state.listings.length-published;
+    state.listings.length-
+    published;
+
 
   const latest=
     [...state.listings]
       .sort(
         (a,b)=>
-          new Date(b.createdAt||0)-
-          new Date(a.createdAt||0)
+          new Date(
+            b.createdAt||0
+          )-
+          new Date(
+            a.createdAt||0
+          )
       )
       .slice(0,5);
 
-  const box=$('dashboardListings');
+
+  const box=
+    $('dashboardListings');
+
 
   if(!latest.length){
 
@@ -1619,35 +2363,72 @@ function renderDashboard(){
   }else{
 
     box.innerHTML=
-      latest.map(item=>`
+      latest
+        .map(item=>`
 
-        <div class="list-card" style="margin-bottom:9px">
+          <div
+            class="list-card"
+            style="margin-bottom:9px">
 
-          <h4>${escapeHtml(item.title||'بدون عنوان')}</h4>
+            <h4>
+              ${escapeHtml(
+                item.title||
+                'بدون عنوان'
+              )}
+            </h4>
 
-          <div class="list-meta">
-            <span>${categoryLabel(item.category)}</span>
-            <span>•</span>
-            <span>${escapeHtml(item.area||'—')}</span>
-            <span>•</span>
-            <span>${escapeHtml(item.price||'قیمت توافقی')}</span>
+            <div class="list-meta">
+
+              <span>
+                ${categoryLabel(
+                  item.category
+                )}
+              </span>
+
+              <span>•</span>
+
+              <span>
+                ${escapeHtml(
+                  item.area||'—'
+                )}
+              </span>
+
+              <span>•</span>
+
+              <span>
+                ${escapeHtml(
+                  item.price||
+                  'قیمت توافقی'
+                )}
+              </span>
+
+            </div>
+
           </div>
 
-        </div>
+        `)
+        .join('');
 
-      `).join('');
   }
+
 
   const requests=
     [...state.requests]
       .sort(
         (a,b)=>
-          new Date(b.createdAt||0)-
-          new Date(a.createdAt||0)
+          new Date(
+            b.createdAt||0
+          )-
+          new Date(
+            a.createdAt||0
+          )
       )
       .slice(0,5);
 
-  const requestBox=$('dashboardRequests');
+
+  const requestBox=
+    $('dashboardRequests');
+
 
   if(!requests.length){
 
@@ -1657,27 +2438,49 @@ function renderDashboard(){
   }else{
 
     requestBox.innerHTML=
-      requests.map(item=>`
+      requests
+        .map(item=>`
 
-        <div class="list-card" style="margin-bottom:9px">
+          <div
+            class="list-card"
+            style="margin-bottom:9px">
 
-          <h4>${escapeHtml(
-            item.title||
-            item.name||
-            'درخواست ملک'
-          )}</h4>
+            <h4>
+              ${escapeHtml(
+                item.title||
+                item.name||
+                'درخواست ملک'
+              )}
+            </h4>
 
-          <div class="list-meta">
-            <span>${requestStatus(item.status)}</span>
-            <span>•</span>
-            <span>${escapeHtml(item.phone||'بدون شماره')}</span>
+            <div class="list-meta">
+
+              <span>
+                ${requestStatus(
+                  item.status
+                )}
+              </span>
+
+              <span>•</span>
+
+              <span>
+                ${escapeHtml(
+                  item.phone||
+                  'بدون شماره'
+                )}
+              </span>
+
+            </div>
+
           </div>
 
-        </div>
+        `)
+        .join('');
 
-      `).join('');
   }
+
 }
+
 
 /* =========================================================
    LISTINGS
@@ -1685,103 +2488,158 @@ function renderDashboard(){
 
 function renderListings(){
 
-  const box=$('listingsContainer');
+  const box=
+    $('listingsContainer');
+
 
   if(!state.listings.length){
 
     box.innerHTML=`
+
       <div class="empty">
-        هنوز آگهی‌ای وجود ندارد.<br><br>
+
+        هنوز آگهی‌ای وجود ندارد.
+
+        <br><br>
+
         می‌توانی اولین آگهی را اضافه کنی.
+
       </div>
+
     `;
 
     return;
+
   }
+
 
   const sorted=
     [...state.listings]
       .sort(
         (a,b)=>
-          new Date(b.createdAt||0)-
-          new Date(a.createdAt||0)
+          new Date(
+            b.createdAt||0
+          )-
+          new Date(
+            a.createdAt||0
+          )
       );
 
+
   box.innerHTML=
-    sorted.map(item=>`
+    sorted
+      .map(item=>`
 
-      <div class="list-card" style="margin-bottom:12px">
+        <div
+          class="list-card"
+          style="margin-bottom:12px">
 
-        <div class="section-title">
+          <div class="section-title">
 
-          <div>
+            <div>
 
-            <h4>
-              ${escapeHtml(item.title||'بدون عنوان')}
-            </h4>
+              <h4>
+                ${escapeHtml(
+                  item.title||
+                  'بدون عنوان'
+                )}
+              </h4>
 
-            <div class="list-meta">
+              <div class="list-meta">
 
-              <span>
-                ${categoryLabel(item.category)}
-              </span>
+                <span>
+                  ${categoryLabel(
+                    item.category
+                  )}
+                </span>
 
-              <span>•</span>
+                <span>•</span>
 
-              <span>
-                ${escapeHtml(item.area||'—')}
-              </span>
+                <span>
+                  ${escapeHtml(
+                    item.area||'—'
+                  )}
+                </span>
 
-              <span>•</span>
+                <span>•</span>
 
-              <span>
-                ${escapeHtml(item.price||'قیمت توافقی')}
-              </span>
+                <span>
+                  ${escapeHtml(
+                    item.price||
+                    'قیمت توافقی'
+                  )}
+                </span>
 
-              <span>•</span>
+                <span>•</span>
 
-              <span>
-                ${item.published===true||item.published==='true'
-                  ?'<span class="badge published">منتشرشده</span>'
-                  :'<span class="badge pending">منتشرنشده</span>'
-                }
-              </span>
+                <span>
+
+                  ${
+                    item.published===true||
+                    item.published==='true'
+
+                    ?
+
+                    '<span class="badge published">منتشرشده</span>'
+
+                    :
+
+                    '<span class="badge pending">منتشرنشده</span>'
+                  }
+
+                </span>
+
+              </div>
 
             </div>
 
           </div>
 
+
+          <div class="list-actions">
+
+            <button
+              class="btn btn-secondary"
+              onclick="editListing('${escapeAttr(item.id)}')">
+              ویرایش
+            </button>
+
+
+            <button
+              class="btn btn-gold"
+              onclick="togglePublished('${escapeAttr(item.id)}')">
+
+              ${
+                item.published===true||
+                item.published==='true'
+
+                ?
+
+                'لغو انتشار'
+
+                :
+
+                'انتشار'
+              }
+
+            </button>
+
+
+            <button
+              class="btn btn-danger"
+              onclick="deleteListing('${escapeAttr(item.id)}')">
+              حذف
+            </button>
+
+          </div>
+
         </div>
 
-        <div class="list-actions">
+      `)
+      .join('');
 
-          <button
-            class="btn btn-secondary"
-            onclick="editListing('${escapeAttr(item.id)}')">
-            ویرایش
-          </button>
-
-          <button
-            class="btn btn-gold"
-            onclick="togglePublished('${escapeAttr(item.id)}')">
-            ${item.published===true||item.published==='true'
-              ?'لغو انتشار'
-              :'انتشار'
-            }
-          </button>
-
-          <button
-            class="btn btn-danger"
-            onclick="deleteListing('${escapeAttr(item.id)}')">
-            حذف
-          </button>
-
-        </div>
-
-      </div>
-
-    `).join('');
 }
+
 
 /* =========================================================
    REQUESTS
@@ -1790,168 +2648,329 @@ function renderListings(){
 function requestStatus(status){
 
   if(status==='approved'){
-    return '<span class="badge approved">تأیید شده</span>';
+
+    return `
+      <span class="badge approved">
+        تأیید شده
+      </span>
+    `;
+
   }
+
 
   if(status==='rejected'){
-    return '<span class="badge rejected">رد شده</span>';
+
+    return `
+      <span class="badge rejected">
+        رد شده
+      </span>
+    `;
+
   }
+
 
   if(status==='published'){
-    return '<span class="badge published">تبدیل به آگهی شده</span>';
+
+    return `
+      <span class="badge published">
+        تبدیل به آگهی شده
+      </span>
+    `;
+
   }
 
-  return '<span class="badge pending">در انتظار بررسی</span>';
+
+  return `
+    <span class="badge pending">
+      در انتظار بررسی
+    </span>
+  `;
+
 }
+
 
 function renderRequests(){
 
-  const box=$('requestsContainer');
+  const box=
+    $('requestsContainer');
+
 
   if(!state.requests.length){
 
     box.innerHTML=`
+
       <div class="empty">
+
         هنوز هیچ درخواست مشتری ثبت نشده است.
+
       </div>
+
     `;
 
     return;
+
   }
+
 
   const sorted=
     [...state.requests]
       .sort(
         (a,b)=>
-          new Date(b.createdAt||0)-
-          new Date(a.createdAt||0)
+          new Date(
+            b.createdAt||0
+          )-
+          new Date(
+            a.createdAt||0
+          )
       );
 
+
   box.innerHTML=
-    sorted.map(item=>`
+    sorted
+      .map(item=>`
 
-      <div class="list-card" style="margin-bottom:14px">
+        <div
+          class="list-card"
+          style="margin-bottom:14px">
 
-        <div class="section-title">
+          <div class="section-title">
 
-          <div>
+            <div>
 
-            <h4>
-              ${escapeHtml(
-                item.title||
-                item.name||
-                'درخواست ثبت ملک'
-              )}
-            </h4>
+              <h4>
+                ${escapeHtml(
+                  item.title||
+                  item.name||
+                  'درخواست ثبت ملک'
+                )}
+              </h4>
 
-            <div class="list-meta">
-              <span>${requestStatus(item.status)}</span>
-              <span>•</span>
-              <span>
-                ${escapeHtml(item.name||'بدون نام')}
-              </span>
-              <span>•</span>
-              <span>
-                ${escapeHtml(item.phone||'بدون شماره')}
-              </span>
+              <div class="list-meta">
+
+                <span>
+                  ${requestStatus(
+                    item.status
+                  )}
+                </span>
+
+                <span>•</span>
+
+                <span>
+                  ${escapeHtml(
+                    item.name||
+                    'بدون نام'
+                  )}
+                </span>
+
+                <span>•</span>
+
+                <span>
+                  ${escapeHtml(
+                    item.phone||
+                    'بدون شماره'
+                  )}
+                </span>
+
+              </div>
+
             </div>
+
+
+            <span class="muted">
+              ${formatDate(
+                item.createdAt
+              )}
+            </span>
 
           </div>
 
-          <span class="muted">
-            ${formatDate(item.createdAt)}
-          </span>
+
+          <div class="request-detail">
+
+            ${
+              item.category
+              ?
+
+              '<div><b>دسته:</b> '+
+              escapeHtml(
+                categoryLabel(
+                  item.category
+                )
+              )+
+              '</div>'
+
+              :
+
+              ''
+            }
+
+
+            ${
+              item.area
+              ?
+
+              '<div><b>متراژ:</b> '+
+              escapeHtml(
+                item.area
+              )+
+              '</div>'
+
+              :
+
+              ''
+            }
+
+
+            ${
+              item.phase
+              ?
+
+              '<div><b>فاز:</b> '+
+              escapeHtml(
+                item.phase
+              )+
+              '</div>'
+
+              :
+
+              ''
+            }
+
+
+            ${
+              item.price
+              ?
+
+              '<div><b>قیمت:</b> '+
+              escapeHtml(
+                item.price
+              )+
+              '</div>'
+
+              :
+
+              ''
+            }
+
+
+            ${
+              item.description
+              ?
+
+              '<div><b>توضیحات:</b><br>'+
+              escapeHtml(
+                item.description
+              )+
+              '</div>'
+
+              :
+
+              ''
+            }
+
+          </div>
+
+
+          <div class="list-actions">
+
+            <button
+              class="btn btn-secondary"
+              onclick="viewRequest('${escapeAttr(item.id)}')">
+              جزئیات کامل
+            </button>
+
+
+            ${
+              (item.status||'pending')===
+              'pending'
+
+              ?
+
+              `
+
+                <button
+                  class="btn btn-success"
+                  onclick="approveRequest('${escapeAttr(item.id)}')">
+                  تأیید درخواست
+                </button>
+
+                <button
+                  class="btn btn-danger"
+                  onclick="rejectRequest('${escapeAttr(item.id)}')">
+                  رد درخواست
+                </button>
+
+              `
+
+              :
+
+              ''
+            }
+
+
+            ${
+              item.status==='approved'
+
+              ?
+
+              `
+
+                <button
+                  class="btn btn-primary"
+                  onclick="convertRequestToListing('${escapeAttr(item.id)}')">
+                  تبدیل به آگهی
+                </button>
+
+              `
+
+              :
+
+              ''
+            }
+
+          </div>
 
         </div>
 
-        <div class="request-detail">
+      `)
+      .join('');
 
-          ${item.category
-            ?'<div><b>دسته:</b> '+escapeHtml(categoryLabel(item.category))+'</div>'
-            :''}
-
-          ${item.area
-            ?'<div><b>متراژ:</b> '+escapeHtml(item.area)+'</div>'
-            :''}
-
-          ${item.phase
-            ?'<div><b>فاز:</b> '+escapeHtml(item.phase)+'</div>'
-            :''}
-
-          ${item.price
-            ?'<div><b>قیمت:</b> '+escapeHtml(item.price)+'</div>'
-            :''}
-
-          ${item.description
-            ?'<div><b>توضیحات:</b><br>'+escapeHtml(item.description)+'</div>'
-            :''}
-
-        </div>
-
-        <div class="list-actions">
-
-          <button
-            class="btn btn-secondary"
-            onclick="viewRequest('${escapeAttr(item.id)}')">
-            جزئیات کامل
-          </button>
-
-          ${
-            (item.status||'pending')==='pending'
-            ?`
-              <button
-                class="btn btn-success"
-                onclick="approveRequest('${escapeAttr(item.id)}')">
-                تأیید درخواست
-              </button>
-
-              <button
-                class="btn btn-danger"
-                onclick="rejectRequest('${escapeAttr(item.id)}')">
-                رد درخواست
-              </button>
-            `
-            :''
-          }
-
-          ${
-            item.status==='approved'
-            ?`
-              <button
-                class="btn btn-primary"
-                onclick="convertRequestToListing('${escapeAttr(item.id)}')">
-                تبدیل به آگهی
-              </button>
-            `
-            :''
-          }
-
-        </div>
-
-      </div>
-
-    `).join('');
 }
+
 
 /* =========================================================
    REQUEST ACTIONS
 ========================================================= */
 
-async function updateRequestStatus(id,status){
+async function updateRequestStatus(
+  id,
+  status
+){
 
   const index=
     state.requests.findIndex(
-      x=>String(x.id)===String(id)
+      x=>
+        String(x.id)===
+        String(id)
     );
 
+
   if(index<0){
-    throw new Error('درخواست پیدا نشد.');
+
+    throw new Error(
+      'درخواست پیدا نشد.'
+    );
+
   }
 
-  state.requests[index].status=status;
+
+  state.requests[index].status=
+    status;
+
 
   state.requests[index].reviewedAt=
     new Date().toISOString();
+
 
   state.requestsSha=
     await writeRequests(
@@ -1959,8 +2978,11 @@ async function updateRequestStatus(id,status){
       state.requestsSha
     );
 
+
   renderAll();
+
 }
+
 
 async function approveRequest(id){
 
@@ -1970,8 +2992,11 @@ async function approveRequest(id){
       'پس از تأیید، هنوز به صورت خودکار در سایت منتشر نمی‌شود.'
     )
   ){
+
     return;
+
   }
+
 
   try{
 
@@ -1980,16 +3005,23 @@ async function approveRequest(id){
       'approved'
     );
 
-    toast('درخواست تأیید شد.');
+
+    toast(
+      'درخواست تأیید شد.'
+    );
 
   }catch(error){
 
     toast(
-      error.message||'خطا',
+      error.message||
+      'خطا',
       false
     );
+
   }
+
 }
+
 
 async function rejectRequest(id){
 
@@ -1998,8 +3030,11 @@ async function rejectRequest(id){
       'این درخواست رد شود؟'
     )
   ){
+
     return;
+
   }
+
 
   try{
 
@@ -2008,67 +3043,131 @@ async function rejectRequest(id){
       'rejected'
     );
 
-    toast('درخواست رد شد.');
+
+    toast(
+      'درخواست رد شد.'
+    );
 
   }catch(error){
 
     toast(
-      error.message||'خطا',
+      error.message||
+      'خطا',
       false
     );
+
   }
+
 }
+
 
 function viewRequest(id){
 
   const item=
     state.requests.find(
-      x=>String(x.id)===String(id)
+      x=>
+        String(x.id)===
+        String(id)
     );
 
+
   if(!item){
-    toast('درخواست پیدا نشد.',false);
+
+    toast(
+      'درخواست پیدا نشد.',
+      false
+    );
+
     return;
+
   }
 
+
   const fields=[
+
     ['عنوان',item.title],
+
     ['نام مالک',item.name],
+
     ['شماره تماس',item.phone],
-    ['دسته‌بندی',categoryLabel(item.category)],
+
+    [
+      'دسته‌بندی',
+      categoryLabel(
+        item.category
+      )
+    ],
+
     ['متراژ',item.area],
+
     ['تعداد خواب',item.bedrooms],
+
     ['فاز',item.phase],
+
     ['قیمت',item.price],
+
     ['پارکینگ',item.parking],
+
     ['انباری',item.storage],
+
     ['آسانسور',item.elevator],
+
     ['وضعیت',requestStatus(item.status)],
+
     ['زمان ثبت',formatDate(item.createdAt)],
+
     ['توضیحات',item.description]
+
   ];
+
 
   $('requestModalContent').innerHTML=
     fields
-      .filter(x=>x[1]!==undefined&&x[1]!==null&&x[1]!=='')
-      .map(x=>`
-        <div style="margin-bottom:9px">
-          <b>${escapeHtml(x[0])}:</b>
-          ${
-            x[0]==='وضعیت'
-            ?x[1]
-            :escapeHtml(String(x[1]))
-          }
-        </div>
-      `)
+      .filter(
+        x=>
+          x[1]!==undefined&&
+          x[1]!==null&&
+          x[1]!==''
+      )
+      .map(
+        x=>`
+
+          <div style="margin-bottom:9px">
+
+            <b>
+              ${escapeHtml(x[0])}:
+            </b>
+
+            ${
+              x[0]==='وضعیت'
+              ?x[1]
+              :escapeHtml(
+                String(x[1])
+              )
+            }
+
+          </div>
+
+        `
+      )
       .join('');
 
-  $('requestModal').classList.add('show');
+
+  $('requestModal')
+    .classList
+    .add('show');
+
 }
 
+
 function closeRequestModal(){
-  $('requestModal').classList.remove('show');
+
+  $('requestModal')
+    .classList
+    .remove('show');
+
 }
+
 
 /* =========================================================
    CONVERT REQUEST TO LISTING
@@ -2078,80 +3177,104 @@ async function convertRequestToListing(id){
 
   const request=
     state.requests.find(
-      x=>String(x.id)===String(id)
+      x=>
+        String(x.id)===
+        String(id)
     );
 
+
   if(!request){
-    toast('درخواست پیدا نشد.',false);
+
+    toast(
+      'درخواست پیدا نشد.',
+      false
+    );
+
     return;
+
   }
 
+
   if(request.status!=='approved'){
+
     toast(
       'ابتدا درخواست را تأیید کن.',
       false
     );
+
     return;
+
   }
 
-  /*
-    اطلاعات درخواست را داخل فرم می‌گذاریم.
-    هنوز هیچ آگهی‌ای ساخته یا منتشر نمی‌شود
-    تا مدیریت آن را ذخیره کند.
-  */
 
   newListing();
+
 
   $('title').value=
     request.title||
     request.name||
     'ملک جدید';
 
+
   $('category').value=
     request.category||
     'apartment';
 
+
   $('price').value=
-    request.price||'';
+    request.price||
+    '';
+
 
   $('area').value=
-    request.area||'';
+    request.area||
+    '';
+
 
   $('bedrooms').value=
-    request.bedrooms||'';
+    request.bedrooms||
+    '';
+
 
   $('phase').value=
-    request.phase||'';
+    request.phase||
+    '';
+
 
   $('parking').value=
-    request.parking||'';
+    request.parking||
+    '';
+
 
   $('storage').value=
-    request.storage||'';
+    request.storage||
+    '';
+
 
   $('elevator').value=
-    request.elevator||'';
+    request.elevator||
+    '';
+
 
   $('description').value=
-    request.description||'';
+    request.description||
+    '';
 
-  /*
-    آگهی جدید به صورت پیش‌فرض منتشر نمی‌شود.
-  */
 
-  $('published').value='false';
+  $('published').value=
+    'false';
 
-  /*
-    شناسه درخواست برای استفاده بعد از ذخیره
-  */
 
   window.__sourceRequestId=
     request.id;
 
+
   toast(
     'اطلاعات درخواست وارد فرم آگهی شد. پس از بررسی، ذخیره کن.'
   );
+
 }
+
 
 /* =========================================================
    NEW LISTING
@@ -2160,13 +3283,25 @@ async function convertRequestToListing(id){
 function resetPhotoState(){
 
   state.photos=[];
+
   state.pendingFiles=[];
+
   state.pendingPreviews=[];
+
 
   $('photoInput').value='';
 
+
+  setUploadStatus(
+    '',
+    false
+  );
+
+
   renderPreviews();
+
 }
+
 
 function newListing(){
 
@@ -2174,19 +3309,29 @@ function newListing(){
 
   window.__sourceRequestId=null;
 
+
   $('listingForm').reset();
+
 
   $('editorTitle').textContent=
     'افزودن آگهی';
 
-  $('category').value='apartment';
 
-  $('published').value='false';
+  $('category').value=
+    'apartment';
+
+
+  $('published').value=
+    'false';
+
 
   resetPhotoState();
 
+
   showPage('add');
+
 }
+
 
 /* =========================================================
    EDIT LISTING
@@ -2196,31 +3341,75 @@ function editListing(id){
 
   const item=
     state.listings.find(
-      x=>String(x.id)===String(id)
+      x=>
+        String(x.id)===
+        String(id)
     );
 
+
   if(!item){
-    toast('آگهی پیدا نشد.',false);
+
+    toast(
+      'آگهی پیدا نشد.',
+      false
+    );
+
     return;
+
   }
 
-  state.editingId=item.id;
+
+  state.editingId=
+    item.id;
+
 
   window.__sourceRequestId=null;
+
 
   $('editorTitle').textContent=
     'ویرایش آگهی';
 
-  $('title').value=item.title||'';
-  $('category').value=item.category||'apartment';
-  $('price').value=item.price||'';
-  $('area').value=item.area||'';
-  $('bedrooms').value=item.bedrooms||'';
-  $('phase').value=item.phase||'';
-  $('parking').value=item.parking||'';
-  $('storage').value=item.storage||'';
-  $('elevator').value=item.elevator||'';
-  $('description').value=item.description||'';
+
+  $('title').value=
+    item.title||'';
+
+
+  $('category').value=
+    item.category||
+    'apartment';
+
+
+  $('price').value=
+    item.price||'';
+
+
+  $('area').value=
+    item.area||'';
+
+
+  $('bedrooms').value=
+    item.bedrooms||'';
+
+
+  $('phase').value=
+    item.phase||'';
+
+
+  $('parking').value=
+    item.parking||'';
+
+
+  $('storage').value=
+    item.storage||'';
+
+
+  $('elevator').value=
+    item.elevator||'';
+
+
+  $('description').value=
+    item.description||'';
+
 
   $('published').value=
     item.published===true||
@@ -2228,102 +3417,160 @@ function editListing(id){
     ?'true'
     :'false';
 
-  state.photos=
+
+  /*
+    پشتیبانی از photos و images
+  */
+
+  const existingPhotos=
     Array.isArray(item.photos)
-    ?item.photos.filter(
-      x=>typeof x==='string'
-    )
-    :[];
+    ?item.photos
+    :(
+      Array.isArray(item.images)
+      ?item.images
+      :[]
+    );
+
+
+  state.photos=
+    existingPhotos.filter(
+      x=>
+        typeof x==='string'&&
+        x.trim()
+    );
+
 
   state.pendingFiles=[];
+
   state.pendingPreviews=[];
+
 
   $('photoInput').value='';
 
+
+  setUploadStatus(
+    '',
+    false
+  );
+
+
   renderPreviews();
 
+
   showPage('add');
+
 }
+
 
 /* =========================================================
    PHOTO INPUT
 ========================================================= */
 
-$('photoInput').addEventListener(
-  'change',
-  async function(){
+$('photoInput')
+  .addEventListener(
+    'change',
+    async function(){
 
-    const files=
-      Array.from(this.files||[]);
-
-    const current=
-      state.photos.length+
-      state.pendingFiles.length;
-
-    if(current+files.length>MAX_PHOTOS){
-
-      toast(
-        'حداکثر ۸ تصویر می‌توانی اضافه کنی.',
-        false
-      );
-
-      return;
-    }
-
-    for(const file of files){
-
-      if(!file.type.startsWith('image/')){
-        toast(
-          'فقط فایل تصویری مجاز است.',
-          false
+      const files=
+        Array.from(
+          this.files||[]
         );
-        continue;
-      }
 
-      if(file.size>MAX_SIZE){
+
+      const current=
+        state.photos.length+
+        state.pendingFiles.length;
+
+
+      if(
+        current+
+        files.length>
+        MAX_PHOTOS
+      ){
 
         toast(
-          'حجم هر تصویر باید حداکثر ۸ مگابایت باشد.',
+          'حداکثر ۸ تصویر می‌توانی اضافه کنی.',
           false
         );
 
-        continue;
+        this.value='';
+
+        return;
+
       }
 
-      state.pendingFiles.push(file);
 
-      const preview=
-        await fileToDataUrl(file);
+      for(const file of files){
 
-      state.pendingPreviews.push(preview);
-    }
+        if(
+          !file.type.startsWith(
+            'image/'
+          )
+        ){
 
-    this.value='';
+          toast(
+            'فقط فایل تصویری مجاز است.',
+            false
+          );
 
-    renderPreviews();
-  }
-);
+          continue;
 
-function fileToDataUrl(file){
+        }
 
-  return new Promise(
-    (resolve,reject)=>{
 
-      const reader=
-        new FileReader();
+        if(
+          file.size>
+          MAX_SIZE
+        ){
 
-      reader.onload=
-        ()=>resolve(reader.result);
+          toast(
+            'حجم هر تصویر باید حداکثر ۸ مگابایت باشد.',
+            false
+          );
 
-      reader.onerror=
-        ()=>reject(
-          new Error('خواندن تصویر ناموفق بود.')
-        );
+          continue;
 
-      reader.readAsDataURL(file);
+        }
+
+
+        try{
+
+          state.pendingFiles.push(
+            file
+          );
+
+
+          const preview=
+            await fileToDataUrl(
+              file
+            );
+
+
+          state.pendingPreviews.push(
+            preview
+          );
+
+        }catch(error){
+
+          toast(
+            error.message||
+            'خواندن تصویر ناموفق بود.',
+            false
+          );
+
+        }
+
+      }
+
+
+      this.value='';
+
+
+      renderPreviews();
+
     }
   );
-}
+
 
 /* =========================================================
    PREVIEWS
@@ -2331,9 +3578,12 @@ function fileToDataUrl(file){
 
 function renderPreviews(){
 
-  const box=$('photoPreview');
+  const box=
+    $('photoPreview');
+
 
   let html='';
+
 
   state.photos.forEach(
     (src,index)=>{
@@ -2344,7 +3594,7 @@ function renderPreviews(){
 
           <img
             src="${escapeAttr(src)}"
-            alt="تصویر">
+            alt="تصویر ملک">
 
           <button
             type="button"
@@ -2356,8 +3606,10 @@ function renderPreviews(){
         </div>
 
       `;
+
     }
   );
+
 
   state.pendingPreviews.forEach(
     (src,index)=>{
@@ -2380,316 +3632,612 @@ function renderPreviews(){
         </div>
 
       `;
+
     }
   );
 
+
   box.innerHTML=html;
+
 }
+
 
 function removeExistingPhoto(index){
 
-  state.photos.splice(index,1);
+  state.photos.splice(
+    index,
+    1
+  );
+
 
   renderPreviews();
+
 }
+
 
 function removePendingPhoto(index){
 
-  state.pendingFiles.splice(index,1);
-  state.pendingPreviews.splice(index,1);
+  state.pendingFiles.splice(
+    index,
+    1
+  );
+
+
+  state.pendingPreviews.splice(
+    index,
+    1
+  );
+
 
   renderPreviews();
+
 }
+
 
 /* =========================================================
    IMAGE UPLOAD
 ========================================================= */
 
-async function uploadImage(file){
+async function uploadImage(
+  file,
+  number,
+  total
+){
+
+  /*
+    نام امن برای فایل
+  */
+
+  const originalName=
+    String(
+      file.name||
+      'image'
+    );
+
 
   const extension=
     (
-      file.name.split('.').pop()||
+      originalName
+        .split('.')
+        .pop()||
       'jpg'
     )
     .toLowerCase()
-    .replace(/[^a-z0-9]/g,'');
+    .replace(
+      /[^a-z0-9]/g,
+      ''
+    );
+
 
   const safeExt=
-    extension||'jpg';
+    extension||
+    'jpg';
+
 
   const id=
     Date.now()+
-    '-'+
+    '-' +
     Math.random()
       .toString(36)
-      .slice(2,9);
+      .slice(2,10);
+
 
   const filename=
-    'property-'+
-    id+
-    '.'+
+    'property-' +
+    id +
+    '.' +
     safeExt;
+
 
   const path=
     IMAGE_DIR+
     '/'+
     filename;
 
+
+  setUploadStatus(
+    'در حال آپلود تصویر '+
+    number+
+    ' از '+
+    total+
+    ' ...'
+  );
+
+
   const dataUrl=
-    await fileToDataUrl(file);
+    await fileToDataUrl(
+      file
+    );
+
 
   const comma=
     dataUrl.indexOf(',');
 
+
   if(comma<0){
+
     throw new Error(
       'فرمت تصویر قابل پردازش نیست.'
     );
+
   }
 
+
   const base64=
-    dataUrl.slice(comma+1);
+    dataUrl.slice(
+      comma+1
+    );
+
+
+  if(!base64){
+
+    throw new Error(
+      'اطلاعات تصویر خالی است.'
+    );
+
+  }
+
 
   const body={
+
     message:
-      'Upload property image '+filename,
+      'Upload property image '+
+      filename,
 
-    content:base64,
+    content:
+      base64,
 
-    branch:cfg().branch
+    branch:
+      cfg().branch
+
   };
+
 
   const data=
     await api(
       path,
       {
         method:'PUT',
+
         headers:{
-          'Content-Type':'application/json'
+          'Content-Type':
+            'application/json'
         },
-        body:JSON.stringify(body)
+
+        body:
+          JSON.stringify(body)
       }
     );
 
-  return data.content?.download_url||
-    (
-      cfg().siteBase+
-      '/'+
-      path
-    );
+
+  /*
+    مهم:
+    از URL نسبی GitHub Pages استفاده می‌کنیم.
+    این روش برای سایت فعلی پایدارتر است.
+  */
+
+  const relativeUrl=
+    cfg().siteBase+
+    '/'+
+    path;
+
+
+  return relativeUrl;
+
 }
+
 
 /* =========================================================
    SAVE LISTING
 ========================================================= */
 
-$('listingForm').addEventListener(
-  'submit',
-  async function(event){
+$('listingForm')
+  .addEventListener(
+    'submit',
+    async function(event){
 
-    event.preventDefault();
+      event.preventDefault();
 
-    const button=$('saveBtn');
 
-    if(button.disabled){
-      return;
-    }
+      const button=
+        $('saveBtn');
 
-    try{
 
-      button.disabled=true;
-      button.innerHTML=
-        '<span class="loader"></span> در حال ذخیره...';
-
-      /*
-        فقط URLهای واقعی ذخیره‌شده
-        در state.photos قرار دارند.
-      */
-
-      const photos=[
-        ...state.photos
-      ];
-
-      /*
-        فایل‌های جدید ابتدا آپلود می‌شوند
-        و فقط URL آنها در JSON ذخیره می‌شود.
-      */
-
-      for(
-        const file of state.pendingFiles
-      ){
-
-        const url=
-          await uploadImage(file);
-
-        photos.push(url);
+      if(button.disabled){
+        return;
       }
 
-      if(photos.length>MAX_PHOTOS){
-        throw new Error(
-          'تعداد تصاویر بیشتر از حد مجاز است.'
-        );
-      }
 
-      const existing=
-        state.editingId
-        ?state.listings.find(
-          x=>String(x.id)===String(state.editingId)
-        )
-        :null;
+      try{
 
-      const item={
+        if(!cfg().token){
 
-        id:
-          state.editingId||
-          (
-            Date.now()+
-            '-'+
-            Math.random()
-              .toString(36)
-              .slice(2,8)
-          ),
-
-        title:
-          $('title').value.trim(),
-
-        category:
-          $('category').value,
-
-        price:
-          $('price').value.trim(),
-
-        area:
-          $('area').value.trim(),
-
-        bedrooms:
-          $('bedrooms').value.trim(),
-
-        phase:
-          $('phase').value.trim(),
-
-        parking:
-          $('parking').value,
-
-        storage:
-          $('storage').value,
-
-        elevator:
-          $('elevator').value,
-
-        description:
-          $('description').value.trim(),
-
-        photos,
-
-        published:
-          $('published').value==='true',
-
-        createdAt:
-          existing?.createdAt||
-          new Date().toISOString(),
-
-        updatedAt:
-          new Date().toISOString(),
-
-        source:
-          existing?.source||
-          (
-            window.__sourceRequestId
-            ?'customer-request'
-            :'admin'
-          ),
-
-        sourceRequestId:
-          window.__sourceRequestId||
-          existing?.sourceRequestId||
-          null
-      };
-
-      if(!item.title){
-        throw new Error(
-          'عنوان آگهی را وارد کن.'
-        );
-      }
-
-      const index=
-        state.listings.findIndex(
-          x=>String(x.id)===String(item.id)
-        );
-
-      if(index>=0){
-        state.listings[index]=item;
-      }else{
-        state.listings.unshift(item);
-      }
-
-      state.listingsSha=
-        await writeListings(
-          state.listings,
-          state.listingsSha
-        );
-
-      /*
-        اگر آگهی از یک درخواست مشتری آمده،
-        پس از ذخیره موفق، درخواست به published
-        تغییر می‌کند.
-      */
-
-      if(window.__sourceRequestId){
-
-        const request=
-          state.requests.find(
-            x=>
-              String(x.id)===
-              String(window.__sourceRequestId)
+          throw new Error(
+            'ابتدا در بخش اتصال و تنظیمات، GitHub Token را وارد کن.'
           );
 
-        if(request){
-
-          request.status='published';
-
-          request.publishedListingId=
-            item.id;
-
-          request.reviewedAt=
-            new Date().toISOString();
-
-          state.requestsSha=
-            await writeRequests(
-              state.requests,
-              state.requestsSha
-            );
         }
+
+
+        if(!cfg().owner){
+
+          throw new Error(
+            'GitHub Username وارد نشده است.'
+          );
+
+        }
+
+
+        if(!cfg().repo){
+
+          throw new Error(
+            'Repository وارد نشده است.'
+          );
+
+        }
+
+
+        if(!cfg().branch){
+
+          throw new Error(
+            'Branch وارد نشده است.'
+          );
+
+        }
+
+
+        button.disabled=true;
+
+
+        button.innerHTML=
+          '<span class="loader"></span> در حال ذخیره...';
+
+
+        /*
+          بررسی عنوان قبل از آپلود تصاویر
+        */
+
+        const title=
+          $('title')
+            .value
+            .trim();
+
+
+        if(!title){
+
+          throw new Error(
+            'عنوان آگهی را وارد کن.'
+          );
+
+        }
+
+
+        /*
+          URLهای قبلی
+        */
+
+        const photos=[
+          ...state.photos
+        ];
+
+
+        /*
+          آپلود تصاویر جدید
+        */
+
+        const total=
+          state.pendingFiles.length;
+
+
+        for(
+          let i=0;
+          i<
+          state.pendingFiles.length;
+          i++
+        ){
+
+          const file=
+            state.pendingFiles[i];
+
+
+          const url=
+            await uploadImage(
+              file,
+              i+1,
+              total
+            );
+
+
+          photos.push(url);
+
+        }
+
+
+        /*
+          بررسی تعداد
+        */
+
+        if(
+          photos.length>
+          MAX_PHOTOS
+        ){
+
+          throw new Error(
+            'تعداد تصاویر بیشتر از حد مجاز است.'
+          );
+
+        }
+
+
+        /*
+          آگهی قبلی در صورت ویرایش
+        */
+
+        const existing=
+          state.editingId
+
+          ?
+
+          state.listings.find(
+            x=>
+              String(x.id)===
+              String(
+                state.editingId
+              )
+          )
+
+          :
+
+          null;
+
+
+        /*
+          ساخت آگهی
+        */
+
+        const item={
+
+          id:
+            state.editingId||
+            (
+              Date.now()+
+              '-' +
+              Math.random()
+                .toString(36)
+                .slice(2,8)
+            ),
+
+
+          title:title,
+
+
+          category:
+            $('category').value,
+
+
+          price:
+            $('price')
+              .value
+              .trim(),
+
+
+          area:
+            $('area')
+              .value
+              .trim(),
+
+
+          bedrooms:
+            $('bedrooms')
+              .value
+              .trim(),
+
+
+          phase:
+            $('phase')
+              .value
+              .trim(),
+
+
+          parking:
+            $('parking').value,
+
+
+          storage:
+            $('storage').value,
+
+
+          elevator:
+            $('elevator').value,
+
+
+          description:
+            $('description')
+              .value
+              .trim(),
+
+
+          photos:photos,
+
+
+          published:
+            $('published')
+              .value===
+            'true',
+
+
+          createdAt:
+            existing?.createdAt||
+            new Date()
+              .toISOString(),
+
+
+          updatedAt:
+            new Date()
+              .toISOString(),
+
+
+          source:
+            existing?.source||
+            (
+              window.__sourceRequestId
+              ?'customer-request'
+              :'admin'
+            ),
+
+
+          sourceRequestId:
+            window.__sourceRequestId||
+            existing?.sourceRequestId||
+            null
+
+        };
+
+
+        /*
+          اضافه / ویرایش
+        */
+
+        const index=
+          state.listings.findIndex(
+            x=>
+              String(x.id)===
+              String(item.id)
+          );
+
+
+        if(index>=0){
+
+          state.listings[index]=
+            item;
+
+        }else{
+
+          state.listings.unshift(
+            item
+          );
+
+        }
+
+
+        /*
+          ذخیره listings.json
+        */
+
+        setUploadStatus(
+          'در حال ذخیره آگهی در GitHub...'
+        );
+
+
+        state.listingsSha=
+          await writeListings(
+            state.listings,
+            state.listingsSha
+          );
+
+
+        /*
+          اگر آگهی از درخواست مشتری آمده
+        */
+
+        if(
+          window.__sourceRequestId
+        ){
+
+          const request=
+            state.requests.find(
+              x=>
+                String(x.id)===
+                String(
+                  window.__sourceRequestId
+                )
+            );
+
+
+          if(request){
+
+            request.status=
+              'published';
+
+
+            request.publishedListingId=
+              item.id;
+
+
+            request.reviewedAt=
+              new Date()
+                .toISOString();
+
+
+            state.requestsSha=
+              await writeRequests(
+                state.requests,
+                state.requestsSha
+              );
+
+          }
+
+        }
+
+
+        setUploadStatus(
+          'آگهی و تصاویر با موفقیت ذخیره شدند.'
+        );
+
+
+        toast(
+          state.editingId
+          ?'آگهی با موفقیت ویرایش شد.'
+          :'آگهی با موفقیت ذخیره شد.'
+        );
+
+
+        /*
+          فرم جدید
+        */
+
+        newListing();
+
+
+        /*
+          دوباره اطلاعات را از GitHub بخوان
+        */
+
+        await loadData();
+
+
+        showPage(
+          'listings'
+        );
+
+
+      }catch(error){
+
+        console.error(
+          'SAVE LISTING ERROR:',
+          error
+        );
+
+
+        toast(
+          error.message||
+          'ذخیره آگهی انجام نشد.',
+          false
+        );
+
+
+      }finally{
+
+        button.disabled=false;
+
+        button.textContent=
+          'ذخیره آگهی';
+
       }
 
-      toast(
-        state.editingId
-        ?'آگهی با موفقیت ویرایش شد.'
-        :'آگهی با موفقیت ذخیره شد.'
-      );
-
-      newListing();
-
-      await loadData();
-
-      showPage('listings');
-
-    }catch(error){
-
-      toast(
-        error.message||
-        'ذخیره آگهی انجام نشد.',
-        false
-      );
-
-    }finally{
-
-      button.disabled=false;
-      button.textContent='ذخیره آگهی';
     }
-  }
-);
+  );
+
 
 /* =========================================================
    PUBLISH
@@ -2699,21 +4247,37 @@ async function togglePublished(id){
 
   const item=
     state.listings.find(
-      x=>String(x.id)===String(id)
+      x=>
+        String(x.id)===
+        String(id)
     );
 
+
   if(!item){
-    toast('آگهی پیدا نشد.',false);
+
+    toast(
+      'آگهی پیدا نشد.',
+      false
+    );
+
     return;
+
   }
+
 
   const current=
     item.published===true||
     item.published==='true';
 
-  item.published=!current;
+
+  item.published=
+    !current;
+
+
   item.updatedAt=
-    new Date().toISOString();
+    new Date()
+      .toISOString();
+
 
   try{
 
@@ -2723,7 +4287,9 @@ async function togglePublished(id){
         state.listingsSha
       );
 
+
     renderAll();
+
 
     toast(
       item.published
@@ -2733,15 +4299,20 @@ async function togglePublished(id){
 
   }catch(error){
 
-    item.published=current;
+    item.published=
+      current;
+
 
     toast(
       error.message||
       'تغییر وضعیت انجام نشد.',
       false
     );
+
   }
+
 }
+
 
 /* =========================================================
    DELETE
@@ -2751,29 +4322,46 @@ async function deleteListing(id){
 
   const item=
     state.listings.find(
-      x=>String(x.id)===String(id)
+      x=>
+        String(x.id)===
+        String(id)
     );
 
+
   if(!item){
-    toast('آگهی پیدا نشد.',false);
+
+    toast(
+      'آگهی پیدا نشد.',
+      false
+    );
+
     return;
+
   }
+
 
   if(
     !confirm(
       'آیا از حذف این آگهی مطمئن هستی؟'
     )
   ){
+
     return;
+
   }
+
 
   const old=
     [...state.listings];
 
+
   state.listings=
     state.listings.filter(
-      x=>String(x.id)!==String(id)
+      x=>
+        String(x.id)!==
+        String(id)
     );
+
 
   try{
 
@@ -2783,21 +4371,30 @@ async function deleteListing(id){
         state.listingsSha
       );
 
+
     renderAll();
 
-    toast('آگهی حذف شد.');
+
+    toast(
+      'آگهی حذف شد.'
+    );
 
   }catch(error){
 
-    state.listings=old;
+    state.listings=
+      old;
+
 
     toast(
       error.message||
       'حذف آگهی انجام نشد.',
       false
     );
+
   }
+
 }
+
 
 /* =========================================================
    SECURITY / HTML ESCAPE
@@ -2806,16 +4403,41 @@ async function deleteListing(id){
 function escapeHtml(value){
 
   return String(value??'')
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;')
-    .replace(/'/g,'&#039;');
+
+    .replace(
+      /&/g,
+      '&amp;'
+    )
+
+    .replace(
+      /</g,
+      '&lt;'
+    )
+
+    .replace(
+      />/g,
+      '&gt;'
+    )
+
+    .replace(
+      /"/g,
+      '&quot;'
+    )
+
+    .replace(
+      /'/g,
+      '&#039;'
+    );
+
 }
 
+
 function escapeAttr(value){
+
   return escapeHtml(value);
+
 }
+
 
 /* =========================================================
    RENDER ALL
@@ -2824,15 +4446,20 @@ function escapeAttr(value){
 function renderAll(){
 
   renderDashboard();
+
   renderListings();
+
   renderRequests();
+
 }
+
 
 /* =========================================================
    INITIALIZE
 ========================================================= */
 
 loadCfg();
+
 
 if(cfg().token){
 
@@ -2846,23 +4473,29 @@ if(cfg().token){
   );
 
   renderAll();
+
 }
+
 
 /* =========================================================
    CLOSE MODAL WITH BACKDROP
 ========================================================= */
 
 $('requestModal')
-.addEventListener(
-  'click',
-  function(event){
+  .addEventListener(
+    'click',
+    function(event){
 
-    if(event.target===this){
-      closeRequestModal();
+      if(
+        event.target===this
+      ){
+
+        closeRequestModal();
+
+      }
+
     }
-
-  }
-);
+  );
 
 </script>
 
