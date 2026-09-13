@@ -12,10 +12,15 @@
       "storage": "ندارد",
       "elevator": "ندارد",
       "description": "تست ۲",
-      "photos": [],
+      "photos": [
+        "https://Amirpasha-melk.github.io/Amirpasha-melk/images/listings/property-1789305902450-l1olj79g.jpg",
+        "https://Amirpasha-melk.github.io/Amirpasha-melk/images/listings/property-1789305907810-wu4bmp2s.jpg",
+        "https://Amirpasha-melk.github.io/Amirpasha-melk/images/listings/property-1789305911808-ao69hkxf.jpg",
+        "https://Amirpasha-melk.github.io/Amirpasha-melk/images/listings/property-1789305913776-0nkgn6il.jpg"
+      ],
       "published": true,
       "createdAt": "2026-09-12T20:02:10.365Z",
-      "updatedAt": "2026-09-12T20:02:10.367Z",
+      "updatedAt": "2026-09-13T13:25:15.854Z",
       "source": "admin",
       "sourceRequestId": null
     },
