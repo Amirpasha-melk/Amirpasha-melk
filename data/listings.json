@@ -1,30 +1,6 @@
 {
   "listings": [
     {
-      "id": "1789243330362-v1utsy",
-      "title": "تست ۲",
-      "category": "maskan-mehr",
-      "price": "۸ میلیارد",
-      "area": "۷ تومن",
-      "bedrooms": "3",
-      "phase": "فاز ۴",
-      "parking": "دارد",
-      "storage": "ندارد",
-      "elevator": "ندارد",
-      "description": "تست ۲",
-      "photos": [
-        "https://Amirpasha-melk.github.io/Amirpasha-melk/images/listings/property-1789305902450-l1olj79g.jpg",
-        "https://Amirpasha-melk.github.io/Amirpasha-melk/images/listings/property-1789305907810-wu4bmp2s.jpg",
-        "https://Amirpasha-melk.github.io/Amirpasha-melk/images/listings/property-1789305911808-ao69hkxf.jpg",
-        "https://Amirpasha-melk.github.io/Amirpasha-melk/images/listings/property-1789305913776-0nkgn6il.jpg"
-      ],
-      "published": true,
-      "createdAt": "2026-09-12T20:02:10.365Z",
-      "updatedAt": "2026-09-13T13:25:15.854Z",
-      "source": "admin",
-      "sourceRequestId": null
-    },
-    {
       "id": "1789235334234-i5onvr",
       "title": "تست",
       "category": "villa",
